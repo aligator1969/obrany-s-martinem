@@ -6,7 +6,7 @@
 <title>ZKO Rudník – OBRANY s Martinem</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
 <style>
-:root {
+:root{
   --gd:#1b3a2d;--gm:#2a5940;--gl:#3d7a57;--am:#d4891a;--al:#f0a830;
   --cr:#f5f0e8;--rd:#c0392b;--rl:#e74c3c;--td:#1a1a1a;--tm:#444;--tl:#777;
   --sf:#27ae60;--st:#c0392b;--sw:#e67e22;--r:8px;
@@ -16,66 +16,37 @@
 body{font-family:'Lato',sans-serif;background:var(--cr);color:var(--td);min-height:100vh}
 
 /* LOADING */
-#loadOverlay{position:fixed;inset:0;background:var(--gd);display:flex;flex-direction:column;
-  align-items:center;justify-content:center;z-index:9000;gap:18px}
+#loadOverlay{position:fixed;inset:0;background:var(--gd);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9000;gap:18px}
 #loadOverlay .logo{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:4px;color:var(--al)}
 #loadOverlay .sub{font-size:.8rem;color:rgba(255,255,255,.5);letter-spacing:2px;text-transform:uppercase}
-.spin{width:36px;height:36px;border:3px solid rgba(255,255,255,.15);border-top-color:var(--al);
-  border-radius:50%;animation:sp .8s linear infinite}
+.spin{width:36px;height:36px;border:3px solid rgba(255,255,255,.15);border-top-color:var(--al);border-radius:50%;animation:sp .8s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
-
-/* SETUP */
-#setupScreen{display:none;position:fixed;inset:0;background:var(--cr);z-index:8000;overflow-y:auto;padding:24px 16px 60px}
-.sb{max-width:680px;margin:0 auto}
-.sb h1{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:3px;color:var(--gd);margin-bottom:6px}
-.sb .lead{color:var(--tm);margin-bottom:24px;font-size:.95rem;line-height:1.6}
-.ss{background:#fff;border-radius:var(--r);box-shadow:var(--ss);padding:20px 22px;margin-bottom:14px;border-left:4px solid var(--am)}
-.ss h3{font-size:.95rem;font-weight:900;color:var(--gd);margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.ss h3 .n{width:24px;height:24px;background:var(--am);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:900;flex-shrink:0}
-.ss p,.ss li{font-size:.88rem;color:var(--tm);line-height:1.65}
-.ss ul{padding-left:18px;margin-top:4px}
-.ss code{background:#f0ece4;padding:2px 6px;border-radius:4px;font-size:.82rem;color:var(--gd);font-family:monospace}
-.cib{background:#1e1e1e;border-radius:8px;padding:18px;margin-top:12px}
-.cib textarea{background:transparent;border:none;color:#ce9178;font-family:'Courier New',monospace;
-  font-size:.82rem;line-height:1.7;resize:vertical;width:100%;min-height:200px}
-.cib textarea:focus{outline:none}
-.ssb{background:var(--gd);color:#fff;border:none;border-radius:8px;padding:12px 28px;
-  font-family:'Lato',sans-serif;font-size:.95rem;font-weight:700;cursor:pointer;width:100%;
-  margin-top:14px;transition:background .2s;letter-spacing:.5px}
-.ssb:hover{background:var(--gm)}
-.se{color:var(--rd);font-size:.84rem;margin-top:8px;display:none}
-.snote{background:#e8f4fd;border:1px solid #a9d4f1;border-radius:6px;padding:12px 15px;
-  font-size:.83rem;color:#2471a3;margin-top:14px;line-height:1.55}
+#loadMsg{color:rgba(255,255,255,.45);font-size:.78rem;margin-top:4px;text-align:center;max-width:300px}
 
 /* HEADER */
 header{background:var(--gd);color:#fff;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.3)}
 .hi{max-width:1100px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .ht{display:flex;flex-direction:column}
 .ht .club{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:3px;color:var(--al);line-height:1}
-.ht .sub{font-size:.78rem;color:rgba(255,255,255,.6);letter-spacing:1px;text-transform:uppercase}
-#aBtn{background:transparent;border:1.5px solid rgba(255,255,255,.35);color:rgba(255,255,255,.8);
-  padding:7px 16px;border-radius:6px;cursor:pointer;font-size:.82rem;font-family:'Lato',sans-serif;transition:all .2s}
-#aBtn:hover{background:rgba(255,255,255,.1);color:#fff}
-#aBtn.on{background:var(--am);border-color:var(--am);color:#fff}
+.ht .sub2{font-size:.78rem;color:rgba(255,255,255,.6);letter-spacing:1px;text-transform:uppercase}
+.hbtn{background:transparent;border:1.5px solid rgba(255,255,255,.35);color:rgba(255,255,255,.8);padding:7px 16px;border-radius:6px;cursor:pointer;font-size:.82rem;font-family:'Lato',sans-serif;transition:all .2s}
+.hbtn:hover{background:rgba(255,255,255,.1);color:#fff}
+.hbtn.on{background:var(--am);border-color:var(--am);color:#fff}
 
 /* PAGES */
 .pg{display:none}.pg.act{display:block}
 .pw{max-width:1000px;margin:0 auto;padding:24px 16px 60px}
 
-/* TRAINER INFO */
-.tib{background:linear-gradient(135deg,var(--gd) 0%,var(--gm) 100%);color:#fff;border-radius:var(--r);
-  padding:20px 24px;margin-bottom:24px;position:relative;overflow:hidden}
-.tib::before{content:'';position:absolute;top:0;right:0;width:120px;height:120px;
-  background:rgba(255,255,255,.04);border-radius:50%;transform:translate(30px,-30px)}
+/* BOXES */
+.tib{background:linear-gradient(135deg,var(--gd) 0%,var(--gm) 100%);color:#fff;border-radius:var(--r);padding:20px 24px;margin-bottom:24px;position:relative;overflow:hidden}
+.tib::before{content:'';position:absolute;top:0;right:0;width:120px;height:120px;background:rgba(255,255,255,.04);border-radius:50%;transform:translate(30px,-30px)}
 .tib h3{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:2px;color:var(--al);margin-bottom:8px}
 .tib p{font-size:.9rem;line-height:1.65;color:rgba(255,255,255,.88);white-space:pre-wrap}
 .ti-empty{color:rgba(255,255,255,.4);font-style:italic;font-size:.88rem}
-
-/* CONTACT */
-.cb{background:#fff;border-radius:var(--r);padding:18px 22px;margin-bottom:24px;border-left:4px solid var(--gl);box-shadow:var(--ss)}
-.cb h3{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:2px;color:var(--gd);margin-bottom:10px}
-.cb p{font-size:.9rem;line-height:1.7;color:var(--tm);white-space:pre-wrap}
-.cb a{color:var(--gm);text-decoration:none;font-weight:700}.cb a:hover{text-decoration:underline}
+.ctbox{background:#fff;border-radius:var(--r);padding:18px 22px;margin-bottom:24px;border-left:4px solid var(--gl);box-shadow:var(--ss)}
+.ctbox h3{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:2px;color:var(--gd);margin-bottom:10px}
+.ctbox p{font-size:.9rem;line-height:1.7;color:var(--tm);white-space:pre-wrap}
+.ctbox a{color:var(--gm);text-decoration:none;font-weight:700}.ctbox a:hover{text-decoration:underline}
 
 /* HOWTO */
 .hw{background:#fff;border-radius:var(--r);padding:16px 20px;margin-bottom:24px;border-left:4px solid var(--am);box-shadow:var(--ss)}
@@ -85,14 +56,13 @@ header{background:var(--gd);color:#fff;position:sticky;top:0;z-index:100;box-sha
 .hw-step .n{width:24px;height:24px;background:var(--am);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:900;flex-shrink:0}
 .hw-step p{font-size:.82rem;color:var(--tm);line-height:1.4;padding-top:3px}
 
-/* SESSIONS */
+/* SESSION CARDS */
 .sh2{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .sh2 h2{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:2px;color:var(--gd)}
 .no-s{background:#fff;border-radius:var(--r);padding:40px;text-align:center;color:var(--tl)}
 .sc{background:#fff;border-radius:var(--r);box-shadow:var(--ss);margin-bottom:16px;overflow:hidden}
 .sc-hd{background:var(--gd);color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;gap:12px}
 .sc-hd:hover{background:var(--gm)}
-.sdi{display:flex;flex-direction:column}
 .sdi .dt{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:1px;color:var(--al)}
 .sdi .mt{font-size:.78rem;color:rgba(255,255,255,.65);margin-top:2px}
 .ss2{display:flex;align-items:center;gap:10px}
@@ -100,26 +70,29 @@ header{background:var(--gd);color:#fff;position:sticky;top:0;z-index:100;box-sha
 .b-free{background:var(--sf);color:#fff}.b-full{background:var(--st);color:#fff}.b-part{background:var(--am);color:#fff}
 .chv{font-size:.9rem;transition:transform .25s;color:rgba(255,255,255,.65)}
 .sc.open .chv{transform:rotate(180deg)}
-.sc-bd{display:none;padding:18px 20px}.sc.open .sc-bd{display:block}
+.sc-bd{display:none;padding:16px 20px}.sc.open .sc-bd{display:block}
 
-/* INTERVALS */
-.sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:7px}
-.sbt{border:none;border-radius:6px;padding:9px 5px;cursor:pointer;font-family:'Lato',sans-serif;font-size:.8rem;font-weight:700;transition:all .15s;display:flex;flex-direction:column;align-items:center;gap:2px;min-height:54px;justify-content:center}
-.sbt .sn{font-size:.68rem;font-weight:900;opacity:.55;line-height:1}
-.sbt .tm2{font-size:.95rem;font-weight:900}
-.sbt .nm{font-size:.68rem;font-weight:400;text-align:center;line-height:1.2}
-.s-free{background:#e8f5ec;color:var(--gd);border:2px solid var(--sf)}
-.s-free:hover{background:var(--sf);color:#fff;transform:translateY(-1px)}
-.s-taken{background:#fdecea;color:var(--st);border:2px solid #f5c6c2;cursor:default}
-
-/* WAITLIST */
-.wls{margin-top:16px}
-.wls h4{font-size:.8rem;text-transform:uppercase;letter-spacing:1px;color:var(--tl);margin-bottom:8px}
-.wl-btn{background:var(--am);color:#fff;border:none;border-radius:6px;padding:9px 18px;cursor:pointer;font-family:'Lato',sans-serif;font-size:.85rem;font-weight:700;transition:background .15s}
-.wl-btn:hover{background:var(--al)}
-.wl-list{display:flex;flex-direction:column;gap:5px}
-.wl-item{background:#fff8ef;border:1px solid #ffdda0;border-radius:6px;padding:6px 12px;font-size:.8rem;display:flex;gap:8px;align-items:center}
-.wl-item .wp{font-weight:900;color:var(--am);min-width:18px}
+/* GROUP CARDS (public) */
+.gc{border:1.5px solid #e5e0d8;border-radius:var(--r);margin-bottom:10px;overflow:hidden}
+.gc-hd{background:#f8f5f0;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.gc-time{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:1px;color:var(--gd)}
+.gc-meta{font-size:.78rem;color:var(--tl)}
+.gc-bd{padding:12px 16px}
+.parts-list{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.part-item{display:flex;align-items:center;gap:10px;background:#f0faf4;border:1px solid #c8e6d0;border-radius:6px;padding:7px 12px;font-size:.85rem}
+.part-num{font-weight:900;color:var(--sf);min-width:22px;font-size:.8rem}
+.part-name{color:var(--td);font-weight:700}
+.part-dog{color:var(--tl);font-size:.78rem}
+.part-empty{color:var(--tl);font-style:italic;font-size:.82rem;padding:4px 0}
+.gc-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.signup-btn{background:var(--sf);color:#fff;border:none;border-radius:6px;padding:8px 18px;cursor:pointer;font-family:'Lato',sans-serif;font-size:.85rem;font-weight:700;transition:background .15s}
+.signup-btn:hover{background:#219a52}
+.wl-btn2{background:var(--am);color:#fff;border:none;border-radius:6px;padding:8px 18px;cursor:pointer;font-family:'Lato',sans-serif;font-size:.85rem;font-weight:700;transition:background .15s}
+.wl-btn2:hover{background:var(--al)}
+.wl-section{margin-top:10px;border-top:1px solid #f0ece4;padding-top:10px}
+.wl-section h5{font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:var(--tl);margin-bottom:6px}
+.wl-item{display:flex;align-items:center;gap:8px;font-size:.8rem;padding:4px 0;color:var(--tm)}
+.wl-pos{font-weight:900;color:var(--sw);min-width:18px}
 
 /* CANCEL */
 .cp{background:#fff;border-radius:var(--r);box-shadow:var(--ss);padding:20px;margin-top:28px}
@@ -133,7 +106,7 @@ header{background:var(--gd);color:#fff;position:sticky;top:0;z-index:100;box-sha
 input,textarea,select{font-family:'Lato',sans-serif;font-size:.9rem;padding:9px 12px;border:1.5px solid #d0ccc4;border-radius:6px;background:#fff;color:var(--td);transition:border-color .2s;width:100%}
 input:focus,textarea:focus,select:focus{outline:none;border-color:var(--gm)}
 label{display:block;font-size:.78rem;font-weight:700;color:var(--tm);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
-.fg{margin-bottom:13px}.fr{display:flex;gap:10px;flex-wrap:wrap}.fr .fg{flex:1;min-width:110px}
+.fg{margin-bottom:13px}.fr{display:flex;gap:10px;flex-wrap:wrap}.fr .fg{flex:1;min-width:100px}
 
 /* BUTTONS */
 .btn{font-family:'Lato',sans-serif;font-size:.86rem;font-weight:700;padding:9px 17px;border:none;border-radius:6px;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:5px}
@@ -146,14 +119,22 @@ label{display:block;font-size:.78rem;font-weight:700;color:var(--tm);margin-bott
 /* MODAL */
 .mo{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;align-items:center;justify-content:center;padding:14px}
 .mo.open{display:flex}
-.md{background:#fff;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.3);width:100%;max-width:460px;max-height:90vh;overflow-y:auto;animation:su .22s ease}
-.md-lg{max-width:760px}
+.md{background:#fff;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.3);width:100%;max-width:480px;max-height:90vh;overflow-y:auto;animation:su .22s ease}
+.md-lg{max-width:800px}
 @keyframes su{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 .mh{background:var(--gd);color:#fff;padding:15px 20px;border-radius:12px 12px 0 0;display:flex;align-items:center;justify-content:space-between}
 .mh h2{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:2px;color:var(--al)}
 .mx{background:none;border:none;color:rgba(255,255,255,.65);font-size:1.3rem;cursor:pointer;line-height:1}
 .mx:hover{color:#fff}
 .mb{padding:20px}.mf{padding:12px 20px;border-top:1px solid #eee;display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+
+/* GROUP TEMPLATE (session form) */
+.gtpl{background:#f8f5f0;border-radius:var(--r);padding:14px;margin-top:10px}
+.gtpl-row{display:flex;gap:8px;align-items:center;background:#fff;border:1.5px solid #e0ddd8;border-radius:6px;padding:8px 12px;margin-bottom:8px;flex-wrap:wrap}
+.gtpl-row input{border:none;border-bottom:1.5px solid #d0ccc4;border-radius:0;padding:4px 6px;font-size:.85rem;width:auto;flex:1;min-width:60px}
+.gtpl-row input:focus{outline:none;border-bottom-color:var(--gm)}
+.gtpl-row label{margin:0;font-size:.7rem;white-space:nowrap;text-transform:none;letter-spacing:0;color:var(--tl)}
+.gtpl-field{display:flex;flex-direction:column;gap:2px;flex:1;min-width:80px}
 
 /* ADMIN */
 .aw{max-width:1100px;margin:0 auto;padding:24px 16px 60px}
@@ -164,7 +145,7 @@ label{display:block;font-size:.78rem;font-weight:700;color:var(--tm);margin-bott
 .al-bd{padding:26px}
 .le{color:var(--rd);font-size:.82rem;margin-top:8px;display:none}
 .an{display:flex;gap:4px;background:var(--gd);border-radius:var(--r);padding:6px;margin-bottom:22px;flex-wrap:wrap}
-.an button{flex:1;min-width:90px;background:transparent;border:none;color:rgba(255,255,255,.6);padding:8px 12px;border-radius:5px;cursor:pointer;font-family:'Lato',sans-serif;font-size:.83rem;font-weight:700;transition:all .2s}
+.an button{flex:1;min-width:80px;background:transparent;border:none;color:rgba(255,255,255,.6);padding:8px 10px;border-radius:5px;cursor:pointer;font-family:'Lato',sans-serif;font-size:.82rem;font-weight:700;transition:all .2s}
 .an button:hover{color:#fff;background:rgba(255,255,255,.1)}.an button.act{background:var(--am);color:#fff}
 .tc{display:none}.tc.act{display:block}
 .sec-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px}
@@ -175,17 +156,20 @@ thead th{background:var(--gd);color:var(--al);padding:10px 13px;text-align:left;
 tbody tr:nth-child(even){background:#f8f5f0}tbody tr:hover{background:#f0ece4}
 td{padding:10px 13px;color:var(--tm);border-bottom:1px solid #eee;vertical-align:middle}
 .ac{display:flex;gap:4px;flex-wrap:wrap}
-.asg{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px}
-.asc{border:1.5px solid #e0e0e0;border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;gap:4px;background:#fff}
-.asc.free{border-color:var(--sf);background:#f0faf4}
-.asc.taken{border-color:var(--st);background:#fff0f0}
-.asc.wl{border-color:var(--sw);background:#fff8ef}
-.stl{font-size:.98rem;font-weight:900;color:var(--gd)}
-.sp2{font-size:.78rem;color:var(--tm)}
-.sa{display:flex;gap:4px;margin-top:4px;flex-wrap:wrap}
-.spg{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:6px}
-.spb{background:#e8f5ec;border:2px solid var(--sf);color:var(--gd);border-radius:6px;padding:8px 4px;cursor:pointer;font-family:'Lato',sans-serif;font-size:.86rem;font-weight:700;text-align:center;transition:all .15s}
-.spb:hover{background:var(--sf);color:#fff}
+
+/* ADMIN DETAIL */
+.adg{display:flex;flex-direction:column;gap:12px}
+.adgc{border:1.5px solid #e0ddd8;border-radius:var(--r);overflow:hidden}
+.adgc-hd{background:#f8f5f0;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.adgc-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1px;color:var(--gd)}
+.adgc-meta{font-size:.78rem;color:var(--tl)}
+.adgc-bd{padding:12px 16px}
+.adgc-parts{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.adgc-part{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#f8f5f0;border:1px solid #e5e0d8;border-radius:6px;padding:8px 12px;flex-wrap:wrap}
+.adgc-part-info{display:flex;align-items:center;gap:8px;font-size:.85rem}
+.adgc-part-num{font-weight:900;color:var(--am);min-width:22px}
+.adgc-empty-slot{background:#f0faf4;border:1px dashed #c8e6d0;border-radius:6px;padding:8px 12px;font-size:.82rem;color:var(--tl);font-style:italic;display:flex;align-items:center;justify-content:space-between}
+
 .ib{background:#fff;border-radius:var(--r);padding:22px;box-shadow:var(--ss)}
 .stc{background:#fff;border-radius:var(--r);padding:22px;box-shadow:var(--ss);max-width:400px}
 .ro{background:#f8f5f0;border-radius:6px;padding:13px;margin-top:6px;display:none}.ro.show{display:block}
@@ -203,9 +187,7 @@ td{padding:10px 13px;color:var(--tm);border-bottom:1px solid #eee;vertical-align
 
 @media(max-width:580px){
   .ht .club{font-size:1.5rem}.hi{padding:11px 12px}
-  .sg{grid-template-columns:repeat(auto-fill,minmax(95px,1fr))}
-  .asg{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
-  .an button{font-size:.75rem;padding:7px 8px}
+  .an button{font-size:.75rem;padding:7px 6px}
 }
 </style>
 </head>
@@ -216,66 +198,26 @@ td{padding:10px 13px;color:var(--tm);border-bottom:1px solid #eee;vertical-align
   <div class="logo">ZKO RUDNÍK</div>
   <div class="sub">OBRANY s Martinem</div>
   <div class="spin"></div>
-  <div id="loadMsg" style="color:rgba(255,255,255,.5);font-size:.8rem;margin-top:4px"></div>
-</div>
-
-<!-- SETUP -->
-<div id="setupScreen">
-  <div class="sb">
-    <h1>🔧 Nastavení Firebase</h1>
-    <p class="lead">Aplikace ukládá data do Firebase — přihlášky jsou tak sdílené v reálném čase pro všechny uživatele. Postupuj podle kroků níže (cca 5 minut, zdarma).</p>
-
-    <div class="ss"><h3><span class="n">1</span> Vytvoř Firebase projekt</h3>
-      <ul><li>Jdi na <strong>console.firebase.google.com</strong> a přihlas se</li>
-        <li>Klikni <strong>Přidat projekt</strong>, pojmenuj ho např. <code>zko-rudnik</code></li>
-        <li>Google Analytics přeskoč — není potřeba</li></ul></div>
-
-    <div class="ss"><h3><span class="n">2</span> Přidej webovou aplikaci</h3>
-      <ul><li>V projektu klikni na ikonu <strong>&lt;/&gt;</strong> (Web)</li>
-        <li>Pojmenuj ji <code>zko-web</code>, klikni <strong>Zaregistrovat aplikaci</strong></li>
-        <li>Zkopíruj celý objekt <code>firebaseConfig</code></li></ul></div>
-
-    <div class="ss"><h3><span class="n">3</span> Vytvoř Firestore databázi</h3>
-      <ul><li>V levém menu: <strong>Firestore Database → Vytvořit databázi</strong></li>
-        <li>Zvol <strong>Začít v testovacím režimu</strong></li>
-        <li>Vyber region <code>europe-west1</code> a potvrď</li></ul></div>
-
-    <div class="ss"><h3><span class="n">4</span> Vlož konfiguraci</h3>
-      <p>Vlož zkopírovaný <code>firebaseConfig</code> objekt:</p>
-      <div class="cib">
-        <textarea id="cfgInput" spellcheck="false">{
-  "apiKey": "VLOZ_SEM",
-  "authDomain": "tvuj-projekt.firebaseapp.com",
-  "projectId": "tvuj-projekt",
-  "storageBucket": "tvuj-projekt.appspot.com",
-  "messagingSenderId": "123456789",
-  "appId": "1:123456789:web:abcdef"
-}</textarea>
-      </div>
-      <div class="se" id="cfgErr"></div>
-      <button class="ssb" onclick="applyConfig()">✔ Uložit a spustit</button>
-      <div class="snote">💡 Konfigurace se uloží do tohoto prohlížeče (localStorage). Při sdílení souboru s ostatními ji každý musí zadat jednou.</div>
-    </div>
-  </div>
+  <div id="loadMsg"></div>
 </div>
 
 <!-- PUBLIC PAGE -->
 <div id="publicPage" class="pg act">
 <header>
   <div class="hi">
-    <div class="ht"><span class="club">ZKO RUDNÍK</span><span class="sub">OBRANY s Martinem</span></div>
-    <button id="aBtn" onclick="goAdmin()">⚙ Administrace</button>
+    <div class="ht"><span class="club">ZKO RUDNÍK</span><span class="sub2">OBRANY s Martinem</span></div>
+    <button class="hbtn" onclick="goAdmin()">⚙ Administrace</button>
   </div>
 </header>
 <div class="pw">
   <div class="tib"><h3>📋 INFORMACE TRENÉRA</h3><div id="tiDisplay"></div></div>
-  <div id="ctBox" class="cb" style="display:none"><h3>📞 KONTAKT NA TRENÉRA</h3><div id="ctDisplay"></div></div>
+  <div id="ctBox" class="ctbox" style="display:none"><h3>📞 KONTAKT NA TRENÉRA</h3><div id="ctDisplay"></div></div>
   <div class="hw">
     <h3>Jak se přihlásit?</h3>
     <div class="hw-steps">
       <div class="hw-step"><div class="n">1</div><p>Najdi níže nadcházející trénink a rozklikni ho.</p></div>
-      <div class="hw-step"><div class="n">2</div><p>Klikni na zelené volné místo v čase, který ti vyhovuje.</p></div>
-      <div class="hw-step"><div class="n">3</div><p>Vyplň jméno psovoda a psa a přihlášení potvrď.</p></div>
+      <div class="hw-step"><div class="n">2</div><p>Vyber skupinu v čase, který ti vyhovuje.</p></div>
+      <div class="hw-step"><div class="n">3</div><p>Klikni na tlačítko přihlásit a vyplň jméno psovoda a psa.</p></div>
       <div class="hw-step"><div class="n">4</div><p>Pro zrušení přihlášky použij sekci níže.</p></div>
     </div>
   </div>
@@ -283,7 +225,7 @@ td{padding:10px 13px;color:var(--tm);border-bottom:1px solid #eee;vertical-align
   <div id="sessionsOut"></div>
   <div class="cp">
     <h3>✖ Zrušení přihlášky</h3>
-    <p style="font-size:.82rem;color:var(--tl);margin-bottom:12px">Zadej své jméno a nalezené přihlášky lze zrušit.</p>
+    <p style="font-size:.82rem;color:var(--tl);margin-bottom:12px">Zadej své jméno pro nalezení a zrušení přihlášky.</p>
     <div class="cf">
       <input type="text" id="csInput" placeholder="Jméno psovoda…" style="max-width:260px" onkeydown="if(event.key==='Enter')doSearch()">
       <button class="btn bg" onclick="doSearch()">🔍 Hledat</button>
@@ -297,8 +239,8 @@ td{padding:10px 13px;color:var(--tm);border-bottom:1px solid #eee;vertical-align
 <div id="adminPage" class="pg">
 <header>
   <div class="hi">
-    <div class="ht"><span class="club">ZKO RUDNÍK</span><span class="sub">ADMINISTRACE</span></div>
-    <button class="on" style="background:var(--am);border:none;color:#fff;padding:7px 16px;border-radius:6px;cursor:pointer;font-size:.82rem;font-family:'Lato',sans-serif" onclick="goPublic()">← Zpět na web</button>
+    <div class="ht"><span class="club">ZKO RUDNÍK</span><span class="sub2">ADMINISTRACE</span></div>
+    <button class="hbtn on" onclick="goPublic()">← Zpět na web</button>
   </div>
 </header>
 <div class="aw">
@@ -323,7 +265,7 @@ td{padding:10px 13px;color:var(--tm);border-bottom:1px solid #eee;vertical-align
     <div id="tT" class="tc act">
       <div class="sec-hd"><h2>Tréninky</h2><button class="btn bp" onclick="openNewS()">＋ Nový trénink</button></div>
       <div class="tw"><table>
-        <thead><tr><th>Datum</th><th>Místo</th><th>Začátek</th><th>Intervaly</th><th>Obsazeno</th><th>Akce</th></tr></thead>
+        <thead><tr><th>Datum</th><th>Místo</th><th>Skupiny</th><th>Přihlášeno</th><th>Akce</th></tr></thead>
         <tbody id="sTbody"></tbody>
       </table></div>
     </div>
@@ -373,30 +315,11 @@ td{padding:10px 13px;color:var(--tm);border-bottom:1px solid #eee;vertical-align
         <div class="fg"><label>Nové heslo znovu</label><input type="password" id="pCon"></div>
         <button class="btn bp" onclick="changePwd()">Změnit heslo</button>
       </div>
-      <div class="stc" style="max-width:500px;margin-bottom:20px">
-        <h3 style="font-size:.95rem;margin-bottom:10px;color:var(--gd)">🧪 Demo tréninky</h3>
-        <p style="font-size:.84rem;color:var(--tl);margin-bottom:12px;line-height:1.55">
-          Vytvoří 3 ukázkové tréninky (za 5, 12 a 19 dní) s ukázkovými přihláškami. Použij při prvním spuštění nebo pro testování.
-        </p>
-        <button class="btn ba" onclick="manualSeed()">＋ Vytvořit demo tréninky</button>
-      </div>
       <div class="stc" style="max-width:500px;background:#fff8ef;border:1.5px solid #ffdda0">
-        <h3 style="font-size:.95rem;margin-bottom:10px;color:var(--am)">⚠ Firestore pravidla (Rules)</h3>
-        <p style="font-size:.84rem;color:var(--tm);line-height:1.6">
-          Pokud data nejdou zobrazit nebo ukládat, zkontroluj pravidla v Firebase konzoli:<br>
-          <strong>Firestore Database → Rules</strong> a nastav:
-        </p>
-        <div style="background:#1e1e1e;border-radius:6px;padding:12px;margin-top:10px;font-family:monospace;font-size:.82rem;color:#ce9178;line-height:1.6">
-          rules_version = '2';<br>
-          service cloud.firestore {<br>
-          &nbsp;&nbsp;match /databases/{db}/documents {<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;match /{doc=**} {<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow read, write: if true;<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-          &nbsp;&nbsp;}<br>
-          }
+        <h3 style="font-size:.95rem;margin-bottom:10px;color:var(--am)">⚠ Firestore pravidla</h3>
+        <div style="background:#1e1e1e;border-radius:6px;padding:12px;font-family:monospace;font-size:.8rem;color:#ce9178;line-height:1.6">
+          rules_version = '2';<br>service cloud.firestore {<br>&nbsp;&nbsp;match /databases/{db}/documents {<br>&nbsp;&nbsp;&nbsp;&nbsp;match /{doc=**} {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow read, write: if true;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;}<br>}
         </div>
-        <p style="font-size:.78rem;color:var(--tl);margin-top:8px">Po změně klikni <strong>Publish</strong> v Firebase konzoli.</p>
       </div>
     </div>
   </div>
@@ -404,11 +327,13 @@ td{padding:10px 13px;color:var(--tm);border-bottom:1px solid #eee;vertical-align
 </div>
 
 <!-- MODALS -->
+
+<!-- Přihlášení do skupiny -->
 <div class="mo" id="mSignup">
   <div class="md">
     <div class="mh"><h2>Přihlášení na trénink</h2><button class="mx" onclick="closeM('mSignup')">✕</button></div>
     <div class="mb">
-      <p id="mSignupInfo" style="font-size:.85rem;color:var(--tl);margin-bottom:14px"></p>
+      <p id="mSignupInfo" style="font-size:.85rem;color:var(--tl);margin-bottom:14px;line-height:1.5"></p>
       <div class="fg"><label>Jméno psovoda</label><input type="text" id="suHandler" placeholder="Např. Jan Novák"></div>
       <div class="fg"><label>Jméno psa</label><input type="text" id="suDog" placeholder="Např. Rex"></div>
     </div>
@@ -419,12 +344,13 @@ td{padding:10px 13px;color:var(--tm);border-bottom:1px solid #eee;vertical-align
   </div>
 </div>
 
+<!-- Čekací listina -->
 <div class="mo" id="mWait">
   <div class="md">
     <div class="mh"><h2>Čekací listina</h2><button class="mx" onclick="closeM('mWait')">✕</button></div>
     <div class="mb">
-      <div class="al2 aw2">Všechna místa jsou obsazena. Zapíšeš se na čekací listinu.</div>
-      <p id="mWaitInfo" style="font-size:.85rem;color:var(--tl);margin-bottom:14px"></p>
+      <div class="al2 aw2">Skupina je plná. Zapíšeš se na čekací listinu.</div>
+      <p id="mWaitInfo" style="font-size:.85rem;color:var(--tl);margin-bottom:14px;line-height:1.5"></p>
       <div class="fg"><label>Jméno psovoda</label><input type="text" id="wlHandler" placeholder="Např. Jan Novák"></div>
       <div class="fg"><label>Jméno psa</label><input type="text" id="wlDog" placeholder="Např. Rex"></div>
     </div>
@@ -435,8 +361,9 @@ td{padding:10px 13px;color:var(--tm);border-bottom:1px solid #eee;vertical-align
   </div>
 </div>
 
+<!-- Formulář termínu -->
 <div class="mo" id="mSession">
-  <div class="md">
+  <div class="md" style="max-width:560px">
     <div class="mh"><h2 id="mSTitle">Nový trénink</h2><button class="mx" onclick="closeM('mSession')">✕</button></div>
     <div class="mb">
       <div class="fg"><label>Datum</label><input type="date" id="sDate"></div>
@@ -447,11 +374,7 @@ td{padding:10px 13px;color:var(--tm);border-bottom:1px solid #eee;vertical-align
         </select>
       </div>
       <div class="fg" id="sLocW" style="display:none"><label>Vlastní místo</label><input type="text" id="sLocC" placeholder="Zadej místo…"></div>
-      <div class="fr">
-        <div class="fg"><label>Začátek</label><input type="time" id="sStart" value="08:00"></div>
-        <div class="fg"><label>Délka intervalu (min)</label><input type="number" id="sDur" value="20" min="5" max="120"></div>
-        <div class="fg"><label>Počet intervalů</label><input type="number" id="sCnt" value="20" min="1" max="60"></div>
-      </div>
+
       <div class="fg">
         <label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;letter-spacing:0">
           <input type="checkbox" id="sRep" onchange="togRep()" style="width:auto"> Opakovat trénink
@@ -463,8 +386,16 @@ td{padding:10px 13px;color:var(--tm);border-bottom:1px solid #eee;vertical-align
           </div>
         </div>
       </div>
-      <div id="seriesW" style="display:none">
-        <div class="al2 ai"><strong>Termín je součástí série.</strong> Co chceš upravit?<br>
+
+      <!-- SKUPINY TEMPLATE -->
+      <div id="groupsSection">
+        <label style="margin-bottom:8px;display:block">Skupiny pro tento termín</label>
+        <div class="gtpl" id="gtplList"></div>
+        <button type="button" class="btn bg bs" style="margin-top:4px" onclick="addGroupRow()">＋ Přidat skupinu</button>
+      </div>
+
+      <div id="seriesW" style="display:none;margin-top:12px">
+        <div class="al2 ai"><strong>Termín je součástí série.</strong><br>
           <div style="display:flex;gap:8px;margin-top:9px">
             <button class="btn bg bs" onclick="setScope('single')">Jen tento</button>
             <button class="btn ba bs" onclick="setScope('series')">Celou sérii</button>
@@ -480,6 +411,7 @@ td{padding:10px 13px;color:var(--tm);border-bottom:1px solid #eee;vertical-align
   </div>
 </div>
 
+<!-- Detail termínu (admin) -->
 <div class="mo" id="mDetail">
   <div class="md md-lg">
     <div class="mh"><h2 id="mDTitle">Detail termínu</h2><button class="mx" onclick="closeM('mDetail')">✕</button></div>
@@ -491,6 +423,26 @@ td{padding:10px 13px;color:var(--tm);border-bottom:1px solid #eee;vertical-align
   </div>
 </div>
 
+<!-- Formulář skupiny (admin detail) -->
+<div class="mo" id="mGroup">
+  <div class="md" style="max-width:420px">
+    <div class="mh"><h2 id="mGTitle">Přidat skupinu</h2><button class="mx" onclick="closeM('mGroup')">✕</button></div>
+    <div class="mb">
+      <input type="hidden" id="gEditID">
+      <div class="fr">
+        <div class="fg"><label>Čas začátku</label><input type="time" id="gStart" value="08:00"></div>
+        <div class="fg"><label>Délka (min)</label><input type="number" id="gDur" value="60" min="5" max="480"></div>
+        <div class="fg"><label>Max. účastníků</label><input type="number" id="gMax" value="3" min="1" max="50"></div>
+      </div>
+    </div>
+    <div class="mf">
+      <button class="btn bg" onclick="closeM('mGroup')">Zrušit</button>
+      <button class="btn bp" onclick="saveGroup()">💾 Uložit skupinu</button>
+    </div>
+  </div>
+</div>
+
+<!-- Upravit přihlášku -->
 <div class="mo" id="mEditReg">
   <div class="md">
     <div class="mh"><h2>Upravit přihlášku</h2><button class="mx" onclick="closeM('mEditReg')">✕</button></div>
@@ -506,18 +458,20 @@ td{padding:10px 13px;color:var(--tm);border-bottom:1px solid #eee;vertical-align
   </div>
 </div>
 
+<!-- Přesun do jiné skupiny -->
 <div class="mo" id="mMove">
   <div class="md">
-    <div class="mh"><h2>Přesunout na jiný interval</h2><button class="mx" onclick="closeM('mMove')">✕</button></div>
+    <div class="mh"><h2>Přesunout do jiné skupiny</h2><button class="mx" onclick="closeM('mMove')">✕</button></div>
     <div class="mb">
       <p id="mMoveInfo" style="font-size:.85rem;color:var(--tl);margin-bottom:12px"></p>
-      <p style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--tl);margin-bottom:9px">Vyber volný interval:</p>
-      <div class="spg" id="movePicker"></div>
+      <p style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--tl);margin-bottom:9px">Vyber skupinu:</p>
+      <div id="movePicker" style="display:flex;flex-direction:column;gap:6px"></div>
     </div>
     <div class="mf"><button class="btn bg" onclick="closeM('mMove')">Zrušit</button></div>
   </div>
 </div>
 
+<!-- Potvrzení -->
 <div class="mo" id="mConfirm">
   <div class="md" style="max-width:380px">
     <div class="mh"><h2 id="mCTitle">Potvrdit akci</h2><button class="mx" onclick="closeM('mConfirm')">✕</button></div>
@@ -531,16 +485,35 @@ td{padding:10px 13px;color:var(--tm);border-bottom:1px solid #eee;vertical-align
 
 <div id="toast"></div>
 
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-
 <script>
-// ═══════════════════════════════════════════════════
-//  CONFIG
-// ═══════════════════════════════════════════════════
-// Pokud chceš config zapéct přímo do souboru, nahraď null objektem:
-// const BAKED_CONFIG = { apiKey:"...", projectId:"...", ... };
+// Dynamicky načte Firebase SDK, pak spustí app
+function loadScript(src){
+  return new Promise((resolve,reject)=>{
+    const s=document.createElement('script');
+    s.src=src; s.onload=resolve; s.onerror=reject;
+    document.head.appendChild(s);
+  });
+}
+async function bootApp(){
+  const CDN='https://www.gstatic.com/firebasejs/9.23.0/';
+  try{
+    document.getElementById('loadMsg').textContent='Načítám Firebase SDK…';
+    await loadScript(CDN+'firebase-app-compat.js');
+    await loadScript(CDN+'firebase-firestore-compat.js');
+    document.getElementById('loadMsg').textContent='Připojuji se k databázi…';
+    initFirebase(BAKED_CONFIG);
+  }catch(e){
+    document.getElementById('loadMsg').innerHTML=
+      '⚠ Nelze načíst Firebase SDK.<br>'+
+      '<strong>Nahraj soubor na GitHub Pages</strong> a otevři přes odkaz https://...'+
+      '<br><small style="opacity:.6">Lokální soubory a Claude preview blokují CDN.</small>';
+  }
+}
+</script>
+<script>
+// ══════════════════════════════════════════════════
+//  FIREBASE CONFIG
+// ══════════════════════════════════════════════════
 const BAKED_CONFIG = {
   apiKey: "AIzaSyCrTSWiZuzpad4AJCT5SyEAjxJOY54xoMM",
   authDomain: "zko-rudnik-obrany-fc573.firebaseapp.com",
@@ -550,455 +523,300 @@ const BAKED_CONFIG = {
   appId: "1:389782711176:web:70ac8856df314eb6a1a83d"
 };
 
-// ═══════════════════════════════════════════════════
+// ══════════════════════════════════════════════════
 //  STATE
-// ═══════════════════════════════════════════════════
+// ══════════════════════════════════════════════════
 let db = null;
-let D  = { sessions: [], registrations: [], trainerInfo: '', contact: {}, adminPassword: 'admin123' };
-let loggedIn = false;
-let ready    = false;
-let detailSID = null;
-let moveID    = null;
-let SU = {}, WL = {};
-let editSID = null, editScope = 'single';
-
-// ═══════════════════════════════════════════════════
-//  HELPERS
-// ═══════════════════════════════════════════════════
-function uid()  { return Math.random().toString(36).slice(2) + Date.now().toString(36); }
-function fmt(d) { return d.toISOString().split('T')[0]; }
-function addM(t, m) {
-  const [h, mi] = t.split(':').map(Number), tot = h*60+mi+m;
-  return String(Math.floor(tot/60)).padStart(2,'0') + ':' + String(tot%60).padStart(2,'0');
-}
-function genSlots(s) { const a=[]; let c=s.startTime; for(let i=0;i<s.slotCount;i++){a.push(c);c=addM(c,s.slotDuration);} return a; }
-function dispDate(ds) {
-  if (!ds) return '';
-  return new Date(ds+'T00:00:00').toLocaleDateString('cs-CZ',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-}
-function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-
-// ═══════════════════════════════════════════════════
-//  TOAST & MODAL
-// ═══════════════════════════════════════════════════
-let tT;
-function toast(msg, type='ok') {
-  const el=document.getElementById('toast');
-  el.textContent=msg; el.className='show '+type;
-  clearTimeout(tT); tT=setTimeout(()=>el.className='',3200);
-}
-function openM(id)  { document.getElementById(id).classList.add('open'); }
-function closeM(id) { document.getElementById(id).classList.remove('open'); }
-document.querySelectorAll('.mo').forEach(el=>el.addEventListener('click',e=>{if(e.target===el)el.classList.remove('open');}));
-
-function confirm2(msg, fn, title) {
-  document.getElementById('mCTitle').textContent = title||'Potvrdit akci';
-  document.getElementById('mCMsg').textContent   = msg;
-  document.getElementById('mCOK').onclick = ()=>{ closeM('mConfirm'); fn(); };
-  openM('mConfirm');
-}
-
-// ═══════════════════════════════════════════════════
-//  FIREBASE SETUP
-// ═══════════════════════════════════════════════════
-function getConfig() {
-  if (BAKED_CONFIG) return BAKED_CONFIG;
-  try { const s=localStorage.getItem('zko_fbcfg'); return s?JSON.parse(s):null; } catch(e){return null;}
-}
-
-function applyConfig() {
-  const raw = document.getElementById('cfgInput').value.trim();
-  const errEl = document.getElementById('cfgErr');
-  errEl.style.display='none';
-  let cfg;
-  try { cfg = JSON.parse(raw); } catch(e) {
-    errEl.textContent='Neplatný JSON. Zkopíruj přesně objekt z Firebase konzole.';
-    errEl.style.display=''; return;
-  }
-  if (!cfg.apiKey || !cfg.projectId) {
-    errEl.textContent='Chybí apiKey nebo projectId.';
-    errEl.style.display=''; return;
-  }
-  localStorage.setItem('zko_fbcfg', JSON.stringify(cfg));
-  document.getElementById('setupScreen').style.display='none';
-  initFirebase(cfg);
-}
-
-function initFirebase(cfg) {
-  try {
-    if (!firebase.apps.length) firebase.initializeApp(cfg);
-    db = firebase.firestore();
-    startListeners();
-  } catch(e) {
-    showMsg('Chyba Firebase: ' + e.message);
-    setTimeout(showSetup, 2000);
-  }
-}
-
-function showSetup() {
-  document.getElementById('loadOverlay').style.display='none';
-  document.getElementById('setupScreen').style.display='';
-}
-
-function showMsg(m) { document.getElementById('loadMsg').textContent = m; }
-
-// ═══════════════════════════════════════════════════
-//  FIRESTORE LISTENERS
-// ═══════════════════════════════════════════════════
-// Stav načítání (počáteční)
-let gotS=false, gotR=false, gotC=false;
+let D = { sessions:[], groups:[], registrations:[], trainerInfo:'', contact:{}, adminPassword:'admin123' };
+let loggedIn = false, ready = false;
+let gotS=false, gotG=false, gotR=false, gotC=false;
 let loadTO = null;
+let detailSID = null, moveRegID = null;
+let editSID = null, editScope = 'single';
+let editGID = null;
+let SU = {}, WL = {};
+// temp group rows in session form
+let gRows = [];
 
-// Hlavní re-render — volaný při každé změně dat
-function rerender() {
-  renderPublic();
-  if (loggedIn) {
-    renderSessions();
-    // Přihlášky tab přerenderi jen pokud je aktivní
-    if (document.getElementById('tR').classList.contains('act')) renderRegs();
-  }
+// ══════════════════════════════════════════════════
+//  HELPERS
+// ══════════════════════════════════════════════════
+function uid()  { return Math.random().toString(36).slice(2)+Date.now().toString(36); }
+function fmt(d) { return d.toISOString().split('T')[0]; }
+function addM(t,m){ const [h,mi]=t.split(':').map(Number),tot=h*60+mi+m; return String(Math.floor(tot/60)).padStart(2,'0')+':'+String(tot%60).padStart(2,'0'); }
+function dispDate(ds){ if(!ds)return''; return new Date(ds+'T00:00:00').toLocaleDateString('cs-CZ',{weekday:'long',day:'numeric',month:'long',year:'numeric'}); }
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function sessionGroups(sid){ return D.groups.filter(g=>g.sessionId===sid).sort((a,b)=>a.startTime.localeCompare(b.startTime)); }
+function groupRegs(gid,status){ return D.registrations.filter(r=>r.groupId===gid&&(status?r.status===status:true)); }
+
+// ══════════════════════════════════════════════════
+//  TOAST & MODAL
+// ══════════════════════════════════════════════════
+let tT;
+function toast(msg,type='ok'){ const el=document.getElementById('toast'); el.textContent=msg; el.className='show '+type; clearTimeout(tT); tT=setTimeout(()=>el.className='',3500); }
+function openM(id){ document.getElementById(id).classList.add('open'); }
+function closeM(id){ document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.mo').forEach(el=>el.addEventListener('click',e=>{ if(e.target===el)el.classList.remove('open'); }));
+function confirm2(msg,fn,title){ document.getElementById('mCTitle').textContent=title||'Potvrdit akci'; document.getElementById('mCMsg').textContent=msg; document.getElementById('mCOK').onclick=()=>{ closeM('mConfirm'); fn(); }; openM('mConfirm'); }
+
+// ══════════════════════════════════════════════════
+//  FIREBASE
+// ══════════════════════════════════════════════════
+function fw(p,lbl){ p.then(()=>console.log('✔',lbl||'')).catch(e=>{ console.error('✘',lbl,e.code,e.message); toast('⚠ Chyba uložení ('+e.code+'): '+e.message,'err'); }); }
+function fsSet(col,id,data){ fw(db.collection(col).doc(id).set(data),col+'/set'); }
+function fsDel(col,id){ fw(db.collection(col).doc(id).delete(),col+'/del'); }
+function fsUpd(col,id,data){ fw(db.collection(col).doc(id).update(data),col+'/upd'); }
+function fsMeta(data){ fw(db.collection('meta').doc('config').set(data,{merge:true}),'meta'); }
+
+function fsDelSession(sid){
+  const batch=db.batch();
+  batch.delete(db.collection('sessions').doc(sid));
+  D.groups.filter(g=>g.sessionId===sid).forEach(g=>batch.delete(db.collection('groups').doc(g.id)));
+  D.registrations.filter(r=>r.sessionId===sid).forEach(r=>batch.delete(db.collection('registrations').doc(r.id)));
+  fw(batch.commit(),'delSession');
+}
+function fsDelGroup(gid){
+  const batch=db.batch();
+  batch.delete(db.collection('groups').doc(gid));
+  D.registrations.filter(r=>r.groupId===gid).forEach(r=>batch.delete(db.collection('registrations').doc(r.id)));
+  fw(batch.commit(),'delGroup');
+}
+function fsReorderWL(gid){
+  const waits=D.registrations.filter(r=>r.groupId===gid&&r.status==='waitlist').sort((a,b)=>a.waitlistPosition-b.waitlistPosition);
+  if(!waits.length)return;
+  const batch=db.batch();
+  waits.forEach((w,i)=>batch.update(db.collection('registrations').doc(w.id),{waitlistPosition:i+1}));
+  fw(batch.commit(),'reorderWL');
 }
 
-// Ruční seed (tlačítko v adminu)
-async function manualSeed() {
-  const now = new Date();
-  const off = n => { const d=new Date(now); d.setDate(d.getDate()+n); return d.toISOString().split('T')[0]; };
-  const s1=uid(), s2=uid(), s3=uid();
-  const items = [
-    ['sessions', {id:s1,date:off(5),location:'ZKO Rudník',startTime:'08:00',slotDuration:20,slotCount:20,repeatGroupId:null,createdAt:Date.now()}],
-    ['sessions', {id:s2,date:off(12),location:'ZKO Rudník',startTime:'08:00',slotDuration:20,slotCount:20,repeatGroupId:null,createdAt:Date.now()}],
-    ['sessions', {id:s3,date:off(19),location:'ZKO Rudník',startTime:'08:00',slotDuration:20,slotCount:20,repeatGroupId:null,createdAt:Date.now()}],
-    ['registrations', {id:uid(),sessionId:s1,slotTime:'08:00',handlerName:'Jan Novák',dogName:'Rex',status:'confirmed',waitlistPosition:null,createdAt:Date.now()}],
-    ['registrations', {id:uid(),sessionId:s1,slotTime:'08:20',handlerName:'Eva Procházková',dogName:'Bára',status:'confirmed',waitlistPosition:null,createdAt:Date.now()}]
-  ];
-  try {
-    const batch = db.batch();
-    items.forEach(([col, doc]) => batch.set(db.collection(col).doc(doc.id), doc));
-    await batch.commit();
-    toast('✔ Demo tréninky vytvořeny — zobrazí se za chvíli.','ok');
-  } catch(e) {
-    console.error('manualSeed error:', e);
-    toast('⚠ Chyba zápisu: ' + e.message, 'err');
-    alert('Chyba zápisu do Firebase:\n\n' + e.code + ': ' + e.message + '\n\nJdi do Firebase konzoli → Firestore → Rules a over, že je nastaveno:\nallow read, write: if true;\nA klikni Publish!');
-  }
+function initFirebase(cfg){
+  try{
+    if(!firebase.apps.length) firebase.initializeApp(cfg);
+    db=firebase.firestore();
+    startListeners();
+  }catch(e){ document.getElementById('loadMsg').textContent='Chyba Firebase: '+e.message; }
 }
 
-function startListeners() {
-  showMsg('Připojuji se k Firebase…');
+function startListeners(){
+  document.getElementById('loadMsg').textContent='Připojuji se k databázi…';
+  loadTO=setTimeout(()=>{ if(!ready){ ready=true; document.getElementById('loadOverlay').style.display='none'; toast('Timeout načítání — zkontroluj Firestore Rules.','err'); rerender(); }},12000);
 
-  // Force-hide loading po 12s
-  loadTO = setTimeout(()=>{
-    if (!ready) {
-      ready = true;
-      document.getElementById('loadOverlay').style.display='none';
-      toast('Timeout: data se nenačetla. Zkontroluj Firestore Rules.','err');
-      rerender();
-    }
-  }, 12000);
+  db.collection('sessions').onSnapshot(snap=>{ D.sessions=snap.docs.map(d=>({id:d.id,...d.data()})); gotS=true; checkReady(); if(ready)rerender(); },
+    err=>{ console.error('sessions',err.code); gotS=true; checkReady(); });
 
-  // SESSIONS listener
-  db.collection('sessions').onSnapshot(
-    snap => {
-      D.sessions = snap.docs.map(d => ({id:d.id, ...d.data()}));
-      gotS = true;
-      console.log('sessions updated:', D.sessions.length);
-      checkReady();
-      if (ready) rerender(); // real-time update po inicializaci
-    },
-    err => {
-      console.error('sessions error:', err.code, err.message);
-      showMsg('⚠ Chyba čtení: ' + err.code + ' — over Firestore Rules!');
-      gotS = true; checkReady();
-    }
-  );
+  db.collection('groups').onSnapshot(snap=>{ D.groups=snap.docs.map(d=>({id:d.id,...d.data()})); gotG=true; checkReady(); if(ready)rerender(); },
+    err=>{ console.error('groups',err.code); gotG=true; checkReady(); });
 
-  // REGISTRATIONS listener
-  db.collection('registrations').onSnapshot(
-    snap => {
-      D.registrations = snap.docs.map(d => ({id:d.id, ...d.data()}));
-      gotR = true;
-      console.log('registrations updated:', D.registrations.length);
-      checkReady();
-      if (ready) rerender();
-    },
-    err => { console.error('registrations error:', err.code); gotR = true; checkReady(); }
-  );
+  db.collection('registrations').onSnapshot(snap=>{ D.registrations=snap.docs.map(d=>({id:d.id,...d.data()})); gotR=true; checkReady(); if(ready)rerender(); },
+    err=>{ console.error('registrations',err.code); gotR=true; checkReady(); });
 
-  // CONFIG listener
-  db.collection('meta').doc('config').onSnapshot(
-    doc => {
-      if (doc.exists) {
-        const d = doc.data();
-        D.trainerInfo   = d.trainerInfo   || '';
-        D.contact       = d.contact       || {};
-        D.adminPassword = d.adminPassword || 'admin123';
-      }
-      gotC = true;
-      checkReady();
-      if (ready) rerender();
-    },
-    err => { gotC = true; checkReady(); }
-  );
+  db.collection('meta').doc('config').onSnapshot(doc=>{ if(doc.exists){const d=doc.data();D.trainerInfo=d.trainerInfo||'';D.contact=d.contact||{};D.adminPassword=d.adminPassword||'admin123';} gotC=true; checkReady(); if(ready)rerender(); },
+    err=>{ gotC=true; checkReady(); });
 }
 
-// Čeká na první načtení všech tří kolekcí
-function checkReady() {
-  if (!gotS || !gotR || !gotC) return;
-  if (ready) return; // už inicializováno
-  ready = true;
-  clearTimeout(loadTO);
-  document.getElementById('loadOverlay').style.display = 'none';
-  console.log('App ready. Sessions:', D.sessions.length, 'Regs:', D.registrations.length);
+function checkReady(){
+  if(!gotS||!gotG||!gotR||!gotC)return;
+  if(ready)return;
+  ready=true; clearTimeout(loadTO);
+  document.getElementById('loadOverlay').style.display='none';
+  console.log('App ready. Sessions:',D.sessions.length,'Groups:',D.groups.length,'Regs:',D.registrations.length);
   rerender();
 }
 
-// ═══════════════════════════════════════════════════
-//  FIRESTORE WRITES (all async, fire-and-forget with toast on error)
-// ═══════════════════════════════════════════════════
-function fw(p, label) {
-  p.then(()=>{ console.log('✔ write ok', label||''); })
-   .catch(e=>{ console.error('✘ write error', label, e.code, e.message); toast('⚠ Chyba uložení ('+e.code+'): '+e.message,'err'); });
+function rerender(){
+  renderPublic();
+  if(loggedIn){ renderSessions(); if(document.getElementById('tR').classList.contains('act'))renderRegs(); if(detailSID)renderDetailBody(detailSID); }
 }
 
-function fsSet(col, id, data)   { fw(db.collection(col).doc(id).set(data), col+'/'+id); }
-function fsDel(col, id)         { fw(db.collection(col).doc(id).delete(), 'del '+col+'/'+id); }
-function fsUpd(col, id, data)   { fw(db.collection(col).doc(id).update(data), 'upd '+col+'/'+id); }
-function fsMeta(data)           { fw(db.collection('meta').doc('config').set(data,{merge:true}), 'meta'); }
+// ══════════════════════════════════════════════════
+//  PAGE
+// ══════════════════════════════════════════════════
+function goAdmin(){ document.getElementById('publicPage').classList.remove('act'); document.getElementById('adminPage').classList.add('act'); if(!loggedIn){document.getElementById('loginBox').style.display='';document.getElementById('adminPanel').style.display='none';}else{renderSessions();fillRegSel();} }
+function goPublic(){ document.getElementById('adminPage').classList.remove('act'); document.getElementById('publicPage').classList.add('act'); }
 
-function fsReorderWL(sessionId) {
-  const waits = D.registrations
-    .filter(r=>r.sessionId===sessionId && r.status==='waitlist')
-    .sort((a,b)=>a.waitlistPosition-b.waitlistPosition);
-  const batch = db.batch();
-  waits.forEach((w,i)=>batch.update(db.collection('registrations').doc(w.id),{waitlistPosition:i+1}));
-  batch.commit().catch(e=>console.error(e));
-}
-
-function fsDelSession(id) {
-  const batch=db.batch();
-  batch.delete(db.collection('sessions').doc(id));
-  D.registrations.filter(r=>r.sessionId===id).forEach(r=>batch.delete(db.collection('registrations').doc(r.id)));
-  batch.commit().catch(e=>console.error(e));
-}
-
-// ═══════════════════════════════════════════════════
-//  PAGE SWITCH
-// ═══════════════════════════════════════════════════
-function goAdmin() {
-  document.getElementById('publicPage').classList.remove('act');
-  document.getElementById('adminPage').classList.add('act');
-  if (!loggedIn) {
-    document.getElementById('loginBox').style.display='';
-    document.getElementById('adminPanel').style.display='none';
-  } else { renderSessions(); fillRegSel(); }
-}
-function goPublic() {
-  document.getElementById('adminPage').classList.remove('act');
-  document.getElementById('publicPage').classList.add('act');
-}
-
-// ═══════════════════════════════════════════════════
+// ══════════════════════════════════════════════════
 //  AUTH
-// ═══════════════════════════════════════════════════
-function doLogin() {
-  const v = document.getElementById('pwdIn').value;
-  if (v === D.adminPassword) {
+// ══════════════════════════════════════════════════
+function doLogin(){
+  if(document.getElementById('pwdIn').value===D.adminPassword){
     loggedIn=true;
     document.getElementById('loginBox').style.display='none';
     document.getElementById('adminPanel').style.display='';
     document.getElementById('pwdIn').value='';
     document.getElementById('loginErr').style.display='none';
-    document.getElementById('tiInput').value = D.trainerInfo||'';
+    document.getElementById('tiInput').value=D.trainerInfo||'';
     loadCT(); renderSessions(); fillRegSel();
     toast('Přihlášení úspěšné.');
-  } else { document.getElementById('loginErr').style.display=''; toast('Nesprávné heslo.','err'); }
+  }else{ document.getElementById('loginErr').style.display=''; toast('Nesprávné heslo.','err'); }
 }
-function doLogout() {
-  loggedIn=false;
-  document.getElementById('adminPanel').style.display='none';
-  document.getElementById('loginBox').style.display='';
-}
-function changePwd() {
-  const cur=document.getElementById('pCur').value, n1=document.getElementById('pNew').value, n2=document.getElementById('pCon').value;
-  if (cur!==D.adminPassword) return toast('Aktuální heslo je nesprávné.','err');
-  if (!n1) return toast('Zadej nové heslo.','err');
-  if (n1!==n2) return toast('Hesla se neshodují.','err');
-  fsMeta({adminPassword:n1});
-  ['pCur','pNew','pCon'].forEach(id=>document.getElementById(id).value='');
+function doLogout(){ loggedIn=false; document.getElementById('adminPanel').style.display='none'; document.getElementById('loginBox').style.display=''; }
+function changePwd(){
+  const cur=document.getElementById('pCur').value,n1=document.getElementById('pNew').value,n2=document.getElementById('pCon').value;
+  if(cur!==D.adminPassword)return toast('Aktuální heslo je nesprávné.','err');
+  if(!n1)return toast('Zadej nové heslo.','err');
+  if(n1!==n2)return toast('Hesla se neshodují.','err');
+  fsMeta({adminPassword:n1}); ['pCur','pNew','pCon'].forEach(id=>document.getElementById(id).value='');
   toast('Heslo bylo změněno.');
 }
 
-// ═══════════════════════════════════════════════════
-//  TABS
-// ═══════════════════════════════════════════════════
-function tab(id, btn) {
-  document.querySelectorAll('.tc').forEach(t=>t.classList.remove('act'));
-  document.querySelectorAll('.an button').forEach(b=>b.classList.remove('act'));
-  document.getElementById(id).classList.add('act'); btn.classList.add('act');
-  if (id==='tT') renderSessions();
-  if (id==='tR') { fillRegSel(); renderRegs(); }
-  if (id==='tI') document.getElementById('tiInput').value=D.trainerInfo||'';
-  if (id==='tC') loadCT();
-}
+function tab(id,btn){ document.querySelectorAll('.tc').forEach(t=>t.classList.remove('act')); document.querySelectorAll('.an button').forEach(b=>b.classList.remove('act')); document.getElementById(id).classList.add('act'); btn.classList.add('act'); if(id==='tT')renderSessions(); if(id==='tR'){fillRegSel();renderRegs();} if(id==='tI')document.getElementById('tiInput').value=D.trainerInfo||''; if(id==='tC')loadCT(); }
 
-// ═══════════════════════════════════════════════════
+// ══════════════════════════════════════════════════
 //  PUBLIC RENDER
-// ═══════════════════════════════════════════════════
-function renderPublic() {
-  const info = D.trainerInfo||'';
-  document.getElementById('tiDisplay').innerHTML = info
-    ? `<p>${esc(info)}</p>` : `<p class="ti-empty">Žádné informace od trenéra.</p>`;
-
-  const c=D.contact||{}, hasCt=c.name||c.phone||c.email||c.note;
+// ══════════════════════════════════════════════════
+function renderPublic(){
+  const info=D.trainerInfo||'';
+  document.getElementById('tiDisplay').innerHTML=info?`<p>${esc(info)}</p>`:`<p class="ti-empty">Žádné informace od trenéra.</p>`;
+  const c=D.contact||{},hasCt=c.name||c.phone||c.email||c.note;
   const cBox=document.getElementById('ctBox');
-  if (hasCt) {
-    let h='';
-    if(c.name)  h+=`<p><strong>👤 ${esc(c.name)}</strong></p>`;
-    if(c.phone) h+=`<p>📞 <a href="tel:${esc(c.phone)}">${esc(c.phone)}</a></p>`;
-    if(c.email) h+=`<p>✉ <a href="mailto:${esc(c.email)}">${esc(c.email)}</a></p>`;
-    if(c.note)  h+=`<p style="margin-top:6px">${esc(c.note)}</p>`;
-    document.getElementById('ctDisplay').innerHTML=h; cBox.style.display='';
-  } else cBox.style.display='none';
+  if(hasCt){let h='';if(c.name)h+=`<p><strong>👤 ${esc(c.name)}</strong></p>`;if(c.phone)h+=`<p>📞 <a href="tel:${esc(c.phone)}">${esc(c.phone)}</a></p>`;if(c.email)h+=`<p>✉ <a href="mailto:${esc(c.email)}">${esc(c.email)}</a></p>`;if(c.note)h+=`<p style="margin-top:6px">${esc(c.note)}</p>`;document.getElementById('ctDisplay').innerHTML=h;cBox.style.display='';}else cBox.style.display='none';
 
   const today=new Date(); today.setHours(0,0,0,0);
   const list=[...D.sessions].filter(s=>new Date(s.date+'T00:00:00')>=today).sort((a,b)=>a.date.localeCompare(b.date));
   const out=document.getElementById('sessionsOut');
-  if (!list.length) { out.innerHTML='<div class="no-s">📅 Žádné nadcházející tréninky nejsou vypsány.</div>'; return; }
-  out.innerHTML=list.map(buildCard).join('');
+  if(!list.length){out.innerHTML='<div class="no-s">📅 Žádné nadcházející tréninky nejsou vypsány.</div>';return;}
+  out.innerHTML=list.map(buildSessionCard).join('');
 }
 
-function buildCard(s) {
-  const sl=genSlots(s);
-  const regs =D.registrations.filter(r=>r.sessionId===s.id&&r.status==='confirmed');
-  const waits=D.registrations.filter(r=>r.sessionId===s.id&&r.status==='waitlist').sort((a,b)=>a.waitlistPosition-b.waitlistPosition);
-  const free =sl.length-regs.length;
-  const bc   =free===0?'b-full':free<4?'b-part':'b-free';
-  const bt   =free===0?'Obsazeno':`${free} volných`;
+function buildSessionCard(s){
+  const grps=sessionGroups(s.id);
+  const totalConfirmed=D.registrations.filter(r=>r.sessionId===s.id&&r.status==='confirmed').length;
+  const totalMax=grps.reduce((a,g)=>a+g.maxParticipants,0);
+  const free=totalMax-totalConfirmed;
+  const bc=free===0?'b-full':free<3?'b-part':'b-free';
+  const bt=grps.length===0?'Bez skupin':free===0?'Obsazeno':`${free} volných`;
 
-  const sHtml=sl.map((t,i)=>{
-    const reg=regs.find(r=>r.slotTime===t);
-    if(reg) return `<button class="sbt s-taken" disabled><span class="sn">${i+1}.</span><span class="tm2">${t}</span><span class="nm">${esc(reg.handlerName)}<br>${esc(reg.dogName)}</span></button>`;
-    return `<button class="sbt s-free" onclick="openSignup('${s.id}','${t}')"><span class="sn">${i+1}.</span><span class="tm2">${t}</span><span class="nm">Volné</span></button>`;
-  }).join('');
-
-  let wHtml='';
-  if(waits.length) wHtml=`<div class="wls"><h4>⏳ Čekací listina (${waits.length})</h4>
-    <div class="wl-list">${waits.map(w=>`<div class="wl-item"><span class="wp">${w.waitlistPosition}.</span>${esc(w.handlerName)} / ${esc(w.dogName)}</div>`).join('')}</div></div>`;
-  const joinBtn=free===0?`<div class="wls"><h4>Vše obsazeno</h4><button class="wl-btn" onclick="openWaitlist('${s.id}')">📋 Zapsat se na čekací listinu</button></div>`:'';
+  const grpsHtml=grps.length?grps.map(g=>buildGroupCard(g,s)).join(''):`<p style="color:var(--tl);font-size:.85rem;padding:8px 0;font-style:italic">Žádné skupiny pro tento termín.</p>`;
 
   return `<div class="sc" id="sc-${s.id}">
     <div class="sc-hd" onclick="togSC('${s.id}')">
-      <div class="sdi"><span class="dt">${dispDate(s.date)}</span>
-        <span class="mt">📍 ${esc(s.location)} &nbsp;·&nbsp; ⏱ ${s.startTime}–${addM(s.startTime,s.slotDuration*s.slotCount)} &nbsp;·&nbsp; interval ${s.slotDuration} min</span>
-      </div>
+      <div class="sdi"><span class="dt">${dispDate(s.date)}</span><span class="mt">📍 ${esc(s.location)} &nbsp;·&nbsp; ${grps.length} ${grps.length===1?'skupina':grps.length<5?'skupiny':'skupin'}</span></div>
       <div class="ss2"><span class="badge ${bc}">${bt}</span><span class="chv">▼</span></div>
     </div>
-    <div class="sc-bd"><div class="sg">${sHtml}</div>${joinBtn}${wHtml}</div>
+    <div class="sc-bd">${grpsHtml}</div>
   </div>`;
 }
 
-function togSC(id) { document.getElementById('sc-'+id).classList.toggle('open'); }
+function buildGroupCard(g,s){
+  const confirmed=groupRegs(g.id,'confirmed').sort((a,b)=>a.createdAt-b.createdAt);
+  const waits=groupRegs(g.id,'waitlist').sort((a,b)=>a.waitlistPosition-b.waitlistPosition);
+  const isFull=confirmed.length>=g.maxParticipants;
+  const end=addM(g.startTime,g.duration);
+  const bc=isFull?'b-full':confirmed.length>0?'b-part':'b-free';
+  const bt=`${confirmed.length}/${g.maxParticipants}`;
 
-// ═══════════════════════════════════════════════════
-//  SIGNUP
-// ═══════════════════════════════════════════════════
-function openSignup(sessionId, slotTime) {
-  const s=D.sessions.find(s=>s.id===sessionId);
-  SU={sessionId, slotTime, admin:false};
-  document.getElementById('mSignupInfo').textContent=`📅 ${dispDate(s.date)} · ⏱ ${slotTime} · 📍 ${s.location}`;
-  document.getElementById('suHandler').value='';
-  document.getElementById('suDog').value='';
-  openM('mSignup');
-  setTimeout(()=>document.getElementById('suHandler').focus(),80);
-}
-
-document.getElementById('suHandler').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('suDog').focus();});
-document.getElementById('suDog').addEventListener('keydown',e=>{if(e.key==='Enter')doSignup();});
-
-function doSignup() {
-  const handler=document.getElementById('suHandler').value.trim();
-  const dog    =document.getElementById('suDog').value.trim();
-  if (!handler||!dog) return toast('Vyplň jméno psovoda i psa.','err');
-  const {sessionId,slotTime}=SU;
-  if (D.registrations.find(r=>r.sessionId===sessionId&&r.slotTime===slotTime&&r.status==='confirmed')) {
-    toast('Interval byl mezitím obsazen.','err'); closeM('mSignup'); return;
+  // slots: show filled + empty
+  let partsHtml='<div class="parts-list">';
+  for(let i=0;i<g.maxParticipants;i++){
+    const p=confirmed[i];
+    if(p) partsHtml+=`<div class="part-item"><span class="part-num">${i+1}.</span><span class="part-name">${esc(p.handlerName)}</span><span class="part-dog">/ ${esc(p.dogName)}</span></div>`;
+    else  partsHtml+=`<div class="part-item" style="background:#f8f8f8;border-color:#e8e8e8"><span class="part-num" style="color:#ccc">${i+1}.</span><span class="part-dog">volné místo</span></div>`;
   }
-  const reg={id:uid(),sessionId,slotTime,handlerName:handler,dogName:dog,status:'confirmed',waitlistPosition:null,createdAt:Date.now()};
-  D.registrations.push(reg); // lokální aktualizace okamžitě
-  closeM('mSignup');
-  fsSet('registrations', reg.id, reg);
-  renderPublic();
-  if (SU.admin) { renderDetailBody(sessionId); renderSessions(); }
-  toast(`✔ Přihlášen: ${handler} / ${dog} na ${slotTime}`);
+  partsHtml+='</div>';
+
+  const actionBtn=isFull
+    ?`<button class="wl-btn2" onclick="openWaitlist('${s.id}','${g.id}')">📋 Čekací listina</button>`
+    :`<button class="signup-btn" onclick="openSignup('${s.id}','${g.id}')">＋ Přihlásit se</button>`;
+
+  let wlHtml='';
+  if(waits.length) wlHtml=`<div class="wl-section"><h5>⏳ Čekací listina (${waits.length})</h5>${waits.map(w=>`<div class="wl-item"><span class="wl-pos">${w.waitlistPosition}.</span>${esc(w.handlerName)} / ${esc(w.dogName)}</div>`).join('')}</div>`;
+
+  return `<div class="gc">
+    <div class="gc-hd">
+      <div><span class="gc-time">⏱ ${g.startTime} – ${end}</span> <span class="gc-meta">${g.duration} min</span></div>
+      <span class="badge ${bc}">${bt} obsazeno</span>
+    </div>
+    <div class="gc-bd">${partsHtml}<div class="gc-actions">${actionBtn}</div>${wlHtml}</div>
+  </div>`;
 }
 
-// ═══════════════════════════════════════════════════
+function togSC(id){ document.getElementById('sc-'+id).classList.toggle('open'); }
+
+// ══════════════════════════════════════════════════
+//  SIGNUP
+// ══════════════════════════════════════════════════
+function openSignup(sessionId,groupId){
+  const s=D.sessions.find(s=>s.id===sessionId), g=D.groups.find(g=>g.id===groupId);
+  SU={sessionId,groupId,admin:false};
+  document.getElementById('mSignupInfo').innerHTML=`📅 ${dispDate(s.date)}<br>⏱ ${g.startTime} – ${addM(g.startTime,g.duration)} (${g.duration} min)<br>📍 ${esc(s.location)}`;
+  document.getElementById('suHandler').value=''; document.getElementById('suDog').value='';
+  openM('mSignup'); setTimeout(()=>document.getElementById('suHandler').focus(),80);
+}
+document.getElementById('suHandler').addEventListener('keydown',e=>{ if(e.key==='Enter')document.getElementById('suDog').focus(); });
+document.getElementById('suDog').addEventListener('keydown',e=>{ if(e.key==='Enter')doSignup(); });
+
+function doSignup(){
+  const handler=document.getElementById('suHandler').value.trim(), dog=document.getElementById('suDog').value.trim();
+  if(!handler||!dog)return toast('Vyplň jméno psovoda i psa.','err');
+  const {sessionId,groupId}=SU;
+  const g=D.groups.find(g=>g.id===groupId);
+  const cnt=groupRegs(groupId,'confirmed').length;
+  if(cnt>=g.maxParticipants){ toast('Skupina je právě plná.','err'); closeM('mSignup'); return; }
+  const reg={id:uid(),sessionId,groupId,handlerName:handler,dogName:dog,status:'confirmed',waitlistPosition:null,createdAt:Date.now()};
+  D.registrations.push(reg); closeM('mSignup'); fsSet('registrations',reg.id,reg); rerender();
+  toast(`✔ Přihlášen: ${handler} / ${dog}`);
+}
+
+// ══════════════════════════════════════════════════
 //  WAITLIST
-// ═══════════════════════════════════════════════════
-function openWaitlist(sessionId) {
-  const s=D.sessions.find(s=>s.id===sessionId);
-  WL={sessionId};
-  document.getElementById('mWaitInfo').textContent=`📅 ${dispDate(s.date)} · 📍 ${s.location}`;
-  document.getElementById('wlHandler').value='';
-  document.getElementById('wlDog').value='';
+// ══════════════════════════════════════════════════
+function openWaitlist(sessionId,groupId){
+  const s=D.sessions.find(s=>s.id===sessionId), g=D.groups.find(g=>g.id===groupId);
+  WL={sessionId,groupId};
+  document.getElementById('mWaitInfo').innerHTML=`📅 ${dispDate(s.date)}<br>⏱ ${g.startTime} – ${addM(g.startTime,g.duration)}<br>📍 ${esc(s.location)}`;
+  document.getElementById('wlHandler').value=''; document.getElementById('wlDog').value='';
   openM('mWait');
 }
-function doWaitlist() {
-  const handler=document.getElementById('wlHandler').value.trim();
-  const dog    =document.getElementById('wlDog').value.trim();
-  if (!handler||!dog) return toast('Vyplň jméno psovoda i psa.','err');
-  const pos=D.registrations.filter(r=>r.sessionId===WL.sessionId&&r.status==='waitlist').length+1;
-  const reg={id:uid(),sessionId:WL.sessionId,slotTime:null,handlerName:handler,dogName:dog,status:'waitlist',waitlistPosition:pos,createdAt:Date.now()};
-  D.registrations.push(reg);
-  closeM('mWait');
-  fsSet('registrations', reg.id, reg);
-  renderPublic();
-  toast(`✔ Zapsán/a na čekací listinu: ${handler} / ${dog}`);
+function doWaitlist(){
+  const handler=document.getElementById('wlHandler').value.trim(), dog=document.getElementById('wlDog').value.trim();
+  if(!handler||!dog)return toast('Vyplň jméno psovoda i psa.','err');
+  const pos=groupRegs(WL.groupId,'waitlist').length+1;
+  const reg={id:uid(),sessionId:WL.sessionId,groupId:WL.groupId,handlerName:handler,dogName:dog,status:'waitlist',waitlistPosition:pos,createdAt:Date.now()};
+  D.registrations.push(reg); closeM('mWait'); fsSet('registrations',reg.id,reg); rerender();
+  toast(`✔ Zapsán/a na čekací listinu (pořadí ${pos}): ${handler} / ${dog}`);
 }
 
-// ═══════════════════════════════════════════════════
+// ══════════════════════════════════════════════════
 //  CANCEL SEARCH
-// ═══════════════════════════════════════════════════
-function doSearch() {
-  const q=document.getElementById('csInput').value.trim().toLowerCase();
-  const out=document.getElementById('csResults');
-  if (!q) { out.innerHTML=''; return; }
+// ══════════════════════════════════════════════════
+function doSearch(){
+  const q=document.getElementById('csInput').value.trim().toLowerCase(), out=document.getElementById('csResults');
+  if(!q){out.innerHTML='';return;}
   const found=D.registrations.filter(r=>r.handlerName.toLowerCase().includes(q));
-  if (!found.length) { out.innerHTML=`<p style="color:var(--tl);font-size:.85rem;padding:8px 0">Žádná přihláška nenalezena.</p>`; return; }
+  if(!found.length){out.innerHTML=`<p style="color:var(--tl);font-size:.85rem;padding:8px 0">Žádná přihláška nenalezena.</p>`;return;}
   out.innerHTML=found.map(r=>{
-    const s=D.sessions.find(s=>s.id===r.sessionId);
-    const slot=r.status==='waitlist'?`Čekací listina (${r.waitlistPosition}.)`:r.slotTime;
-    return `<div class="cri">
-      <div><strong>${esc(r.handlerName)} / ${esc(r.dogName)}</strong><span>${s?dispDate(s.date):'–'} · ${slot}</span></div>
-      <button class="btn br bs" onclick="cancelReg('${r.id}')">✖ Zrušit</button>
-    </div>`;
+    const s=D.sessions.find(s=>s.id===r.sessionId), g=D.groups.find(g=>g.id===r.groupId);
+    const slot=r.status==='waitlist'?`Čekací listina (${r.waitlistPosition}.)`:(g?`${g.startTime}–${addM(g.startTime,g.duration)}`:'–');
+    return `<div class="cri"><div><strong>${esc(r.handlerName)} / ${esc(r.dogName)}</strong><span>${s?dispDate(s.date):'–'} · ${slot}</span></div><button class="btn br bs" onclick="cancelReg('${r.id}')">✖ Zrušit</button></div>`;
   }).join('');
 }
-function cancelReg(id) {
-  const r=D.registrations.find(r=>r.id===id); if(!r) return;
-  confirm2(`Zrušit přihlášku ${r.handlerName} / ${r.dogName}?`, ()=>{
-    const sid=r.sessionId;
-    fsDel('registrations', id);
-    fsReorderWL(sid);
-    setTimeout(()=>{ doSearch(); },500);
-    toast('Přihláška zrušena.');
+function cancelReg(id){
+  const r=D.registrations.find(r=>r.id===id); if(!r)return;
+  confirm2(`Zrušit přihlášku ${r.handlerName} / ${r.dogName}?`,()=>{
+    const gid=r.groupId;
+    D.registrations=D.registrations.filter(r=>r.id!==id);
+    reorderWL(gid); fsDel('registrations',id); fsReorderWL(gid);
+    doSearch(); rerender(); toast('Přihláška zrušena.');
   },'Zrušit přihlášku');
 }
+function reorderWL(gid){ D.registrations.filter(r=>r.groupId===gid&&r.status==='waitlist').sort((a,b)=>a.waitlistPosition-b.waitlistPosition).forEach((r,i)=>r.waitlistPosition=i+1); }
 
-// ═══════════════════════════════════════════════════
-//  ADMIN – SESSIONS
-// ═══════════════════════════════════════════════════
-function renderSessions() {
+// ══════════════════════════════════════════════════
+//  ADMIN – SESSIONS TABLE
+// ══════════════════════════════════════════════════
+function renderSessions(){
   const sorted=[...D.sessions].sort((a,b)=>a.date.localeCompare(b.date));
   const tb=document.getElementById('sTbody');
-  if (!sorted.length) { tb.innerHTML=`<tr><td colspan="6" style="text-align:center;color:var(--tl);padding:24px">Žádné tréninky.</td></tr>`; return; }
+  if(!sorted.length){tb.innerHTML=`<tr><td colspan="5" style="text-align:center;color:var(--tl);padding:24px">Žádné tréninky.</td></tr>`;return;}
   tb.innerHTML=sorted.map(s=>{
+    const grps=sessionGroups(s.id);
     const cnt=D.registrations.filter(r=>r.sessionId===s.id&&r.status==='confirmed').length;
-    const bc=cnt>=s.slotCount?'b-full':cnt>0?'b-part':'b-free';
+    const max=grps.reduce((a,g)=>a+g.maxParticipants,0);
+    const bc=max===0?'b-free':cnt>=max?'b-full':cnt>0?'b-part':'b-free';
     return `<tr>
-      <td>${dispDate(s.date)}</td><td>${esc(s.location)}</td><td>${s.startTime}</td>
-      <td>${s.slotCount} × ${s.slotDuration} min</td>
-      <td><span class="badge ${bc}">${cnt}/${s.slotCount}</span></td>
+      <td>${dispDate(s.date)}</td><td>${esc(s.location)}</td>
+      <td>${grps.length} skupin${grps.length===1?'a':grps.length<5&&grps.length>1?'y':''}</td>
+      <td><span class="badge ${bc}">${cnt}/${max}</span></td>
       <td><div class="ac">
         <button class="btn bg bx" onclick="openDetail('${s.id}')">📋 Detail</button>
         <button class="btn bg bx" onclick="openEditS('${s.id}')">✏ Upravit</button>
@@ -1008,313 +826,371 @@ function renderSessions() {
   }).join('');
 }
 
-function openNewS() {
+// ── Group rows in session form ──────────────────────
+function addGroupRow(startTime, duration, maxP){
+  const id='gr_'+uid();
+  gRows.push({rid:id, startTime:startTime||'08:00', duration:duration||60, maxParticipants:maxP||3});
+  renderGroupRows();
+}
+function removeGroupRow(rid){ gRows=gRows.filter(r=>r.rid!==rid); renderGroupRows(); }
+function renderGroupRows(){
+  const cont=document.getElementById('gtplList');
+  if(!gRows.length){cont.innerHTML='<p style="color:var(--tl);font-size:.82rem;font-style:italic">Žádné skupiny. Přidej skupinu níže.</p>';return;}
+  cont.innerHTML=gRows.map((r,i)=>`
+    <div class="gtpl-row" id="${r.rid}">
+      <div class="gtpl-field"><label>Začátek</label><input type="time" value="${r.startTime}" onchange="gRows[${i}].startTime=this.value"></div>
+      <div class="gtpl-field"><label>Délka (min)</label><input type="number" value="${r.duration}" min="5" max="480" onchange="gRows[${i}].duration=parseInt(this.value)"></div>
+      <div class="gtpl-field"><label>Max. osob</label><input type="number" value="${r.maxParticipants}" min="1" max="50" onchange="gRows[${i}].maxParticipants=parseInt(this.value)"></div>
+      <button type="button" class="btn br bx" style="align-self:flex-end;margin-bottom:2px" onclick="removeGroupRow('${r.rid}')">✕</button>
+    </div>`).join('');
+}
+
+function openNewS(){
   editSID=null; editScope='single';
   document.getElementById('mSTitle').textContent='Nový trénink';
   document.getElementById('sDate').value='';
   document.getElementById('sLoc').value='ZKO Rudník';
-  document.getElementById('sLocC').value='';
-  document.getElementById('sLocW').style.display='none';
-  document.getElementById('sStart').value='08:00';
-  document.getElementById('sDur').value='20';
-  document.getElementById('sCnt').value='20';
-  document.getElementById('sRep').checked=false;
-  document.getElementById('repOpts').classList.remove('show');
+  document.getElementById('sLocC').value=''; document.getElementById('sLocW').style.display='none';
+  document.getElementById('sRep').checked=false; document.getElementById('repOpts').classList.remove('show');
   document.getElementById('seriesW').style.display='none';
+  document.getElementById('groupsSection').style.display='';
+  gRows=[]; addGroupRow();
   openM('mSession');
 }
-function openEditS(id) {
+
+function openEditS(id){
   editSID=id; editScope='single';
   const s=D.sessions.find(s=>s.id===id);
-  document.getElementById('mSTitle').textContent='Upravit trénink';
+  document.getElementById('mSTitle').textContent='Upravit termín';
   document.getElementById('sDate').value=s.date;
-  if (s.location==='ZKO Rudník'){document.getElementById('sLoc').value='ZKO Rudník';document.getElementById('sLocW').style.display='none';}
+  if(s.location==='ZKO Rudník'){document.getElementById('sLoc').value='ZKO Rudník';document.getElementById('sLocW').style.display='none';}
   else{document.getElementById('sLoc').value='custom';document.getElementById('sLocC').value=s.location;document.getElementById('sLocW').style.display='';}
-  document.getElementById('sStart').value=s.startTime;
-  document.getElementById('sDur').value=s.slotDuration;
-  document.getElementById('sCnt').value=s.slotCount;
-  document.getElementById('sRep').checked=false;
-  document.getElementById('repOpts').classList.remove('show');
+  document.getElementById('sRep').checked=false; document.getElementById('repOpts').classList.remove('show');
   document.getElementById('seriesW').style.display=s.repeatGroupId?'':'none';
   document.getElementById('scopeNote').textContent='';
+  // When editing, hide groups section (manage in detail)
+  document.getElementById('groupsSection').style.display='none';
   openM('mSession');
 }
-function setScope(v) { editScope=v; document.getElementById('scopeNote').textContent=v==='single'?'✔ Upraven bude pouze tento termín.':'✔ Upravena bude celá série termínů.'; }
-function togRep() { document.getElementById('repOpts').classList.toggle('show',document.getElementById('sRep').checked); }
-function togLoc() { document.getElementById('sLocW').style.display=document.getElementById('sLoc').value==='custom'?'':'none'; }
-function getLoc()  { const v=document.getElementById('sLoc').value; return v==='custom'?document.getElementById('sLocC').value.trim():v; }
 
-function saveSession() {
-  const date=document.getElementById('sDate').value, location=getLoc(),
-    startTime=document.getElementById('sStart').value,
-    slotDuration=parseInt(document.getElementById('sDur').value),
-    slotCount   =parseInt(document.getElementById('sCnt').value);
-  if (!date||!location||!startTime||!slotDuration||!slotCount) return toast('Vyplň všechna povinná pole.','err');
-  closeM('mSession');
+function setScope(v){ editScope=v; document.getElementById('scopeNote').textContent=v==='single'?'✔ Upraven bude pouze tento termín.':'✔ Upravena bude celá série termínů.'; }
+function togRep(){ document.getElementById('repOpts').classList.toggle('show',document.getElementById('sRep').checked); }
+function togLoc(){ document.getElementById('sLocW').style.display=document.getElementById('sLoc').value==='custom'?'':'none'; }
+function getLoc(){ const v=document.getElementById('sLoc').value; return v==='custom'?document.getElementById('sLocC').value.trim():v; }
 
-  if (editSID) {
+function saveSession(){
+  const date=document.getElementById('sDate').value, location=getLoc();
+  if(!date||!location)return toast('Vyplň datum a místo.','err');
+
+  if(editSID){
     const s=D.sessions.find(s=>s.id===editSID);
-    const upd={location,startTime,slotDuration,slotCount};
-    if (editScope==='series'&&s.repeatGroupId) {
-      D.sessions.filter(s2=>s2.repeatGroupId===s.repeatGroupId).forEach(s2=>{
-        Object.assign(s2,upd);
-        fsSet('sessions',s2.id,s2);
-      });
+    const upd={location};
+    if(editScope==='series'&&s.repeatGroupId){
+      D.sessions.filter(s2=>s2.repeatGroupId===s.repeatGroupId).forEach(s2=>{Object.assign(s2,upd);fsSet('sessions',s2.id,s2);});
       toast('Série termínů upravena.');
-    } else {
-      Object.assign(s,{date,...upd});
-      fsSet('sessions',editSID,s);
-      toast('Termín upraven.');
-    }
-  } else {
-    const rep=document.getElementById('sRep').checked;
-    if (rep) {
-      const every=parseInt(document.getElementById('rEvery').value)||7, count=parseInt(document.getElementById('rCnt').value)||4, gid=uid();
-      for(let i=0;i<count;i++){
-        const d=new Date(date+'T00:00:00'); d.setDate(d.getDate()+i*every);
-        const ns={id:uid(),date:fmt(d),location,startTime,slotDuration,slotCount,repeatGroupId:gid,createdAt:Date.now()};
-        D.sessions.push(ns);
-        fsSet('sessions',ns.id,ns);
-      }
-      toast(`Vytvořeno ${count} opakovaných termínů.`);
-    } else {
-      const ns={id:uid(),date,location,startTime,slotDuration,slotCount,repeatGroupId:null,createdAt:Date.now()};
-      D.sessions.push(ns);
-      fsSet('sessions',ns.id,ns);
-      toast('Termín vytvořen.');
-    }
+    }else{ Object.assign(s,{date,...upd}); fsSet('sessions',editSID,s); toast('Termín upraven.'); }
+    closeM('mSession'); renderSessions(); return;
   }
-  // Okamžitý re-render (Firestore listener přijde za chvíli, ale UI aktualizujeme hned)
-  renderSessions();
-  fillRegSel();
+
+  // New session(s)
+  if(!gRows.length)return toast('Přidej alespoň jednu skupinu.','err');
+
+  const rep=document.getElementById('sRep').checked;
+  const sessionsToCreate=[];
+  if(rep){
+    const every=parseInt(document.getElementById('rEvery').value)||7, count=parseInt(document.getElementById('rCnt').value)||4, gid=uid();
+    for(let i=0;i<count;i++){const d=new Date(date+'T00:00:00');d.setDate(d.getDate()+i*every);sessionsToCreate.push({id:uid(),date:fmt(d),location,repeatGroupId:gid,createdAt:Date.now()});}
+    toast(`Vytvořeno ${count} opakovaných termínů.`);
+  }else{
+    sessionsToCreate.push({id:uid(),date,location,repeatGroupId:null,createdAt:Date.now()});
+    toast('Termín vytvořen.');
+  }
+
+  sessionsToCreate.forEach(s=>{
+    D.sessions.push(s); fsSet('sessions',s.id,s);
+    gRows.forEach((r,i)=>{
+      const g={id:uid(),sessionId:s.id,startTime:r.startTime,duration:r.duration,maxParticipants:r.maxParticipants,order:i,createdAt:Date.now()};
+      D.groups.push(g); fsSet('groups',g.id,g);
+    });
+  });
+
+  closeM('mSession'); renderSessions(); fillRegSel(); rerender();
 }
 
-function deleteS(id) {
+function deleteS(id){
   const s=D.sessions.find(s=>s.id===id);
-  confirm2(`Smazat termín ${dispDate(s.date)} a všechny přihlášky?`, ()=>{
-    D.sessions = D.sessions.filter(s=>s.id!==id);
-    D.registrations = D.registrations.filter(r=>r.sessionId!==id);
-    fsDelSession(id);
-    renderSessions(); fillRegSel();
-    toast('Termín smazán.');
+  confirm2(`Smazat termín ${dispDate(s.date)} včetně skupin a přihlášek?`,()=>{
+    D.sessions=D.sessions.filter(s=>s.id!==id);
+    D.groups=D.groups.filter(g=>g.sessionId!==id);
+    D.registrations=D.registrations.filter(r=>r.sessionId!==id);
+    fsDelSession(id); renderSessions(); fillRegSel(); rerender(); toast('Termín smazán.');
   },'Smazat termín');
 }
-function copyS(id) {
+
+function copyS(id){
   const s=D.sessions.find(s=>s.id===id), d=new Date(s.date+'T00:00:00');
   d.setDate(d.getDate()+7);
-  const ns={id:uid(),date:fmt(d),location:s.location,startTime:s.startTime,slotDuration:s.slotDuration,slotCount:s.slotCount,repeatGroupId:null,createdAt:Date.now()};
-  D.sessions.push(ns);
-  fsSet('sessions',ns.id,ns);
-  renderSessions(); fillRegSel();
-  toast(`Termín zkopírován → ${dispDate(fmt(d))}`);
+  const ns={id:uid(),date:fmt(d),location:s.location,repeatGroupId:null,createdAt:Date.now()};
+  D.sessions.push(ns); fsSet('sessions',ns.id,ns);
+  // Copy groups
+  const grps=sessionGroups(id);
+  grps.forEach(g=>{
+    const ng={...g,id:uid(),sessionId:ns.id,createdAt:Date.now()};
+    D.groups.push(ng); fsSet('groups',ng.id,ng);
+  });
+  renderSessions(); fillRegSel(); rerender();
+  toast(`Termín zkopírován → ${dispDate(fmt(d))} (vč. ${grps.length} skupin)`);
 }
 
-// ═══════════════════════════════════════════════════
-//  DETAIL
-// ═══════════════════════════════════════════════════
-function openDetail(id) {
+// ══════════════════════════════════════════════════
+//  DETAIL MODAL
+// ══════════════════════════════════════════════════
+function openDetail(id){
   detailSID=id;
   const s=D.sessions.find(s=>s.id===id);
   document.getElementById('mDTitle').textContent=dispDate(s.date);
   renderDetailBody(id); openM('mDetail');
 }
-function renderDetailBody(id) {
-  const s=D.sessions.find(s=>s.id===id); if(!s)return;
-  const sl=genSlots(s);
-  const regs =D.registrations.filter(r=>r.sessionId===id&&r.status==='confirmed');
-  const waits=D.registrations.filter(r=>r.sessionId===id&&r.status==='waitlist').sort((a,b)=>a.waitlistPosition-b.waitlistPosition);
 
-  const sHtml=sl.map((t,i)=>{
-    const reg=regs.find(r=>r.slotTime===t);
-    if(reg)return`<div class="asc taken">
-      <div class="stl"><span style="color:var(--tl);font-size:.75rem;font-weight:400">${i+1}.</span> ${t}</div>
-      <div class="sp2">👤 ${esc(reg.handlerName)}</div><div class="sp2">🐕 ${esc(reg.dogName)}</div>
-      <div class="sa">
-        <button class="btn bg bx" onclick="openEditReg('${reg.id}')">✏</button>
-        <button class="btn ba bx" onclick="openMove('${reg.id}')">↔</button>
-        <button class="btn br bx" onclick="adminDelReg('${reg.id}')">✖</button>
-      </div></div>`;
-    return`<div class="asc free">
-      <div class="stl"><span style="color:var(--tl);font-size:.75rem;font-weight:400">${i+1}.</span> ${t}</div>
-      <div class="sp2" style="color:var(--sf)">Volné</div>
-      <div class="sa"><button class="btn bg bx" onclick="adminAddSlot('${id}','${t}')">＋</button></div>
+function renderDetailBody(id){
+  const s=D.sessions.find(s=>s.id===id); if(!s)return;
+  const grps=sessionGroups(id);
+
+  const grpsHtml=grps.map(g=>{
+    const confirmed=groupRegs(g.id,'confirmed').sort((a,b)=>a.createdAt-b.createdAt);
+    const waits=groupRegs(g.id,'waitlist').sort((a,b)=>a.waitlistPosition-b.waitlistPosition);
+    const end=addM(g.startTime,g.duration);
+
+    // Confirmed participants
+    let partsHtml='<div class="adgc-parts">';
+    for(let i=0;i<g.maxParticipants;i++){
+      const p=confirmed[i];
+      if(p) partsHtml+=`<div class="adgc-part">
+        <div class="adgc-part-info"><span class="adgc-part-num">${i+1}.</span><strong>${esc(p.handlerName)}</strong><span style="color:var(--tl);font-size:.8rem">/ ${esc(p.dogName)}</span></div>
+        <div class="ac">
+          <button class="btn bg bx" onclick="openEditReg('${p.id}')">✏</button>
+          <button class="btn ba bx" onclick="openMoveReg('${p.id}')">↔</button>
+          <button class="btn br bx" onclick="adminDelReg('${p.id}')">✖</button>
+        </div></div>`;
+      else partsHtml+=`<div class="adgc-empty-slot"><span style="color:#bbb">${i+1}. volné místo</span><button class="btn bg bx" onclick="adminAddToGroup('${id}','${g.id}')">＋ Přidat</button></div>`;
+    }
+    partsHtml+='</div>';
+
+    // Waitlist
+    let wHtml='';
+    if(waits.length) wHtml=`<div style="margin-top:10px;border-top:1px solid #eee;padding-top:10px"><p style="font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:var(--sw);font-weight:700;margin-bottom:6px">⏳ Čekací listina</p>${waits.map(w=>`<div class="adgc-part"><div class="adgc-part-info"><span class="adgc-part-num" style="color:var(--sw)">${w.waitlistPosition}.</span><strong>${esc(w.handlerName)}</strong><span style="color:var(--tl);font-size:.8rem">/ ${esc(w.dogName)}</span></div><div class="ac"><button class="btn bg bx" onclick="openEditReg('${w.id}')">✏</button><button class="btn ba bx" onclick="promoteWL('${w.id}')">↑</button><button class="btn br bx" onclick="adminDelReg('${w.id}')">✖</button></div></div>`).join('')}</div>`;
+
+    return `<div class="adgc">
+      <div class="adgc-hd">
+        <div><span class="adgc-title">⏱ ${g.startTime} – ${end}</span> <span class="adgc-meta">${g.duration} min · max ${g.maxParticipants} osob · ${confirmed.length}/${g.maxParticipants} obsazeno</span></div>
+        <div class="ac">
+          <button class="btn bg bx" onclick="openEditGroup('${g.id}')">✏ Skupinu</button>
+          <button class="btn br bx" onclick="deleteGroup('${g.id}')">🗑</button>
+        </div>
+      </div>
+      <div class="adgc-bd">${partsHtml}${wHtml}</div>
     </div>`;
   }).join('');
 
-  let wHtml='';
-  if(waits.length)wHtml=`<div style="margin-top:18px">
-    <h4 style="font-family:'Bebas Neue',sans-serif;letter-spacing:1px;color:var(--am);margin-bottom:9px">⏳ ČEKACÍ LISTINA</h4>
-    ${waits.map(w=>`<div class="asc wl" style="flex-direction:row;align-items:center;gap:12px;flex-wrap:wrap">
-      <div><div class="stl">${w.waitlistPosition}.</div><div class="sp2">👤 ${esc(w.handlerName)} / 🐕 ${esc(w.dogName)}</div></div>
-      <div class="sa" style="margin-top:0">
-        <button class="btn bg bx" onclick="openEditReg('${w.id}')">✏</button>
-        <button class="btn ba bx" onclick="promoteWL('${w.id}')">↑ Povýšit</button>
-        <button class="btn br bx" onclick="adminDelReg('${w.id}')">✖</button>
-      </div></div>`).join('')}</div>`;
-
-  document.getElementById('mDBody').innerHTML=`<div class="asg">${sHtml}</div>${wHtml}`;
+  document.getElementById('mDBody').innerHTML=`
+    <div style="display:flex;justify-content:flex-end;margin-bottom:12px">
+      <button class="btn bp bs" onclick="openAddGroup('${id}')">＋ Přidat skupinu</button>
+    </div>
+    <div class="adg">${grpsHtml||'<p style="color:var(--tl);font-style:italic;padding:12px 0">Žádné skupiny. Přidej skupinu tlačítkem výše.</p>'}</div>`;
 }
 
-function adminDelReg(id) {
+// ── Group CRUD ──────────────────────────────────────
+function openAddGroup(sessionId){
+  editGID=null;
+  document.getElementById('mGTitle').textContent='Přidat skupinu';
+  document.getElementById('gEditID').value='';
+  document.getElementById('gStart').value='08:00';
+  document.getElementById('gDur').value='60';
+  document.getElementById('gMax').value='3';
+  openM('mGroup');
+}
+function openEditGroup(gid){
+  editGID=gid;
+  const g=D.groups.find(g=>g.id===gid);
+  document.getElementById('mGTitle').textContent='Upravit skupinu';
+  document.getElementById('gEditID').value=gid;
+  document.getElementById('gStart').value=g.startTime;
+  document.getElementById('gDur').value=g.duration;
+  document.getElementById('gMax').value=g.maxParticipants;
+  openM('mGroup');
+}
+function saveGroup(){
+  const startTime=document.getElementById('gStart').value;
+  const duration=parseInt(document.getElementById('gDur').value);
+  const maxParticipants=parseInt(document.getElementById('gMax').value);
+  if(!startTime||!duration||!maxParticipants)return toast('Vyplň všechna pole.','err');
+  if(editGID){
+    const g=D.groups.find(g=>g.id===editGID);
+    Object.assign(g,{startTime,duration,maxParticipants});
+    fsSet('groups',editGID,g);
+    toast('Skupina upravena.');
+  }else{
+    const g={id:uid(),sessionId:detailSID,startTime,duration,maxParticipants,order:D.groups.filter(g=>g.sessionId===detailSID).length,createdAt:Date.now()};
+    D.groups.push(g); fsSet('groups',g.id,g);
+    toast('Skupina přidána.');
+  }
+  closeM('mGroup'); renderDetailBody(detailSID); rerender();
+}
+function deleteGroup(gid){
+  const g=D.groups.find(g=>g.id===gid);
+  const cnt=groupRegs(gid,'confirmed').length;
+  confirm2(`Smazat skupinu ${g.startTime}–${addM(g.startTime,g.duration)} (${cnt} přihlášek)?`,()=>{
+    D.groups=D.groups.filter(g=>g.id!==gid);
+    D.registrations=D.registrations.filter(r=>r.groupId!==gid);
+    fsDelGroup(gid); renderDetailBody(detailSID); rerender(); toast('Skupina smazána.');
+  },'Smazat skupinu');
+}
+
+// ── Registration CRUD ───────────────────────────────
+function adminDelReg(id){
   const r=D.registrations.find(r=>r.id===id);
-  confirm2(`Smazat přihlášku ${r.handlerName} / ${r.dogName}?`, ()=>{
-    const sid=r.sessionId;
-    fsDel('registrations',id);
-    fsReorderWL(sid);
-    toast('Přihláška smazána.');
+  confirm2(`Smazat přihlášku ${r.handlerName} / ${r.dogName}?`,()=>{
+    const gid=r.groupId;
+    D.registrations=D.registrations.filter(r=>r.id!==id);
+    reorderWL(gid); fsDel('registrations',id); fsReorderWL(gid);
+    renderDetailBody(detailSID); renderSessions(); renderRegs(); rerender(); toast('Přihláška smazána.');
   },'Smazat přihlášku');
 }
-function adminAddSlot(sessionId,slotTime) {
-  const s=D.sessions.find(s=>s.id===sessionId);
-  SU={sessionId,slotTime,admin:true};
-  document.getElementById('mSignupInfo').textContent=`📅 ${dispDate(s.date)} · ⏱ ${slotTime} (admin)`;
-  document.getElementById('suHandler').value='';
-  document.getElementById('suDog').value='';
+
+function adminAddToGroup(sessionId,groupId){
+  const s=D.sessions.find(s=>s.id===sessionId), g=D.groups.find(g=>g.id===groupId);
+  SU={sessionId,groupId,admin:true};
+  document.getElementById('mSignupInfo').innerHTML=`📅 ${dispDate(s.date)}<br>⏱ ${g.startTime} – ${addM(g.startTime,g.duration)} (admin)`;
+  document.getElementById('suHandler').value=''; document.getElementById('suDog').value='';
   openM('mSignup');
 }
 
-// ═══════════════════════════════════════════════════
-//  EDIT / MOVE REG
-// ═══════════════════════════════════════════════════
-function openEditReg(id) {
+function openEditReg(id){
   const r=D.registrations.find(r=>r.id===id);
   document.getElementById('erID').value=id;
   document.getElementById('erHandler').value=r.handlerName;
   document.getElementById('erDog').value=r.dogName;
   openM('mEditReg');
 }
-function saveEditReg() {
-  const id=document.getElementById('erID').value;
-  const handler=document.getElementById('erHandler').value.trim();
-  const dog    =document.getElementById('erDog').value.trim();
-  if (!handler||!dog) return toast('Vyplň všechna pole.','err');
-  closeM('mEditReg');
-  fsUpd('registrations',id,{handlerName:handler,dogName:dog});
-  toast('Přihláška upravena.');
+function saveEditReg(){
+  const id=document.getElementById('erID').value, handler=document.getElementById('erHandler').value.trim(), dog=document.getElementById('erDog').value.trim();
+  if(!handler||!dog)return toast('Vyplň všechna pole.','err');
+  const r=D.registrations.find(r=>r.id===id);
+  r.handlerName=handler; r.dogName=dog;
+  closeM('mEditReg'); fsUpd('registrations',id,{handlerName:handler,dogName:dog});
+  renderDetailBody(detailSID); renderRegs(); rerender(); toast('Přihláška upravena.');
 }
 
-function openMove(id) {
-  moveID=id;
+// ── Move to another group ───────────────────────────
+function openMoveReg(id){
+  moveRegID=id;
   const r=D.registrations.find(r=>r.id===id);
-  const s=D.sessions.find(s=>s.id===r.sessionId);
-  const sl=genSlots(s), regs=D.registrations.filter(r=>r.sessionId===s.id&&r.status==='confirmed');
-  const free=sl.filter(t=>t!==r.slotTime&&!regs.find(r=>r.slotTime===t));
-  document.getElementById('mMoveInfo').textContent=`Přesouvám: ${r.handlerName} / ${r.dogName} (aktuálně ${r.slotTime||'čekací listina'})`;
-  document.getElementById('movePicker').innerHTML=free.length
-    ?free.map(t=>`<button class="spb" onclick="doMove('${t}')">${t}</button>`).join('')
-    :`<p style="color:var(--tl);font-size:.85rem">Žádné volné intervaly.</p>`;
+  const grps=sessionGroups(r.sessionId).filter(g=>g.id!==r.groupId);
+  document.getElementById('mMoveInfo').textContent=`Přesouvám: ${r.handlerName} / ${r.dogName}`;
+  const picker=document.getElementById('movePicker');
+  if(!grps.length){picker.innerHTML=`<p style="color:var(--tl);font-size:.85rem">Žádné jiné skupiny.</p>`;openM('mMove');return;}
+  picker.innerHTML=grps.map(g=>{
+    const cnt=groupRegs(g.id,'confirmed').length, isFull=cnt>=g.maxParticipants;
+    return `<button class="btn ${isFull?'bg':'bp'} bs" style="width:100%;justify-content:space-between" ${isFull?'disabled':''} onclick="doMove('${g.id}')">
+      <span>⏱ ${g.startTime} – ${addM(g.startTime,g.duration)}</span>
+      <span class="badge ${isFull?'b-full':'b-free'}">${cnt}/${g.maxParticipants}</span>
+    </button>`;
+  }).join('');
   openM('mMove');
 }
-function doMove(t) {
+function doMove(newGid){
+  const r=D.registrations.find(r=>r.id===moveRegID);
+  const oldGid=r.groupId;
+  const g=D.groups.find(g=>g.id===newGid);
+  r.groupId=newGid; r.status='confirmed'; r.waitlistPosition=null;
   closeM('mMove');
-  fsUpd('registrations',moveID,{slotTime:t,status:'confirmed',waitlistPosition:null});
-  toast(`Přesunuto na ${t}.`);
-}
-function promoteWL(id) {
-  moveID=id;
-  const r=D.registrations.find(r=>r.id===id);
-  const s=D.sessions.find(s=>s.id===r.sessionId);
-  const sl=genSlots(s), regs=D.registrations.filter(r=>r.sessionId===s.id&&r.status==='confirmed');
-  const free=sl.filter(t=>!regs.find(r=>r.slotTime===t));
-  document.getElementById('mMoveInfo').textContent=`Povyšuji z čekací listiny: ${r.handlerName} / ${r.dogName}`;
-  document.getElementById('movePicker').innerHTML=free.length
-    ?free.map(t=>`<button class="spb" onclick="doPromote('${t}')">${t}</button>`).join('')
-    :`<p style="color:var(--tl);font-size:.85rem">Žádné volné intervaly.</p>`;
-  openM('mMove');
-}
-function doPromote(t) {
-  const r=D.registrations.find(r=>r.id===moveID), sid=r.sessionId;
-  closeM('mMove');
-  fsUpd('registrations',moveID,{slotTime:t,status:'confirmed',waitlistPosition:null});
-  fsReorderWL(sid);
-  toast(`${r.handlerName} povýšen/a → ${t}`);
+  fsUpd('registrations',moveRegID,{groupId:newGid,status:'confirmed',waitlistPosition:null});
+  reorderWL(oldGid); fsReorderWL(oldGid);
+  renderDetailBody(detailSID); renderRegs(); rerender();
+  toast(`Přesunuto do skupiny ${g.startTime}`);
 }
 
-// ═══════════════════════════════════════════════════
+function promoteWL(id){
+  const r=D.registrations.find(r=>r.id===id);
+  const g=D.groups.find(g=>g.id===r.groupId);
+  const cnt=groupRegs(g.id,'confirmed').length;
+  if(cnt>=g.maxParticipants)return toast('Skupina je plná.','err');
+  r.status='confirmed'; r.waitlistPosition=null;
+  reorderWL(g.id);
+  fsUpd('registrations',id,{status:'confirmed',waitlistPosition:null});
+  fsReorderWL(g.id);
+  renderDetailBody(detailSID); rerender();
+  toast(`${r.handlerName} povýšen/a do skupiny.`);
+}
+
+// ══════════════════════════════════════════════════
 //  REGISTRATIONS TAB
-// ═══════════════════════════════════════════════════
-function fillRegSel() {
+// ══════════════════════════════════════════════════
+function fillRegSel(){
   const sel=document.getElementById('rSel'), cur=sel.value;
-  const sorted=[...D.sessions].sort((a,b)=>a.date.localeCompare(b.date));
-  sel.innerHTML=`<option value="">-- Vyber termín --</option>`+sorted.map(s=>`<option value="${s.id}">${dispDate(s.date)} – ${esc(s.location)}</option>`).join('');
+  sel.innerHTML=`<option value="">-- Vyber termín --</option>`+[...D.sessions].sort((a,b)=>a.date.localeCompare(b.date)).map(s=>`<option value="${s.id}">${dispDate(s.date)} – ${esc(s.location)}</option>`).join('');
   if(cur)sel.value=cur;
 }
-function renderRegs() {
-  const id=document.getElementById('rSel').value, out=document.getElementById('regsOut');
-  if(!id){out.innerHTML=`<div class="al2 ai">Vyber termín pro zobrazení přihlášek.</div>`;return;}
-  const s=D.sessions.find(s=>s.id===id);
-  const regs =D.registrations.filter(r=>r.sessionId===id&&r.status==='confirmed').sort((a,b)=>a.slotTime.localeCompare(b.slotTime));
-  const waits=D.registrations.filter(r=>r.sessionId===id&&r.status==='waitlist').sort((a,b)=>a.waitlistPosition-b.waitlistPosition);
-  if(!regs.length&&!waits.length){out.innerHTML=`<div class="al2 ai">Žádné přihlášky pro tento termín.</div>`;return;}
-  let rows=regs.map(r=>`<tr><td>${r.slotTime}</td><td>${esc(r.handlerName)}</td><td>${esc(r.dogName)}</td>
-    <td><span class="badge b-free">Přihlášen</span></td>
-    <td><div class="ac">
-      <button class="btn bg bx" onclick="openEditReg('${r.id}')">✏</button>
-      <button class="btn ba bx" onclick="openMoveRegs('${r.id}')">↔</button>
-      <button class="btn br bx" onclick="delRegRegs('${r.id}')">✖</button>
-    </div></td></tr>`).join('');
-  rows+=waits.map(w=>`<tr><td>Čekací (${w.waitlistPosition}.)</td><td>${esc(w.handlerName)}</td><td>${esc(w.dogName)}</td>
-    <td><span class="badge" style="background:var(--sw);color:#fff">Čeká</span></td>
-    <td><div class="ac">
-      <button class="btn bg bx" onclick="openEditReg('${w.id}')">✏</button>
-      <button class="btn br bx" onclick="delRegRegs('${w.id}')">✖</button>
-    </div></td></tr>`).join('');
-  out.innerHTML=`<p style="font-size:.82rem;color:var(--tl);margin-bottom:10px">📍 ${esc(s.location)} · ⏱ ${s.startTime} · ${regs.length}/${s.slotCount} obsazeno</p>
-    <div class="tw"><table><thead><tr><th>Čas</th><th>Psovod</th><th>Pes</th><th>Status</th><th>Akce</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+function renderRegs(){
+  const sid=document.getElementById('rSel').value, out=document.getElementById('regsOut');
+  if(!sid){out.innerHTML=`<div class="al2 ai">Vyber termín pro zobrazení přihlášek.</div>`;return;}
+  const grps=sessionGroups(sid);
+  if(!grps.length){out.innerHTML=`<div class="al2 ai">Žádné skupiny pro tento termín.</div>`;return;}
+  let html='';
+  grps.forEach(g=>{
+    const confirmed=groupRegs(g.id,'confirmed').sort((a,b)=>a.createdAt-b.createdAt);
+    const waits=groupRegs(g.id,'waitlist').sort((a,b)=>a.waitlistPosition-b.waitlistPosition);
+    if(!confirmed.length&&!waits.length)return;
+    let rows=confirmed.map((r,i)=>`<tr><td>${i+1}.</td><td>${esc(r.handlerName)}</td><td>${esc(r.dogName)}</td><td><span class="badge b-free">Přihlášen</span></td><td><div class="ac"><button class="btn bg bx" onclick="openEditReg('${r.id}');detailSID='${sid}'">✏</button><button class="btn br bx" onclick="delRegRegs('${r.id}')">✖</button></div></td></tr>`).join('');
+    rows+=waits.map(w=>`<tr><td>čekací ${w.waitlistPosition}.</td><td>${esc(w.handlerName)}</td><td>${esc(w.dogName)}</td><td><span class="badge" style="background:var(--sw);color:#fff">Čeká</span></td><td><div class="ac"><button class="btn bg bx" onclick="openEditReg('${w.id}');detailSID='${sid}'">✏</button><button class="btn br bx" onclick="delRegRegs('${w.id}')">✖</button></div></td></tr>`).join('');
+    if(rows) html+=`<h4 style="font-family:'Bebas Neue',sans-serif;letter-spacing:1px;color:var(--gd);margin:14px 0 6px">⏱ ${g.startTime} – ${addM(g.startTime,g.duration)} &nbsp;(${confirmed.length}/${g.maxParticipants})</h4><div class="tw"><table><thead><tr><th>#</th><th>Psovod</th><th>Pes</th><th>Status</th><th>Akce</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  });
+  out.innerHTML=html||`<div class="al2 ai">Žádné přihlášky pro tento termín.</div>`;
 }
-function openMoveRegs(id){detailSID=D.registrations.find(r=>r.id===id).sessionId;openMove(id);}
 function delRegRegs(id){
   const r=D.registrations.find(r=>r.id===id);
   confirm2(`Smazat přihlášku ${r.handlerName}?`,()=>{
-    const sid=r.sessionId; fsDel('registrations',id); fsReorderWL(sid); toast('Přihláška smazána.');
+    const gid=r.groupId; D.registrations=D.registrations.filter(r=>r.id!==id);
+    reorderWL(gid); fsDel('registrations',id); fsReorderWL(gid);
+    renderRegs(); renderSessions(); rerender(); toast('Přihláška smazána.');
   },'Smazat přihlášku');
 }
 
-// ═══════════════════════════════════════════════════
+// ══════════════════════════════════════════════════
 //  TRAINER INFO & CONTACT
-// ═══════════════════════════════════════════════════
-function saveTI()  { fsMeta({trainerInfo:document.getElementById('tiInput').value}); toast('Informace trenéra uloženy.'); }
-function clearTI() { confirm2('Smazat informace trenéra?',()=>{ document.getElementById('tiInput').value=''; fsMeta({trainerInfo:''}); toast('Informace trenéra smazány.'); },'Smazat informace'); }
+// ══════════════════════════════════════════════════
+function saveTI(){ fsMeta({trainerInfo:document.getElementById('tiInput').value}); toast('Informace trenéra uloženy.'); }
+function clearTI(){ confirm2('Smazat informace trenéra?',()=>{ document.getElementById('tiInput').value=''; fsMeta({trainerInfo:''}); toast('Informace trenéra smazány.'); },'Smazat'); }
+function loadCT(){ const c=D.contact||{}; ['ctName','ctPhone','ctEmail','ctNote'].forEach((id,i)=>document.getElementById(id).value=[c.name,c.phone,c.email,c.note][i]||''); }
+function saveCT(){ fsMeta({contact:{name:document.getElementById('ctName').value.trim(),phone:document.getElementById('ctPhone').value.trim(),email:document.getElementById('ctEmail').value.trim(),note:document.getElementById('ctNote').value.trim()}}); toast('Kontakt uložen.'); }
+function clearCT(){ confirm2('Smazat kontaktní údaje?',()=>{ fsMeta({contact:{name:'',phone:'',email:'',note:''}}); loadCT(); toast('Kontakt smazán.'); },'Smazat'); }
 
-function loadCT() {
-  const c=D.contact||{};
-  document.getElementById('ctName').value=c.name||'';
-  document.getElementById('ctPhone').value=c.phone||'';
-  document.getElementById('ctEmail').value=c.email||'';
-  document.getElementById('ctNote').value=c.note||'';
-}
-function saveCT() {
-  fsMeta({contact:{name:document.getElementById('ctName').value.trim(),phone:document.getElementById('ctPhone').value.trim(),email:document.getElementById('ctEmail').value.trim(),note:document.getElementById('ctNote').value.trim()}});
-  toast('Kontakt uložen.');
-}
-function clearCT() { confirm2('Smazat kontaktní údaje?',()=>{ fsMeta({contact:{name:'',phone:'',email:'',note:''}}); loadCT(); toast('Kontakt smazán.'); },'Smazat kontakt'); }
-
-// ═══════════════════════════════════════════════════
+// ══════════════════════════════════════════════════
 //  EXPORT CSV
-// ═══════════════════════════════════════════════════
-function exportCSV() {
+// ══════════════════════════════════════════════════
+function exportCSV(){
   const s=D.sessions.find(s=>s.id===detailSID); if(!s)return;
-  const regs =D.registrations.filter(r=>r.sessionId===detailSID&&r.status==='confirmed').sort((a,b)=>a.slotTime.localeCompare(b.slotTime));
-  const waits=D.registrations.filter(r=>r.sessionId===detailSID&&r.status==='waitlist').sort((a,b)=>a.waitlistPosition-b.waitlistPosition);
+  const grps=sessionGroups(detailSID);
   let csv='\uFEFF';
-  csv+=`ZKO Rudník – Přihlášky na obrany\nDatum;${dispDate(s.date)}\nMísto;${s.location}\n\nČas;Psovod;Pes\n`;
-  regs.forEach(r=>csv+=`${r.slotTime};${r.handlerName};${r.dogName}\n`);
-  if(waits.length){csv+=`\nČekací listina\nPořadí;Psovod;Pes\n`;waits.forEach(w=>csv+=`${w.waitlistPosition};${w.handlerName};${w.dogName}\n`);}
+  csv+=`ZKO Rudník – Přihlášky\nDatum;${dispDate(s.date)}\nMísto;${s.location}\n\n`;
+  grps.forEach(g=>{
+    csv+=`Skupina;${g.startTime}–${addM(g.startTime,g.duration)};${g.duration} min;max ${g.maxParticipants} osob\n`;
+    csv+=`Pořadí;Psovod;Pes;Status\n`;
+    const confirmed=groupRegs(g.id,'confirmed').sort((a,b)=>a.createdAt-b.createdAt);
+    const waits=groupRegs(g.id,'waitlist').sort((a,b)=>a.waitlistPosition-b.waitlistPosition);
+    confirmed.forEach((r,i)=>csv+=`${i+1};${r.handlerName};${r.dogName};Přihlášen\n`);
+    waits.forEach(w=>csv+=`Čekací ${w.waitlistPosition};${w.handlerName};${w.dogName};Čeká\n`);
+    csv+='\n';
+  });
   const a=Object.assign(document.createElement('a'),{href:URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8;'})),download:`zko-rudnik-${s.date}.csv`});
   a.click(); URL.revokeObjectURL(a.href); toast('CSV exportováno.');
 }
 
-// ═══════════════════════════════════════════════════
+// ══════════════════════════════════════════════════
 //  INIT
-// ═══════════════════════════════════════════════════
-document.getElementById('csInput').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch();});
-
-const cfg = getConfig();
-if (cfg) {
-  initFirebase(cfg);
-} else {
-  showSetup();
-}
+// ══════════════════════════════════════════════════
+document.getElementById('csInput').addEventListener('keydown',e=>{ if(e.key==='Enter')doSearch(); });
+bootApp();
 </script>
 </body>
 </html>
