@@ -2,259 +2,209 @@
 <html lang="cs">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ZKO Rudník – OBRANY s Martinem</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-:root{
-  --gd:#1b3a2d;--gm:#2a5940;--gl:#3d7a57;--am:#d4891a;--al:#f0a830;
-  --cr:#f5f0e8;--rd:#c0392b;--rl:#e74c3c;--td:#1a1a1a;--tm:#444;--tl:#777;
-  --sf:#27ae60;--st:#c0392b;--sw:#e67e22;--r:8px;
-  --sh:0 4px 20px rgba(0,0,0,.12);--ss:0 2px 8px rgba(0,0,0,.08);
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Lato',sans-serif;background:var(--cr);color:var(--td);min-height:100vh}
-
-/* LOADING */
-#loadOverlay{position:fixed;inset:0;background:var(--gd);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9000;gap:18px}
-#loadOverlay .logo{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:4px;color:var(--al)}
-#loadOverlay .sub{font-size:.8rem;color:rgba(255,255,255,.5);letter-spacing:2px;text-transform:uppercase}
-.spin{width:36px;height:36px;border:3px solid rgba(255,255,255,.15);border-top-color:var(--al);border-radius:50%;animation:sp .8s linear infinite}
+:root{--g:#1b3a2d;--gm:#2a5940;--a:#d4891a;--al:#f0a830;--r:#c0392b;--sf:#27ae60;--bg:#f5f0e8;--w:#fff;--tm:#444;--tl:#777}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Lato',sans-serif;background:var(--bg);min-height:100vh}
+/* overlay */
+#ov{position:fixed;inset:0;background:var(--g);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999;gap:16px}
+#ov .t{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:4px;color:var(--al)}
+#ov .s{font-size:.75rem;color:rgba(255,255,255,.5);letter-spacing:2px;text-transform:uppercase}
+.spin{width:34px;height:34px;border:3px solid rgba(255,255,255,.15);border-top-color:var(--al);border-radius:50%;animation:sp .8s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
-#loadMsg{color:rgba(255,255,255,.45);font-size:.78rem;margin-top:4px;text-align:center;max-width:300px}
-
-/* HEADER */
-header{background:var(--gd);color:#fff;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.3)}
-.hi{max-width:1100px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.ht{display:flex;flex-direction:column}
-.ht .club{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:3px;color:var(--al);line-height:1}
-.ht .sub2{font-size:.78rem;color:rgba(255,255,255,.6);letter-spacing:1px;text-transform:uppercase}
-.hbtn{background:transparent;border:1.5px solid rgba(255,255,255,.35);color:rgba(255,255,255,.8);padding:7px 16px;border-radius:6px;cursor:pointer;font-size:.82rem;font-family:'Lato',sans-serif;transition:all .2s}
-.hbtn:hover{background:rgba(255,255,255,.1);color:#fff}
-.hbtn.on{background:var(--am);border-color:var(--am);color:#fff}
-
-/* PAGES */
+#ovMsg{font-size:.78rem;color:rgba(255,255,255,.45);text-align:center;max-width:280px;line-height:1.5}
+/* header */
+header{background:var(--g);color:#fff;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.3)}
+.hdr{max-width:1100px;margin:0 auto;padding:13px 18px;display:flex;align-items:center;justify-content:space-between}
+.htitle{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:3px;color:var(--al);line-height:1}
+.hsub{font-size:.72rem;color:rgba(255,255,255,.55);letter-spacing:1px;text-transform:uppercase}
+.hbtn{background:transparent;border:1.5px solid rgba(255,255,255,.3);color:rgba(255,255,255,.8);padding:6px 15px;border-radius:6px;cursor:pointer;font-size:.8rem;font-family:'Lato',sans-serif;transition:all .2s}
+.hbtn:hover{background:rgba(255,255,255,.1)}
+.hbtn.on{background:var(--a);border-color:var(--a);color:#fff}
+/* pages */
 .pg{display:none}.pg.act{display:block}
-.pw{max-width:1000px;margin:0 auto;padding:24px 16px 60px}
-
-/* BOXES */
-.tib{background:linear-gradient(135deg,var(--gd) 0%,var(--gm) 100%);color:#fff;border-radius:var(--r);padding:20px 24px;margin-bottom:24px;position:relative;overflow:hidden}
-.tib::before{content:'';position:absolute;top:0;right:0;width:120px;height:120px;background:rgba(255,255,255,.04);border-radius:50%;transform:translate(30px,-30px)}
-.tib h3{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:2px;color:var(--al);margin-bottom:8px}
-.tib p{font-size:.9rem;line-height:1.65;color:rgba(255,255,255,.88);white-space:pre-wrap}
-.ti-empty{color:rgba(255,255,255,.4);font-style:italic;font-size:.88rem}
-.ctbox{background:#fff;border-radius:var(--r);padding:18px 22px;margin-bottom:24px;border-left:4px solid var(--gl);box-shadow:var(--ss)}
-.ctbox h3{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:2px;color:var(--gd);margin-bottom:10px}
-.ctbox p{font-size:.9rem;line-height:1.7;color:var(--tm);white-space:pre-wrap}
-.ctbox a{color:var(--gm);text-decoration:none;font-weight:700}.ctbox a:hover{text-decoration:underline}
-
-/* HOWTO */
-.hw{background:#fff;border-radius:var(--r);padding:16px 20px;margin-bottom:24px;border-left:4px solid var(--am);box-shadow:var(--ss)}
-.hw h3{font-size:.78rem;text-transform:uppercase;letter-spacing:1px;color:var(--tl);margin-bottom:12px}
-.hw-steps{display:flex;flex-wrap:wrap;gap:12px}
-.hw-step{display:flex;align-items:flex-start;gap:8px;flex:1;min-width:160px}
-.hw-step .n{width:24px;height:24px;background:var(--am);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:900;flex-shrink:0}
-.hw-step p{font-size:.82rem;color:var(--tm);line-height:1.4;padding-top:3px}
-
-/* SESSION CARDS */
-.sh2{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.sh2 h2{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:2px;color:var(--gd)}
-.no-s{background:#fff;border-radius:var(--r);padding:40px;text-align:center;color:var(--tl)}
-.sc{background:#fff;border-radius:var(--r);box-shadow:var(--ss);margin-bottom:16px;overflow:hidden}
-.sc-hd{background:var(--gd);color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;gap:12px}
+.wrap{max-width:1000px;margin:0 auto;padding:22px 15px 60px}
+/* info box */
+.ibox{background:linear-gradient(135deg,var(--g),var(--gm));color:#fff;border-radius:8px;padding:18px 22px;margin-bottom:22px}
+.ibox h3{font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:2px;color:var(--al);margin-bottom:7px}
+.ibox p{font-size:.88rem;line-height:1.6;color:rgba(255,255,255,.85);white-space:pre-wrap}
+.iempty{color:rgba(255,255,255,.35);font-style:italic}
+/* contact */
+.cbox{background:var(--w);border-radius:8px;padding:16px 20px;margin-bottom:22px;border-left:4px solid var(--gm);box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.cbox h3{font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:2px;color:var(--g);margin-bottom:8px}
+.cbox p{font-size:.88rem;line-height:1.65;color:var(--tm)}
+.cbox a{color:var(--gm);text-decoration:none;font-weight:700}
+/* howto */
+.hw{background:var(--w);border-radius:8px;padding:14px 18px;margin-bottom:22px;border-left:4px solid var(--a);box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.hw h3{font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--tl);margin-bottom:10px}
+.hw-steps{display:flex;flex-wrap:wrap;gap:10px}
+.hw-step{display:flex;align-items:flex-start;gap:7px;flex:1;min-width:150px}
+.hw-step .n{width:22px;height:22px;background:var(--a);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:900;flex-shrink:0}
+.hw-step p{font-size:.8rem;color:var(--tm);line-height:1.4;padding-top:2px}
+/* session cards */
+.sec-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.sec-h h2{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:2px;color:var(--g)}
+.no-s{background:var(--w);border-radius:8px;padding:36px;text-align:center;color:var(--tl);font-size:.9rem}
+.sc{background:var(--w);border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.07);margin-bottom:14px;overflow:hidden}
+.sc-hd{background:var(--g);color:#fff;padding:13px 18px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;gap:10px}
 .sc-hd:hover{background:var(--gm)}
-.sdi .dt{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:1px;color:var(--al)}
-.sdi .mt{font-size:.78rem;color:rgba(255,255,255,.65);margin-top:2px}
-.ss2{display:flex;align-items:center;gap:10px}
-.badge{padding:4px 11px;border-radius:20px;font-size:.75rem;font-weight:700;white-space:nowrap}
-.b-free{background:var(--sf);color:#fff}.b-full{background:var(--st);color:#fff}.b-part{background:var(--am);color:#fff}
-.chv{font-size:.9rem;transition:transform .25s;color:rgba(255,255,255,.65)}
-.sc.open .chv{transform:rotate(180deg)}
-.sc-bd{display:none;padding:16px 20px}.sc.open .sc-bd{display:block}
-
-/* GROUP CARDS (public) */
-.gc{border:1.5px solid #e5e0d8;border-radius:var(--r);margin-bottom:10px;overflow:hidden}
-.gc-hd{background:#f8f5f0;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.gc-time{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:1px;color:var(--gd)}
-.gc-meta{font-size:.78rem;color:var(--tl)}
-.gc-bd{padding:12px 16px}
-.parts-list{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
-.part-item{display:flex;align-items:center;gap:10px;background:#f0faf4;border:1px solid #c8e6d0;border-radius:6px;padding:7px 12px;font-size:.85rem}
-.part-num{font-weight:900;color:var(--sf);min-width:22px;font-size:.8rem}
-.part-name{color:var(--td);font-weight:700}
-.part-dog{color:var(--tl);font-size:.78rem}
-.part-empty{color:var(--tl);font-style:italic;font-size:.82rem;padding:4px 0}
-.gc-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-.signup-btn{background:var(--sf);color:#fff;border:none;border-radius:6px;padding:8px 18px;cursor:pointer;font-family:'Lato',sans-serif;font-size:.85rem;font-weight:700;transition:background .15s}
-.signup-btn:hover{background:#219a52}
-.wl-btn2{background:var(--am);color:#fff;border:none;border-radius:6px;padding:8px 18px;cursor:pointer;font-family:'Lato',sans-serif;font-size:.85rem;font-weight:700;transition:background .15s}
-.wl-btn2:hover{background:var(--al)}
-.wl-section{margin-top:10px;border-top:1px solid #f0ece4;padding-top:10px}
-.wl-section h5{font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:var(--tl);margin-bottom:6px}
-.wl-item{display:flex;align-items:center;gap:8px;font-size:.8rem;padding:4px 0;color:var(--tm)}
-.wl-pos{font-weight:900;color:var(--sw);min-width:18px}
-
-/* CANCEL */
-.cp{background:#fff;border-radius:var(--r);box-shadow:var(--ss);padding:20px;margin-top:28px}
-.cp h3{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;color:var(--gd);margin-bottom:12px}
-.cf{display:flex;gap:10px;flex-wrap:wrap}.cf input{flex:1;min-width:200px}
-.cr2{margin-top:12px}
-.cri{background:#f9f9f9;border:1px solid #e0e0e0;border-radius:6px;padding:11px 14px;margin-bottom:7px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
-.cri strong{display:block;font-size:.9rem}.cri span{color:var(--tl);font-size:.78rem}
-
-/* INPUTS */
-input,textarea,select{font-family:'Lato',sans-serif;font-size:.9rem;padding:9px 12px;border:1.5px solid #d0ccc4;border-radius:6px;background:#fff;color:var(--td);transition:border-color .2s;width:100%}
+.sdate{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:1px;color:var(--al)}
+.smeta{font-size:.75rem;color:rgba(255,255,255,.6);margin-top:1px}
+.bdg{padding:3px 10px;border-radius:20px;font-size:.72rem;font-weight:700;white-space:nowrap}
+.bf{background:var(--sf);color:#fff}.bp2{background:var(--a);color:#fff}.bfu{background:var(--r);color:#fff}
+.chv{font-size:.85rem;transition:transform .25s;color:rgba(255,255,255,.6)}
+.sc.op .chv{transform:rotate(180deg)}
+.sc-bd{display:none;padding:16px 18px}.sc.op .sc-bd{display:block}
+/* slot grid */
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}
+/* slot card - multi person */
+.slot-card{border-radius:7px;border:1.5px solid #e0ddd8;overflow:hidden}
+.slot-card-hd{background:#f5f2ec;padding:8px 12px;display:flex;align-items:center;justify-content:space-between}
+.slot-time{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:1px;color:var(--g)}
+.slot-card-bd{padding:8px 12px}
+.slot-spot{display:flex;align-items:center;gap:7px;padding:4px 0;border-bottom:1px solid #f0ece4;font-size:.8rem}
+.slot-spot:last-child{border-bottom:none}
+.spot-num{font-weight:900;color:var(--a);min-width:18px;font-size:.75rem}
+.spot-name{font-weight:700;color:var(--g)}
+.spot-dog{color:var(--tl);font-size:.74rem}
+.spot-empty{color:#ccc;font-style:italic;font-size:.76rem}
+.slot-btn{width:100%;background:var(--sf);color:#fff;border:none;border-radius:5px;padding:7px;cursor:pointer;font-family:'Lato',sans-serif;font-size:.8rem;font-weight:700;margin-top:8px;transition:background .15s}
+.slot-btn:hover{background:#219a52}
+.slot-btn-wl{background:var(--a)}.slot-btn-wl:hover{background:var(--al)}
+.wl-sect{margin-top:8px;border-top:1px solid #f0ece4;padding-top:8px}
+.wl-sect h5{font-size:.7rem;text-transform:uppercase;letter-spacing:1px;color:var(--tl);margin-bottom:5px}
+.wl-item{font-size:.77rem;color:var(--tm);padding:2px 0}
+.wl-pos{font-weight:900;color:var(--a);margin-right:5px}
+/* cancel */
+.cp{background:var(--w);border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.07);padding:18px;margin-top:26px}
+.cp h3{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:2px;color:var(--g);margin-bottom:10px}
+.cf{display:flex;gap:8px;flex-wrap:wrap}.cf input{flex:1;min-width:180px}
+.cres{margin-top:10px}
+.cri{background:#f9f9f9;border:1px solid #e8e8e8;border-radius:6px;padding:10px 13px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:7px}
+.cri strong{display:block;font-size:.88rem}.cri span{color:var(--tl);font-size:.76rem}
+/* inputs */
+input,textarea,select{font-family:'Lato',sans-serif;font-size:.88rem;padding:8px 11px;border:1.5px solid #d0ccc4;border-radius:6px;background:var(--w);color:#1a1a1a;transition:border-color .2s;width:100%}
 input:focus,textarea:focus,select:focus{outline:none;border-color:var(--gm)}
-label{display:block;font-size:.78rem;font-weight:700;color:var(--tm);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
-.fg{margin-bottom:13px}.fr{display:flex;gap:10px;flex-wrap:wrap}.fr .fg{flex:1;min-width:100px}
-
-/* BUTTONS */
-.btn{font-family:'Lato',sans-serif;font-size:.86rem;font-weight:700;padding:9px 17px;border:none;border-radius:6px;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:5px}
-.bp{background:var(--gd);color:#fff}.bp:hover{background:var(--gm)}
-.ba{background:var(--am);color:#fff}.ba:hover{background:var(--al)}
-.br{background:var(--rd);color:#fff}.br:hover{background:var(--rl)}
-.bg{background:transparent;color:var(--tm);border:1.5px solid #ccc}.bg:hover{border-color:var(--gm);color:var(--gd)}
-.bs{padding:6px 12px;font-size:.8rem}.bx{padding:4px 8px;font-size:.74rem}
-
-/* MODAL */
-.mo{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;align-items:center;justify-content:center;padding:14px}
-.mo.open{display:flex}
-.md{background:#fff;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.3);width:100%;max-width:480px;max-height:90vh;overflow-y:auto;animation:su .22s ease}
-.md-lg{max-width:800px}
-@keyframes su{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.mh{background:var(--gd);color:#fff;padding:15px 20px;border-radius:12px 12px 0 0;display:flex;align-items:center;justify-content:space-between}
-.mh h2{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:2px;color:var(--al)}
-.mx{background:none;border:none;color:rgba(255,255,255,.65);font-size:1.3rem;cursor:pointer;line-height:1}
-.mx:hover{color:#fff}
-.mb{padding:20px}.mf{padding:12px 20px;border-top:1px solid #eee;display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
-
-/* GROUP TEMPLATE (session form) */
-.gtpl{background:#f8f5f0;border-radius:var(--r);padding:14px;margin-top:10px}
-.gtpl-row{display:flex;gap:8px;align-items:center;background:#fff;border:1.5px solid #e0ddd8;border-radius:6px;padding:8px 12px;margin-bottom:8px;flex-wrap:wrap}
-.gtpl-row input{border:none;border-bottom:1.5px solid #d0ccc4;border-radius:0;padding:4px 6px;font-size:.85rem;width:auto;flex:1;min-width:60px}
-.gtpl-row input:focus{outline:none;border-bottom-color:var(--gm)}
-.gtpl-row label{margin:0;font-size:.7rem;white-space:nowrap;text-transform:none;letter-spacing:0;color:var(--tl)}
-.gtpl-field{display:flex;flex-direction:column;gap:2px;flex:1;min-width:80px}
-
-/* ADMIN */
-.aw{max-width:1100px;margin:0 auto;padding:24px 16px 60px}
-.al-box{max-width:360px;margin:60px auto;background:#fff;border-radius:12px;box-shadow:var(--sh);overflow:hidden}
-.al-hd{background:var(--gd);padding:24px;text-align:center}
-.al-hd h2{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:3px;color:var(--al)}
-.al-hd p{font-size:.8rem;color:rgba(255,255,255,.55);margin-top:4px}
-.al-bd{padding:26px}
-.le{color:var(--rd);font-size:.82rem;margin-top:8px;display:none}
-.an{display:flex;gap:4px;background:var(--gd);border-radius:var(--r);padding:6px;margin-bottom:22px;flex-wrap:wrap}
-.an button{flex:1;min-width:80px;background:transparent;border:none;color:rgba(255,255,255,.6);padding:8px 10px;border-radius:5px;cursor:pointer;font-family:'Lato',sans-serif;font-size:.82rem;font-weight:700;transition:all .2s}
-.an button:hover{color:#fff;background:rgba(255,255,255,.1)}.an button.act{background:var(--am);color:#fff}
+label{display:block;font-size:.75rem;font-weight:700;color:var(--tm);margin-bottom:3px;text-transform:uppercase;letter-spacing:.5px}
+.fg{margin-bottom:12px}.fr{display:flex;gap:9px;flex-wrap:wrap}.fr .fg{flex:1;min-width:95px}
+/* buttons */
+.btn{font-family:'Lato',sans-serif;font-size:.84rem;font-weight:700;padding:8px 16px;border:none;border-radius:6px;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:5px}
+.bpri{background:var(--g);color:#fff}.bpri:hover{background:var(--gm)}
+.bamb{background:var(--a);color:#fff}.bamb:hover{background:var(--al)}
+.bred{background:var(--r);color:#fff}.bred:hover{opacity:.85}
+.bgho{background:transparent;color:var(--tm);border:1.5px solid #ccc}.bgho:hover{border-color:var(--gm);color:var(--g)}
+.bsm{padding:5px 11px;font-size:.77rem}.bxs{padding:3px 8px;font-size:.72rem}
+/* modal */
+.mo{display:none;position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:500;align-items:center;justify-content:center;padding:13px}
+.mo.op{display:flex}
+.md{background:var(--w);border-radius:11px;box-shadow:0 18px 55px rgba(0,0,0,.28);width:100%;max-width:460px;max-height:90vh;overflow-y:auto;animation:su .22s ease}
+.md-lg{max-width:740px}
+@keyframes su{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.mh{background:var(--g);color:#fff;padding:14px 19px;border-radius:11px 11px 0 0;display:flex;align-items:center;justify-content:space-between}
+.mh h2{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:var(--al)}
+.mcls{background:none;border:none;color:rgba(255,255,255,.6);font-size:1.25rem;cursor:pointer;line-height:1}
+.mcls:hover{color:#fff}
+.mb{padding:19px}.mf{padding:11px 19px;border-top:1px solid #eee;display:flex;gap:7px;justify-content:flex-end;flex-wrap:wrap}
+/* admin */
+.aw{max-width:1100px;margin:0 auto;padding:22px 15px 60px}
+.lbox{max-width:340px;margin:55px auto;background:var(--w);border-radius:11px;box-shadow:0 4px 18px rgba(0,0,0,.1);overflow:hidden}
+.lhd{background:var(--g);padding:22px;text-align:center}
+.lhd h2{font-family:'Bebas Neue',sans-serif;font-size:1.75rem;letter-spacing:3px;color:var(--al)}
+.lhd p{font-size:.77rem;color:rgba(255,255,255,.5);margin-top:3px}
+.lbd{padding:24px}
+.lerr{color:var(--r);font-size:.8rem;margin-top:7px;display:none}
+.anav{display:flex;gap:4px;background:var(--g);border-radius:8px;padding:5px;margin-bottom:20px;flex-wrap:wrap}
+.anav button{flex:1;min-width:80px;background:transparent;border:none;color:rgba(255,255,255,.55);padding:7px 9px;border-radius:5px;cursor:pointer;font-family:'Lato',sans-serif;font-size:.8rem;font-weight:700;transition:all .2s}
+.anav button:hover{color:#fff;background:rgba(255,255,255,.1)}
+.anav button.act{background:var(--a);color:#fff}
 .tc{display:none}.tc.act{display:block}
-.sec-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px}
-.sec-hd h2{font-family:'Bebas Neue',sans-serif;font-size:1.45rem;letter-spacing:2px;color:var(--gd)}
-.tw{overflow-x:auto;border-radius:var(--r);box-shadow:var(--ss)}
-table{width:100%;border-collapse:collapse;font-size:.86rem}
-thead th{background:var(--gd);color:var(--al);padding:10px 13px;text-align:left;font-size:.75rem;text-transform:uppercase;letter-spacing:1px;white-space:nowrap}
+.sechd{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.sechd h2{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:2px;color:var(--g)}
+.tw{overflow-x:auto;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+table{width:100%;border-collapse:collapse;font-size:.84rem}
+thead th{background:var(--g);color:var(--al);padding:9px 12px;text-align:left;font-size:.72rem;text-transform:uppercase;letter-spacing:1px;white-space:nowrap}
 tbody tr:nth-child(even){background:#f8f5f0}tbody tr:hover{background:#f0ece4}
-td{padding:10px 13px;color:var(--tm);border-bottom:1px solid #eee;vertical-align:middle}
+td{padding:9px 12px;color:var(--tm);border-bottom:1px solid #eee;vertical-align:middle}
 .ac{display:flex;gap:4px;flex-wrap:wrap}
-
-/* ADMIN DETAIL */
-.adg{display:flex;flex-direction:column;gap:12px}
-.adgc{border:1.5px solid #e0ddd8;border-radius:var(--r);overflow:hidden}
-.adgc-hd{background:#f8f5f0;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.adgc-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1px;color:var(--gd)}
-.adgc-meta{font-size:.78rem;color:var(--tl)}
-.adgc-bd{padding:12px 16px}
-.adgc-parts{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
-.adgc-part{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#f8f5f0;border:1px solid #e5e0d8;border-radius:6px;padding:8px 12px;flex-wrap:wrap}
-.adgc-part-info{display:flex;align-items:center;gap:8px;font-size:.85rem}
-.adgc-part-num{font-weight:900;color:var(--am);min-width:22px}
-.adgc-empty-slot{background:#f0faf4;border:1px dashed #c8e6d0;border-radius:6px;padding:8px 12px;font-size:.82rem;color:var(--tl);font-style:italic;display:flex;align-items:center;justify-content:space-between}
-
-.ib{background:#fff;border-radius:var(--r);padding:22px;box-shadow:var(--ss)}
-.stc{background:#fff;border-radius:var(--r);padding:22px;box-shadow:var(--ss);max-width:400px}
-.ro{background:#f8f5f0;border-radius:6px;padding:13px;margin-top:6px;display:none}.ro.show{display:block}
-.at{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-.at h1{font-family:'Bebas Neue',sans-serif;font-size:1.55rem;letter-spacing:3px;color:var(--gd)}
-.al2{padding:11px 15px;border-radius:6px;font-size:.86rem;margin-bottom:14px}
-.ai{background:#e8f4fd;color:#2471a3;border:1px solid #a9d4f1}
-.aw2{background:#fff4e0;color:#c0780a;border:1px solid #fad7a0}
-.ss3{margin-bottom:16px}.ss3 select{max-width:420px}
-
-/* TOAST */
-#toast{position:fixed;bottom:20px;right:20px;background:var(--gd);color:#fff;padding:11px 18px;border-radius:8px;font-size:.86rem;z-index:9999;box-shadow:var(--sh);transform:translateY(70px);opacity:0;transition:all .28s;max-width:320px}
+/* admin detail slots */
+.aslots{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.asc{border:1.5px solid #e0ddd8;border-radius:7px;overflow:hidden}
+.asc-hd{background:#f5f2ec;padding:9px 12px;display:flex;align-items:center;justify-content:space-between}
+.asc-time{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;color:var(--g)}
+.asc-bd{padding:9px 12px}
+.asc-spot{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f0ece4;gap:7px;flex-wrap:wrap}
+.asc-spot:last-child{border-bottom:none}
+.asc-empty{color:var(--sf);font-style:italic;font-size:.78rem;cursor:pointer;text-decoration:underline}
+.asc-info{font-size:.8rem;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.ro{background:#f8f5f0;border-radius:6px;padding:12px;margin-top:5px;display:none}.ro.show{display:block}
+.atop{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.atop h1{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:3px;color:var(--g)}
+.al2{padding:10px 14px;border-radius:6px;font-size:.83rem;margin-bottom:12px}
+.ainf{background:#e8f4fd;color:#2471a3;border:1px solid #a9d4f1}
+.awrn{background:#fff4e0;color:#c0780a;border:1px solid #fad7a0}
+.ss3{margin-bottom:14px}.ss3 select{max-width:400px}
+.stc{background:var(--w);border-radius:8px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.07);max-width:400px;margin-bottom:18px}
+/* toast */
+#toast{position:fixed;bottom:18px;right:18px;background:var(--g);color:#fff;padding:10px 17px;border-radius:7px;font-size:.84rem;z-index:9999;box-shadow:0 3px 14px rgba(0,0,0,.2);transform:translateY(60px);opacity:0;transition:all .26s;max-width:300px}
 #toast.show{transform:translateY(0);opacity:1}
-#toast.err{background:var(--rd)}#toast.ok{background:var(--sf)}
-
-@media(max-width:580px){
-  .ht .club{font-size:1.5rem}.hi{padding:11px 12px}
-  .an button{font-size:.75rem;padding:7px 6px}
-}
+#toast.err{background:var(--r)}#toast.ok{background:var(--sf)}
+@media(max-width:560px){.htitle{font-size:1.5rem}.hdr{padding:10px 12px}.anav button{font-size:.72rem;padding:6px 6px}.slots{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}}
 </style>
 </head>
 <body>
 
-<!-- LOADING -->
-<div id="loadOverlay">
-  <div class="logo">ZKO RUDNÍK</div>
-  <div class="sub">OBRANY s Martinem</div>
-  <div class="spin"></div>
-  <div id="loadMsg"></div>
-</div>
+<div id="ov"><div class="t">ZKO RUDNÍK</div><div class="s">OBRANY s Martinem</div><div class="spin"></div><div id="ovMsg"></div></div>
 
-<!-- PUBLIC PAGE -->
-<div id="publicPage" class="pg act">
-<header>
-  <div class="hi">
-    <div class="ht"><span class="club">ZKO RUDNÍK</span><span class="sub2">OBRANY s Martinem</span></div>
-    <button class="hbtn" onclick="goAdmin()">⚙ Administrace</button>
-  </div>
-</header>
-<div class="pw">
-  <div class="tib"><h3>📋 INFORMACE TRENÉRA</h3><div id="tiDisplay"></div></div>
-  <div id="ctBox" class="ctbox" style="display:none"><h3>📞 KONTAKT NA TRENÉRA</h3><div id="ctDisplay"></div></div>
-  <div class="hw">
-    <h3>Jak se přihlásit?</h3>
-    <div class="hw-steps">
-      <div class="hw-step"><div class="n">1</div><p>Najdi níže nadcházející trénink a rozklikni ho.</p></div>
-      <div class="hw-step"><div class="n">2</div><p>Vyber skupinu v čase, který ti vyhovuje.</p></div>
-      <div class="hw-step"><div class="n">3</div><p>Klikni na tlačítko přihlásit a vyplň jméno psovoda a psa.</p></div>
-      <div class="hw-step"><div class="n">4</div><p>Pro zrušení přihlášky použij sekci níže.</p></div>
-    </div>
-  </div>
-  <div class="sh2"><h2>📅 Nadcházející tréninky</h2></div>
-  <div id="sessionsOut"></div>
+<!-- PUBLIC -->
+<div id="pubPg" class="pg act">
+<header><div class="hdr">
+  <div><div class="htitle">ZKO RUDNÍK</div><div class="hsub">OBRANY s Martinem</div></div>
+  <button class="hbtn" onclick="goAdmin()">⚙ Administrace</button>
+</div></header>
+<div class="wrap">
+  <div class="ibox"><h3>📋 INFORMACE TRENÉRA</h3><div id="tiDisp"></div></div>
+  <div id="ctBox" class="cbox" style="display:none"><h3>📞 KONTAKT</h3><div id="ctDisp"></div></div>
+  <div class="hw"><h3>Jak se přihlásit?</h3><div class="hw-steps">
+    <div class="hw-step"><div class="n">1</div><p>Najdi trénink a rozklikni ho.</p></div>
+    <div class="hw-step"><div class="n">2</div><p>Vyber volné místo v čase, který ti vyhovuje.</p></div>
+    <div class="hw-step"><div class="n">3</div><p>Zadej jméno psovoda a psa.</p></div>
+    <div class="hw-step"><div class="n">4</div><p>Pro zrušení použij sekci níže.</p></div>
+  </div></div>
+  <div class="sec-h"><h2>📅 Nadcházející tréninky</h2></div>
+  <div id="sesOut"></div>
   <div class="cp">
     <h3>✖ Zrušení přihlášky</h3>
-    <p style="font-size:.82rem;color:var(--tl);margin-bottom:12px">Zadej své jméno pro nalezení a zrušení přihlášky.</p>
+    <p style="font-size:.8rem;color:var(--tl);margin-bottom:10px">Zadej jméno psovoda pro nalezení přihlášky.</p>
     <div class="cf">
-      <input type="text" id="csInput" placeholder="Jméno psovoda…" style="max-width:260px" onkeydown="if(event.key==='Enter')doSearch()">
-      <button class="btn bg" onclick="doSearch()">🔍 Hledat</button>
+      <input id="csIn" type="text" placeholder="Jméno psovoda…" style="max-width:240px" onkeydown="if(event.key==='Enter')doSearch()">
+      <button class="btn bgho" onclick="doSearch()">🔍 Hledat</button>
     </div>
-    <div id="csResults" class="cr2"></div>
+    <div id="csRes" class="cres"></div>
   </div>
 </div>
 </div>
 
-<!-- ADMIN PAGE -->
-<div id="adminPage" class="pg">
-<header>
-  <div class="hi">
-    <div class="ht"><span class="club">ZKO RUDNÍK</span><span class="sub2">ADMINISTRACE</span></div>
-    <button class="hbtn on" onclick="goPublic()">← Zpět na web</button>
-  </div>
-</header>
+<!-- ADMIN -->
+<div id="admPg" class="pg">
+<header><div class="hdr">
+  <div><div class="htitle">ZKO RUDNÍK</div><div class="hsub">ADMINISTRACE</div></div>
+  <button class="hbtn on" onclick="goPublic()">← Zpět na web</button>
+</div></header>
 <div class="aw">
-  <div id="loginBox" class="al-box">
-    <div class="al-hd"><h2>Administrace</h2><p>ZKO Rudník – přihlašovací systém</p></div>
-    <div class="al-bd">
+  <div id="lbox" class="lbox">
+    <div class="lhd"><h2>Administrace</h2><p>ZKO Rudník</p></div>
+    <div class="lbd">
       <div class="fg"><label>Heslo</label><input type="password" id="pwdIn" placeholder="Zadej heslo…" onkeydown="if(event.key==='Enter')doLogin()"></div>
-      <button class="btn bp" style="width:100%" onclick="doLogin()">Přihlásit se</button>
-      <div class="le" id="loginErr">Nesprávné heslo.</div>
+      <button class="btn bpri" style="width:100%" onclick="doLogin()">Přihlásit se</button>
+      <div class="lerr" id="lerr">Nesprávné heslo.</div>
     </div>
   </div>
-  <div id="adminPanel" style="display:none">
-    <div class="at"><h1>⚙ Administrace</h1><button class="btn bg bs" onclick="doLogout()">Odhlásit</button></div>
-    <nav class="an">
+  <div id="admPanel" style="display:none">
+    <div class="atop"><h1>⚙ Administrace</h1><button class="btn bgho bsm" onclick="doLogout()">Odhlásit</button></div>
+    <nav class="anav">
       <button class="act" onclick="tab('tT',this)">📅 Tréninky</button>
       <button onclick="tab('tR',this)">📋 Přihlášky</button>
       <button onclick="tab('tI',this)">📝 Info trenéra</button>
@@ -263,63 +213,54 @@ td{padding:10px 13px;color:var(--tm);border-bottom:1px solid #eee;vertical-align
     </nav>
 
     <div id="tT" class="tc act">
-      <div class="sec-hd"><h2>Tréninky</h2><button class="btn bp" onclick="openNewS()">＋ Nový trénink</button></div>
+      <div class="sechd"><h2>Tréninky</h2><button class="btn bpri" onclick="openNewS()">＋ Nový trénink</button></div>
       <div class="tw"><table>
-        <thead><tr><th>Datum</th><th>Místo</th><th>Skupiny</th><th>Přihlášeno</th><th>Akce</th></tr></thead>
-        <tbody id="sTbody"></tbody>
+        <thead><tr><th>Datum</th><th>Místo</th><th>Čas / Intervaly</th><th>Obsazeno</th><th>Akce</th></tr></thead>
+        <tbody id="sTb"></tbody>
       </table></div>
     </div>
 
     <div id="tR" class="tc">
-      <div class="sec-hd"><h2>Přihlášky</h2></div>
-      <div class="ss3"><label>Vyber termín</label>
-        <select id="rSel" onchange="renderRegs()"><option value="">-- Vyber termín --</option></select>
-      </div>
+      <div class="sechd"><h2>Přihlášky</h2></div>
+      <div class="ss3"><label>Vyber termín</label><select id="rSel" onchange="renderRegs()"><option value="">-- Vyber termín --</option></select></div>
       <div id="regsOut"></div>
     </div>
 
     <div id="tI" class="tc">
-      <div class="sec-hd"><h2>Informace trenéra</h2></div>
-      <div class="ib">
-        <div class="fg"><label>Text na hlavní stránce</label><textarea id="tiInput" rows="8" placeholder="Napište pokyny, co vzít s sebou…"></textarea></div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <button class="btn bp" onclick="saveTI()">💾 Uložit</button>
-          <button class="btn bg" onclick="clearTI()">🗑 Smazat</button>
+      <div class="sechd"><h2>Informace trenéra</h2></div>
+      <div class="stc" style="max-width:600px">
+        <div class="fg"><label>Text na hlavní stránce</label><textarea id="tiIn" rows="7" placeholder="Pokyny, co vzít s sebou…"></textarea></div>
+        <div style="display:flex;gap:8px">
+          <button class="btn bpri" onclick="saveTI()">💾 Uložit</button>
+          <button class="btn bgho" onclick="clearTI()">🗑 Smazat</button>
         </div>
       </div>
     </div>
 
     <div id="tC" class="tc">
-      <div class="sec-hd"><h2>Kontakt na trenéra</h2></div>
-      <div class="ib">
-        <p style="font-size:.84rem;color:var(--tl);margin-bottom:14px">Prázdné pole = kontakt se nezobrazí.</p>
-        <div class="fg"><label>Jméno</label><input type="text" id="ctName" placeholder="Např. Martin Novák"></div>
+      <div class="sechd"><h2>Kontakt na trenéra</h2></div>
+      <div class="stc" style="max-width:500px">
+        <div class="fg"><label>Jméno</label><input type="text" id="ctN" placeholder="Např. Martin Novák"></div>
         <div class="fr">
-          <div class="fg"><label>Telefon</label><input type="tel" id="ctPhone" placeholder="+420 777 123 456"></div>
-          <div class="fg"><label>E-mail</label><input type="email" id="ctEmail" placeholder="martin@zkorudnik.cz"></div>
+          <div class="fg"><label>Telefon</label><input type="tel" id="ctP" placeholder="+420 777 123 456"></div>
+          <div class="fg"><label>E-mail</label><input type="email" id="ctE" placeholder="martin@rudnik.cz"></div>
         </div>
-        <div class="fg"><label>Poznámka</label><textarea id="ctNote" rows="3" placeholder="Facebook, dostupnost…"></textarea></div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <button class="btn bp" onclick="saveCT()">💾 Uložit</button>
-          <button class="btn bg" onclick="clearCT()">🗑 Smazat</button>
+        <div class="fg"><label>Poznámka</label><textarea id="ctNo" rows="2" placeholder="Facebook, dostupnost…"></textarea></div>
+        <div style="display:flex;gap:8px">
+          <button class="btn bpri" onclick="saveCT()">💾 Uložit</button>
+          <button class="btn bgho" onclick="clearCT()">🗑 Smazat</button>
         </div>
       </div>
     </div>
 
     <div id="tS" class="tc">
-      <div class="sec-hd"><h2>Nastavení</h2></div>
-      <div class="stc" style="margin-bottom:20px">
-        <h3 style="font-size:.95rem;margin-bottom:15px;color:var(--gd)">Změna hesla</h3>
-        <div class="fg"><label>Aktuální heslo</label><input type="password" id="pCur"></div>
-        <div class="fg"><label>Nové heslo</label><input type="password" id="pNew"></div>
-        <div class="fg"><label>Nové heslo znovu</label><input type="password" id="pCon"></div>
-        <button class="btn bp" onclick="changePwd()">Změnit heslo</button>
-      </div>
-      <div class="stc" style="max-width:500px;background:#fff8ef;border:1.5px solid #ffdda0">
-        <h3 style="font-size:.95rem;margin-bottom:10px;color:var(--am)">⚠ Firestore pravidla</h3>
-        <div style="background:#1e1e1e;border-radius:6px;padding:12px;font-family:monospace;font-size:.8rem;color:#ce9178;line-height:1.6">
-          rules_version = '2';<br>service cloud.firestore {<br>&nbsp;&nbsp;match /databases/{db}/documents {<br>&nbsp;&nbsp;&nbsp;&nbsp;match /{doc=**} {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow read, write: if true;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;}<br>}
-        </div>
+      <div class="sechd"><h2>Nastavení</h2></div>
+      <div class="stc">
+        <h3 style="font-size:.9rem;margin-bottom:13px;color:var(--g)">Změna hesla</h3>
+        <div class="fg"><label>Aktuální heslo</label><input type="password" id="pC"></div>
+        <div class="fg"><label>Nové heslo</label><input type="password" id="pN"></div>
+        <div class="fg"><label>Nové heslo znovu</label><input type="password" id="pK"></div>
+        <button class="btn bpri" onclick="chgPwd()">Změnit heslo</button>
       </div>
     </div>
   </div>
@@ -327,870 +268,472 @@ td{padding:10px 13px;color:var(--tm);border-bottom:1px solid #eee;vertical-align
 </div>
 
 <!-- MODALS -->
-
-<!-- Přihlášení do skupiny -->
-<div class="mo" id="mSignup">
-  <div class="md">
-    <div class="mh"><h2>Přihlášení na trénink</h2><button class="mx" onclick="closeM('mSignup')">✕</button></div>
-    <div class="mb">
-      <p id="mSignupInfo" style="font-size:.85rem;color:var(--tl);margin-bottom:14px;line-height:1.5"></p>
-      <div class="fg"><label>Jméno psovoda</label><input type="text" id="suHandler" placeholder="Např. Jan Novák"></div>
-      <div class="fg"><label>Jméno psa</label><input type="text" id="suDog" placeholder="Např. Rex"></div>
-    </div>
-    <div class="mf">
-      <button class="btn bg" onclick="closeM('mSignup')">Zrušit</button>
-      <button class="btn bp" onclick="doSignup()">✔ Přihlásit se</button>
-    </div>
+<div class="mo" id="mSU">
+  <div class="md"><div class="mh"><h2>Přihlášení</h2><button class="mcls" onclick="closeM('mSU')">✕</button></div>
+  <div class="mb">
+    <p id="mSUInfo" style="font-size:.82rem;color:var(--tl);margin-bottom:13px;line-height:1.5"></p>
+    <div class="fg"><label>Jméno psovoda</label><input type="text" id="suH" placeholder="Např. Jan Novák"></div>
+    <div class="fg"><label>Jméno psa</label><input type="text" id="suD" placeholder="Např. Rex"></div>
+  </div>
+  <div class="mf"><button class="btn bgho" onclick="closeM('mSU')">Zrušit</button><button class="btn bpri" onclick="doSignup()">✔ Přihlásit se</button></div>
   </div>
 </div>
 
-<!-- Čekací listina -->
-<div class="mo" id="mWait">
-  <div class="md">
-    <div class="mh"><h2>Čekací listina</h2><button class="mx" onclick="closeM('mWait')">✕</button></div>
-    <div class="mb">
-      <div class="al2 aw2">Skupina je plná. Zapíšeš se na čekací listinu.</div>
-      <p id="mWaitInfo" style="font-size:.85rem;color:var(--tl);margin-bottom:14px;line-height:1.5"></p>
-      <div class="fg"><label>Jméno psovoda</label><input type="text" id="wlHandler" placeholder="Např. Jan Novák"></div>
-      <div class="fg"><label>Jméno psa</label><input type="text" id="wlDog" placeholder="Např. Rex"></div>
-    </div>
-    <div class="mf">
-      <button class="btn bg" onclick="closeM('mWait')">Zrušit</button>
-      <button class="btn ba" onclick="doWaitlist()">📋 Zapsat na čekací listinu</button>
-    </div>
+<div class="mo" id="mWL">
+  <div class="md"><div class="mh"><h2>Čekací listina</h2><button class="mcls" onclick="closeM('mWL')">✕</button></div>
+  <div class="mb">
+    <div class="al2 awrn">Všechna místa jsou obsazena. Zapíšeš se na čekací listinu.</div>
+    <p id="mWLInfo" style="font-size:.82rem;color:var(--tl);margin-bottom:13px;line-height:1.5"></p>
+    <div class="fg"><label>Jméno psovoda</label><input type="text" id="wlH" placeholder="Např. Jan Novák"></div>
+    <div class="fg"><label>Jméno psa</label><input type="text" id="wlD" placeholder="Např. Rex"></div>
+  </div>
+  <div class="mf"><button class="btn bgho" onclick="closeM('mWL')">Zrušit</button><button class="btn bamb" onclick="doWL()">📋 Zapsat na čekací listinu</button></div>
   </div>
 </div>
 
-<!-- Formulář termínu -->
-<div class="mo" id="mSession">
-  <div class="md" style="max-width:560px">
-    <div class="mh"><h2 id="mSTitle">Nový trénink</h2><button class="mx" onclick="closeM('mSession')">✕</button></div>
-    <div class="mb">
-      <div class="fg"><label>Datum</label><input type="date" id="sDate"></div>
-      <div class="fg"><label>Místo</label>
-        <select id="sLoc" onchange="togLoc()">
-          <option value="ZKO Rudník">ZKO Rudník</option>
-          <option value="custom">Jiné…</option>
-        </select>
-      </div>
-      <div class="fg" id="sLocW" style="display:none"><label>Vlastní místo</label><input type="text" id="sLocC" placeholder="Zadej místo…"></div>
-
-      <div class="fg">
-        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;letter-spacing:0">
-          <input type="checkbox" id="sRep" onchange="togRep()" style="width:auto"> Opakovat trénink
-        </label>
-        <div class="ro" id="repOpts">
-          <div class="fr">
-            <div class="fg"><label>Každých (dní)</label><input type="number" id="rEvery" value="7" min="1"></div>
-            <div class="fg"><label>Počet opakování</label><input type="number" id="rCnt" value="4" min="2" max="52"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SKUPINY TEMPLATE -->
-      <div id="groupsSection">
-        <label style="margin-bottom:8px;display:block">Skupiny pro tento termín</label>
-        <div class="gtpl" id="gtplList"></div>
-        <button type="button" class="btn bg bs" style="margin-top:4px" onclick="addGroupRow()">＋ Přidat skupinu</button>
-      </div>
-
-      <div id="seriesW" style="display:none;margin-top:12px">
-        <div class="al2 ai"><strong>Termín je součástí série.</strong><br>
-          <div style="display:flex;gap:8px;margin-top:9px">
-            <button class="btn bg bs" onclick="setScope('single')">Jen tento</button>
-            <button class="btn ba bs" onclick="setScope('series')">Celou sérii</button>
-          </div>
-          <div id="scopeNote" style="font-size:.78rem;margin-top:7px;color:var(--tl)"></div>
+<div class="mo" id="mSes">
+  <div class="md"><div class="mh"><h2 id="mSesT">Nový trénink</h2><button class="mcls" onclick="closeM('mSes')">✕</button></div>
+  <div class="mb">
+    <div class="fg"><label>Datum</label><input type="date" id="sD"></div>
+    <div class="fg"><label>Místo</label>
+      <select id="sL" onchange="togL()"><option value="ZKO Rudník">ZKO Rudník</option><option value="custom">Jiné…</option></select>
+    </div>
+    <div class="fg" id="sLW" style="display:none"><label>Vlastní místo</label><input type="text" id="sLC" placeholder="Zadej místo…"></div>
+    <div class="fr">
+      <div class="fg"><label>Začátek</label><input type="time" id="sSt" value="08:00"></div>
+      <div class="fg"><label>Délka intervalu (min)</label><input type="number" id="sDr" value="60" min="5" max="480"></div>
+      <div class="fg"><label>Počet intervalů</label><input type="number" id="sCn" value="3" min="1" max="50"></div>
+      <div class="fg"><label>Max. osob / interval</label><input type="number" id="sMx" value="3" min="1" max="20"></div>
+    </div>
+    <div class="fg">
+      <label style="display:flex;align-items:center;gap:7px;cursor:pointer;text-transform:none;letter-spacing:0">
+        <input type="checkbox" id="sRp" onchange="togR()" style="width:auto"> Opakovat trénink
+      </label>
+      <div class="ro" id="rpOpts">
+        <div class="fr">
+          <div class="fg"><label>Každých (dní)</label><input type="number" id="rEv" value="7" min="1"></div>
+          <div class="fg"><label>Počet opakování</label><input type="number" id="rCn" value="4" min="2" max="52"></div>
         </div>
       </div>
     </div>
-    <div class="mf">
-      <button class="btn bg" onclick="closeM('mSession')">Zrušit</button>
-      <button class="btn bp" onclick="saveSession()">💾 Uložit</button>
-    </div>
-  </div>
-</div>
-
-<!-- Detail termínu (admin) -->
-<div class="mo" id="mDetail">
-  <div class="md md-lg">
-    <div class="mh"><h2 id="mDTitle">Detail termínu</h2><button class="mx" onclick="closeM('mDetail')">✕</button></div>
-    <div class="mb" id="mDBody"></div>
-    <div class="mf">
-      <button class="btn bg" onclick="closeM('mDetail')">Zavřít</button>
-      <button class="btn ba bs" onclick="exportCSV()">⬇ Export CSV</button>
-    </div>
-  </div>
-</div>
-
-<!-- Formulář skupiny (admin detail) -->
-<div class="mo" id="mGroup">
-  <div class="md" style="max-width:420px">
-    <div class="mh"><h2 id="mGTitle">Přidat skupinu</h2><button class="mx" onclick="closeM('mGroup')">✕</button></div>
-    <div class="mb">
-      <input type="hidden" id="gEditID">
-      <div class="fr">
-        <div class="fg"><label>Čas začátku</label><input type="time" id="gStart" value="08:00"></div>
-        <div class="fg"><label>Délka (min)</label><input type="number" id="gDur" value="60" min="5" max="480"></div>
-        <div class="fg"><label>Max. účastníků</label><input type="number" id="gMax" value="3" min="1" max="50"></div>
+    <div id="serW" style="display:none">
+      <div class="al2 ainf"><strong>Termín je součástí série.</strong><br>
+        <div style="display:flex;gap:7px;margin-top:8px">
+          <button class="btn bgho bsm" onclick="setScope('single')">Jen tento</button>
+          <button class="btn bamb bsm" onclick="setScope('series')">Celou sérii</button>
+        </div>
+        <div id="scopeN" style="font-size:.76rem;margin-top:6px;color:var(--tl)"></div>
       </div>
     </div>
-    <div class="mf">
-      <button class="btn bg" onclick="closeM('mGroup')">Zrušit</button>
-      <button class="btn bp" onclick="saveGroup()">💾 Uložit skupinu</button>
-    </div>
+  </div>
+  <div class="mf"><button class="btn bgho" onclick="closeM('mSes')">Zrušit</button><button class="btn bpri" onclick="saveSes()">💾 Uložit</button></div>
   </div>
 </div>
 
-<!-- Upravit přihlášku -->
-<div class="mo" id="mEditReg">
-  <div class="md">
-    <div class="mh"><h2>Upravit přihlášku</h2><button class="mx" onclick="closeM('mEditReg')">✕</button></div>
-    <div class="mb">
-      <input type="hidden" id="erID">
-      <div class="fg"><label>Jméno psovoda</label><input type="text" id="erHandler"></div>
-      <div class="fg"><label>Jméno psa</label><input type="text" id="erDog"></div>
-    </div>
-    <div class="mf">
-      <button class="btn bg" onclick="closeM('mEditReg')">Zrušit</button>
-      <button class="btn bp" onclick="saveEditReg()">💾 Uložit</button>
-    </div>
+<div class="mo" id="mDet">
+  <div class="md md-lg"><div class="mh"><h2 id="mDetT">Detail</h2><button class="mcls" onclick="closeM('mDet')">✕</button></div>
+  <div class="mb" id="mDetB"></div>
+  <div class="mf"><button class="btn bgho" onclick="closeM('mDet')">Zavřít</button><button class="btn bamb bsm" onclick="expCSV()">⬇ Export CSV</button></div>
   </div>
 </div>
 
-<!-- Přesun do jiné skupiny -->
-<div class="mo" id="mMove">
-  <div class="md">
-    <div class="mh"><h2>Přesunout do jiné skupiny</h2><button class="mx" onclick="closeM('mMove')">✕</button></div>
-    <div class="mb">
-      <p id="mMoveInfo" style="font-size:.85rem;color:var(--tl);margin-bottom:12px"></p>
-      <p style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--tl);margin-bottom:9px">Vyber skupinu:</p>
-      <div id="movePicker" style="display:flex;flex-direction:column;gap:6px"></div>
-    </div>
-    <div class="mf"><button class="btn bg" onclick="closeM('mMove')">Zrušit</button></div>
+<div class="mo" id="mER">
+  <div class="md"><div class="mh"><h2>Upravit přihlášku</h2><button class="mcls" onclick="closeM('mER')">✕</button></div>
+  <div class="mb">
+    <input type="hidden" id="erID">
+    <div class="fg"><label>Jméno psovoda</label><input type="text" id="erH"></div>
+    <div class="fg"><label>Jméno psa</label><input type="text" id="erDg"></div>
+  </div>
+  <div class="mf"><button class="btn bgho" onclick="closeM('mER')">Zrušit</button><button class="btn bpri" onclick="saveER()">💾 Uložit</button></div>
   </div>
 </div>
 
-<!-- Potvrzení -->
-<div class="mo" id="mConfirm">
-  <div class="md" style="max-width:380px">
-    <div class="mh"><h2 id="mCTitle">Potvrdit akci</h2><button class="mx" onclick="closeM('mConfirm')">✕</button></div>
-    <div class="mb"><p id="mCMsg" style="font-size:.92rem;line-height:1.5"></p></div>
-    <div class="mf">
-      <button class="btn bg" onclick="closeM('mConfirm')">Zrušit</button>
-      <button class="btn br" id="mCOK">Potvrdit</button>
-    </div>
+<div class="mo" id="mMv">
+  <div class="md"><div class="mh"><h2>Přesunout na jiný interval</h2><button class="mcls" onclick="closeM('mMv')">✕</button></div>
+  <div class="mb">
+    <p id="mMvInfo" style="font-size:.82rem;color:var(--tl);margin-bottom:10px"></p>
+    <div id="mvPick" style="display:flex;flex-direction:column;gap:6px"></div>
+  </div>
+  <div class="mf"><button class="btn bgho" onclick="closeM('mMv')">Zrušit</button></div>
+  </div>
+</div>
+
+<div class="mo" id="mCf">
+  <div class="md" style="max-width:360px"><div class="mh"><h2 id="mCfT">Potvrdit</h2><button class="mcls" onclick="closeM('mCf')">✕</button></div>
+  <div class="mb"><p id="mCfM" style="font-size:.9rem;line-height:1.5"></p></div>
+  <div class="mf"><button class="btn bgho" onclick="closeM('mCf')">Zrušit</button><button class="btn bred" id="mCfOK">Potvrdit</button></div>
   </div>
 </div>
 
 <div id="toast"></div>
 
 <script>
-// Dynamicky načte Firebase SDK, pak spustí app
-function loadScript(src){
-  return new Promise((resolve,reject)=>{
-    const s=document.createElement('script');
-    s.src=src; s.onload=resolve; s.onerror=reject;
-    document.head.appendChild(s);
-  });
-}
-async function bootApp(){
-  const CDN='https://www.gstatic.com/firebasejs/9.23.0/';
-  try{
-    document.getElementById('loadMsg').textContent='Načítám Firebase SDK…';
-    await loadScript(CDN+'firebase-app-compat.js');
-    await loadScript(CDN+'firebase-firestore-compat.js');
-    document.getElementById('loadMsg').textContent='Připojuji se k databázi…';
-    initFirebase(BAKED_CONFIG);
-  }catch(e){
-    document.getElementById('loadMsg').innerHTML=
-      '⚠ Nelze načíst Firebase SDK.<br>'+
-      '<strong>Nahraj soubor na GitHub Pages</strong> a otevři přes odkaz https://...'+
-      '<br><small style="opacity:.6">Lokální soubory a Claude preview blokují CDN.</small>';
-  }
-}
-</script>
-<script>
-// ══════════════════════════════════════════════════
-//  FIREBASE CONFIG
-// ══════════════════════════════════════════════════
-const BAKED_CONFIG = {
-  apiKey: "AIzaSyCrTSWiZuzpad4AJCT5SyEAjxJOY54xoMM",
-  authDomain: "zko-rudnik-obrany-fc573.firebaseapp.com",
-  projectId: "zko-rudnik-obrany-fc573",
-  storageBucket: "zko-rudnik-obrany-fc573.firebasestorage.app",
-  messagingSenderId: "389782711176",
-  appId: "1:389782711176:web:70ac8856df314eb6a1a83d"
-};
+const FB_CFG={apiKey:"AIzaSyCrTSWiZuzpad4AJCT5SyEAjxJOY54xoMM",authDomain:"zko-rudnik-obrany-fc573.firebaseapp.com",projectId:"zko-rudnik-obrany-fc573",storageBucket:"zko-rudnik-obrany-fc573.firebasestorage.app",messagingSenderId:"389782711176",appId:"1:389782711176:web:70ac8856df314eb6a1a83d"};
+let db=null,D={sessions:[],registrations:[],ti:'',ct:{},pwd:'admin123'};
+let loggedIn=false,ready=false,gotS=false,gotR=false,gotC=false,loadTO=null;
+let detSID=null,mvID=null,SU={},WL={},editSID=null,editScope='single';
 
-// ══════════════════════════════════════════════════
-//  STATE
-// ══════════════════════════════════════════════════
-let db = null;
-let D = { sessions:[], groups:[], registrations:[], trainerInfo:'', contact:{}, adminPassword:'admin123' };
-let loggedIn = false, ready = false;
-let gotS=false, gotG=false, gotR=false, gotC=false;
-let loadTO = null;
-let detailSID = null, moveRegID = null;
-let editSID = null, editScope = 'single';
-let editGID = null;
-let SU = {}, WL = {};
-// temp group rows in session form
-let gRows = [];
+// helpers
+function uid(){return Math.random().toString(36).slice(2)+Date.now().toString(36)}
+function fmt(d){return d.toISOString().split('T')[0]}
+function addM(t,m){const[h,mi]=t.split(':').map(Number),tot=h*60+mi+m;return String(Math.floor(tot/60)).padStart(2,'0')+':'+String(tot%60).padStart(2,'0')}
+function slots(s){const a=[];let c=s.startTime;for(let i=0;i<s.slotCount;i++){a.push(c);c=addM(c,s.slotDuration);}return a}
+function dd(ds){if(!ds)return'';return new Date(ds+'T00:00:00').toLocaleDateString('cs-CZ',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}
+function ex(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function slotRegs(sid,t,st){return D.registrations.filter(r=>r.sessionId===sid&&r.slotTime===t&&(st?r.status===st:true))}
 
-// ══════════════════════════════════════════════════
-//  HELPERS
-// ══════════════════════════════════════════════════
-function uid()  { return Math.random().toString(36).slice(2)+Date.now().toString(36); }
-function fmt(d) { return d.toISOString().split('T')[0]; }
-function addM(t,m){ const [h,mi]=t.split(':').map(Number),tot=h*60+mi+m; return String(Math.floor(tot/60)).padStart(2,'0')+':'+String(tot%60).padStart(2,'0'); }
-function dispDate(ds){ if(!ds)return''; return new Date(ds+'T00:00:00').toLocaleDateString('cs-CZ',{weekday:'long',day:'numeric',month:'long',year:'numeric'}); }
-function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-function sessionGroups(sid){ return D.groups.filter(g=>g.sessionId===sid).sort((a,b)=>a.startTime.localeCompare(b.startTime)); }
-function groupRegs(gid,status){ return D.registrations.filter(r=>r.groupId===gid&&(status?r.status===status:true)); }
-
-// ══════════════════════════════════════════════════
-//  TOAST & MODAL
-// ══════════════════════════════════════════════════
+// toast
 let tT;
-function toast(msg,type='ok'){ const el=document.getElementById('toast'); el.textContent=msg; el.className='show '+type; clearTimeout(tT); tT=setTimeout(()=>el.className='',3500); }
-function openM(id){ document.getElementById(id).classList.add('open'); }
-function closeM(id){ document.getElementById(id).classList.remove('open'); }
-document.querySelectorAll('.mo').forEach(el=>el.addEventListener('click',e=>{ if(e.target===el)el.classList.remove('open'); }));
-function confirm2(msg,fn,title){ document.getElementById('mCTitle').textContent=title||'Potvrdit akci'; document.getElementById('mCMsg').textContent=msg; document.getElementById('mCOK').onclick=()=>{ closeM('mConfirm'); fn(); }; openM('mConfirm'); }
+function toast(m,tp='ok'){const e=document.getElementById('toast');e.textContent=m;e.className='show '+tp;clearTimeout(tT);tT=setTimeout(()=>e.className='',3200)}
+function openM(id){document.getElementById(id).classList.add('op')}
+function closeM(id){document.getElementById(id).classList.remove('op')}
+document.querySelectorAll('.mo').forEach(e=>e.addEventListener('click',ev=>{if(ev.target===e)e.classList.remove('op')}));
+function cfm(msg,fn,title){document.getElementById('mCfT').textContent=title||'Potvrdit';document.getElementById('mCfM').textContent=msg;document.getElementById('mCfOK').onclick=()=>{closeM('mCf');fn()};openM('mCf')}
 
-// ══════════════════════════════════════════════════
-//  FIREBASE
-// ══════════════════════════════════════════════════
-function fw(p,lbl){ p.then(()=>console.log('✔',lbl||'')).catch(e=>{ console.error('✘',lbl,e.code,e.message); toast('⚠ Chyba uložení ('+e.code+'): '+e.message,'err'); }); }
-function fsSet(col,id,data){ fw(db.collection(col).doc(id).set(data),col+'/set'); }
-function fsDel(col,id){ fw(db.collection(col).doc(id).delete(),col+'/del'); }
-function fsUpd(col,id,data){ fw(db.collection(col).doc(id).update(data),col+'/upd'); }
-function fsMeta(data){ fw(db.collection('meta').doc('config').set(data,{merge:true}),'meta'); }
+// firebase
+function fw(p,l){p.then(()=>console.log('✔',l||'')).catch(e=>{console.error('✘',l,e.code,e.message);toast('⚠ Chyba: '+e.message,'err')})}
+function fsS(col,id,d){fw(db.collection(col).doc(id).set(d),col)}
+function fsD(col,id){fw(db.collection(col).doc(id).delete(),'del '+col)}
+function fsU(col,id,d){fw(db.collection(col).doc(id).update(d),'upd '+col)}
+function fsMeta(d){fw(db.collection('meta').doc('cfg').set(d,{merge:true}),'meta')}
+function fsDSes(id){const b=db.batch();b.delete(db.collection('sessions').doc(id));D.registrations.filter(r=>r.sessionId===id).forEach(r=>b.delete(db.collection('registrations').doc(r.id)));fw(b.commit(),'delSes')}
+function fsRWL(sid,t){const w=D.registrations.filter(r=>r.sessionId===sid&&r.slotTime===t&&r.status==='waitlist').sort((a,b)=>a.waitlistPosition-b.waitlistPosition);if(!w.length)return;const b=db.batch();w.forEach((r,i)=>b.update(db.collection('registrations').doc(r.id),{waitlistPosition:i+1}));fw(b.commit(),'rwl')}
 
-function fsDelSession(sid){
-  const batch=db.batch();
-  batch.delete(db.collection('sessions').doc(sid));
-  D.groups.filter(g=>g.sessionId===sid).forEach(g=>batch.delete(db.collection('groups').doc(g.id)));
-  D.registrations.filter(r=>r.sessionId===sid).forEach(r=>batch.delete(db.collection('registrations').doc(r.id)));
-  fw(batch.commit(),'delSession');
-}
-function fsDelGroup(gid){
-  const batch=db.batch();
-  batch.delete(db.collection('groups').doc(gid));
-  D.registrations.filter(r=>r.groupId===gid).forEach(r=>batch.delete(db.collection('registrations').doc(r.id)));
-  fw(batch.commit(),'delGroup');
-}
-function fsReorderWL(gid){
-  const waits=D.registrations.filter(r=>r.groupId===gid&&r.status==='waitlist').sort((a,b)=>a.waitlistPosition-b.waitlistPosition);
-  if(!waits.length)return;
-  const batch=db.batch();
-  waits.forEach((w,i)=>batch.update(db.collection('registrations').doc(w.id),{waitlistPosition:i+1}));
-  fw(batch.commit(),'reorderWL');
-}
-
-function initFirebase(cfg){
+function loadScr(src){return new Promise((res,rej)=>{const s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s)})}
+async function boot(){
+  const CDN='https://www.gstatic.com/firebasejs/9.23.0/';
+  document.getElementById('ovMsg').textContent='Načítám Firebase…';
   try{
-    if(!firebase.apps.length) firebase.initializeApp(cfg);
+    await loadScr(CDN+'firebase-app-compat.js');
+    await loadScr(CDN+'firebase-firestore-compat.js');
+    document.getElementById('ovMsg').textContent='Připojuji se…';
+    if(!firebase.apps.length)firebase.initializeApp(FB_CFG);
     db=firebase.firestore();
-    startListeners();
-  }catch(e){ document.getElementById('loadMsg').textContent='Chyba Firebase: '+e.message; }
+    startL();
+  }catch(e){
+    document.getElementById('ovMsg').innerHTML='⚠ Nelze načíst Firebase SDK.<br><strong>Otevři appku přes GitHub Pages odkaz (https://...)</strong><br><small>Lokální soubory a Claude preview toto blokují.</small>';
+  }
 }
-
-function startListeners(){
-  document.getElementById('loadMsg').textContent='Připojuji se k databázi…';
-  loadTO=setTimeout(()=>{ if(!ready){ ready=true; document.getElementById('loadOverlay').style.display='none'; toast('Timeout načítání — zkontroluj Firestore Rules.','err'); rerender(); }},12000);
-
-  db.collection('sessions').onSnapshot(snap=>{ D.sessions=snap.docs.map(d=>({id:d.id,...d.data()})); gotS=true; checkReady(); if(ready)rerender(); },
-    err=>{ console.error('sessions',err.code); gotS=true; checkReady(); });
-
-  db.collection('groups').onSnapshot(snap=>{ D.groups=snap.docs.map(d=>({id:d.id,...d.data()})); gotG=true; checkReady(); if(ready)rerender(); },
-    err=>{ console.error('groups',err.code); gotG=true; checkReady(); });
-
-  db.collection('registrations').onSnapshot(snap=>{ D.registrations=snap.docs.map(d=>({id:d.id,...d.data()})); gotR=true; checkReady(); if(ready)rerender(); },
-    err=>{ console.error('registrations',err.code); gotR=true; checkReady(); });
-
-  db.collection('meta').doc('config').onSnapshot(doc=>{ if(doc.exists){const d=doc.data();D.trainerInfo=d.trainerInfo||'';D.contact=d.contact||{};D.adminPassword=d.adminPassword||'admin123';} gotC=true; checkReady(); if(ready)rerender(); },
-    err=>{ gotC=true; checkReady(); });
+function startL(){
+  loadTO=setTimeout(()=>{if(!ready){ready=true;document.getElementById('ov').style.display='none';toast('Timeout — zkontroluj Firestore Rules','err');rr()}},12000);
+  db.collection('sessions').onSnapshot(s=>{D.sessions=s.docs.map(d=>({id:d.id,...d.data()}));gotS=true;chkR();if(ready)rr()},e=>{gotS=true;chkR()});
+  db.collection('registrations').onSnapshot(s=>{D.registrations=s.docs.map(d=>({id:d.id,...d.data()}));gotR=true;chkR();if(ready)rr()},e=>{gotR=true;chkR()});
+  db.collection('meta').doc('cfg').onSnapshot(d=>{if(d.exists){const v=d.data();D.ti=v.trainerInfo||'';D.ct=v.contact||{};D.pwd=v.adminPassword||'admin123'}gotC=true;chkR();if(ready)rr()},e=>{gotC=true;chkR()});
 }
+function chkR(){if(!gotS||!gotR||!gotC||ready)return;ready=true;clearTimeout(loadTO);document.getElementById('ov').style.display='none';rr()}
+function rr(){renderPub();if(loggedIn){renderSes();if(document.getElementById('tR').classList.contains('act'))renderRegs();if(detSID)renderDetB(detSID)}}
 
-function checkReady(){
-  if(!gotS||!gotG||!gotR||!gotC)return;
-  if(ready)return;
-  ready=true; clearTimeout(loadTO);
-  document.getElementById('loadOverlay').style.display='none';
-  console.log('App ready. Sessions:',D.sessions.length,'Groups:',D.groups.length,'Regs:',D.registrations.length);
-  rerender();
-}
+// page
+function goAdmin(){document.getElementById('pubPg').classList.remove('act');document.getElementById('admPg').classList.add('act');if(!loggedIn){document.getElementById('lbox').style.display='';document.getElementById('admPanel').style.display='none'}else{renderSes();fillRS()}}
+function goPublic(){document.getElementById('admPg').classList.remove('act');document.getElementById('pubPg').classList.add('act')}
 
-function rerender(){
-  renderPublic();
-  if(loggedIn){ renderSessions(); if(document.getElementById('tR').classList.contains('act'))renderRegs(); if(detailSID)renderDetailBody(detailSID); }
-}
+// auth
+function doLogin(){if(document.getElementById('pwdIn').value===D.pwd){loggedIn=true;document.getElementById('lbox').style.display='none';document.getElementById('admPanel').style.display='';document.getElementById('pwdIn').value='';document.getElementById('lerr').style.display='none';document.getElementById('tiIn').value=D.ti||'';loadCT();renderSes();fillRS();toast('Přihlášení úspěšné.')}else{document.getElementById('lerr').style.display='';toast('Nesprávné heslo.','err')}}
+function doLogout(){loggedIn=false;document.getElementById('admPanel').style.display='none';document.getElementById('lbox').style.display=''}
+function chgPwd(){const c=document.getElementById('pC').value,n=document.getElementById('pN').value,k=document.getElementById('pK').value;if(c!==D.pwd)return toast('Aktuální heslo je nesprávné.','err');if(!n)return toast('Zadej nové heslo.','err');if(n!==k)return toast('Hesla se neshodují.','err');fsMeta({adminPassword:n});['pC','pN','pK'].forEach(i=>document.getElementById(i).value='');toast('Heslo změněno.')}
+function tab(id,btn){document.querySelectorAll('.tc').forEach(t=>t.classList.remove('act'));document.querySelectorAll('.anav button').forEach(b=>b.classList.remove('act'));document.getElementById(id).classList.add('act');btn.classList.add('act');if(id==='tT')renderSes();if(id==='tR'){fillRS();renderRegs()}if(id==='tI')document.getElementById('tiIn').value=D.ti||'';if(id==='tC')loadCT()}
 
-// ══════════════════════════════════════════════════
-//  PAGE
-// ══════════════════════════════════════════════════
-function goAdmin(){ document.getElementById('publicPage').classList.remove('act'); document.getElementById('adminPage').classList.add('act'); if(!loggedIn){document.getElementById('loginBox').style.display='';document.getElementById('adminPanel').style.display='none';}else{renderSessions();fillRegSel();} }
-function goPublic(){ document.getElementById('adminPage').classList.remove('act'); document.getElementById('publicPage').classList.add('act'); }
-
-// ══════════════════════════════════════════════════
-//  AUTH
-// ══════════════════════════════════════════════════
-function doLogin(){
-  if(document.getElementById('pwdIn').value===D.adminPassword){
-    loggedIn=true;
-    document.getElementById('loginBox').style.display='none';
-    document.getElementById('adminPanel').style.display='';
-    document.getElementById('pwdIn').value='';
-    document.getElementById('loginErr').style.display='none';
-    document.getElementById('tiInput').value=D.trainerInfo||'';
-    loadCT(); renderSessions(); fillRegSel();
-    toast('Přihlášení úspěšné.');
-  }else{ document.getElementById('loginErr').style.display=''; toast('Nesprávné heslo.','err'); }
-}
-function doLogout(){ loggedIn=false; document.getElementById('adminPanel').style.display='none'; document.getElementById('loginBox').style.display=''; }
-function changePwd(){
-  const cur=document.getElementById('pCur').value,n1=document.getElementById('pNew').value,n2=document.getElementById('pCon').value;
-  if(cur!==D.adminPassword)return toast('Aktuální heslo je nesprávné.','err');
-  if(!n1)return toast('Zadej nové heslo.','err');
-  if(n1!==n2)return toast('Hesla se neshodují.','err');
-  fsMeta({adminPassword:n1}); ['pCur','pNew','pCon'].forEach(id=>document.getElementById(id).value='');
-  toast('Heslo bylo změněno.');
-}
-
-function tab(id,btn){ document.querySelectorAll('.tc').forEach(t=>t.classList.remove('act')); document.querySelectorAll('.an button').forEach(b=>b.classList.remove('act')); document.getElementById(id).classList.add('act'); btn.classList.add('act'); if(id==='tT')renderSessions(); if(id==='tR'){fillRegSel();renderRegs();} if(id==='tI')document.getElementById('tiInput').value=D.trainerInfo||''; if(id==='tC')loadCT(); }
-
-// ══════════════════════════════════════════════════
-//  PUBLIC RENDER
-// ══════════════════════════════════════════════════
-function renderPublic(){
-  const info=D.trainerInfo||'';
-  document.getElementById('tiDisplay').innerHTML=info?`<p>${esc(info)}</p>`:`<p class="ti-empty">Žádné informace od trenéra.</p>`;
-  const c=D.contact||{},hasCt=c.name||c.phone||c.email||c.note;
-  const cBox=document.getElementById('ctBox');
-  if(hasCt){let h='';if(c.name)h+=`<p><strong>👤 ${esc(c.name)}</strong></p>`;if(c.phone)h+=`<p>📞 <a href="tel:${esc(c.phone)}">${esc(c.phone)}</a></p>`;if(c.email)h+=`<p>✉ <a href="mailto:${esc(c.email)}">${esc(c.email)}</a></p>`;if(c.note)h+=`<p style="margin-top:6px">${esc(c.note)}</p>`;document.getElementById('ctDisplay').innerHTML=h;cBox.style.display='';}else cBox.style.display='none';
-
-  const today=new Date(); today.setHours(0,0,0,0);
+// PUBLIC
+function renderPub(){
+  const info=D.ti||'';
+  document.getElementById('tiDisp').innerHTML=info?`<p>${ex(info)}</p>`:`<p class="iempty">Žádné informace od trenéra.</p>`;
+  const c=D.ct||{},has=c.name||c.phone||c.email||c.note;
+  const cb=document.getElementById('ctBox');
+  if(has){let h='';if(c.name)h+=`<p><strong>👤 ${ex(c.name)}</strong></p>`;if(c.phone)h+=`<p>📞 <a href="tel:${ex(c.phone)}">${ex(c.phone)}</a></p>`;if(c.email)h+=`<p>✉ <a href="mailto:${ex(c.email)}">${ex(c.email)}</a></p>`;if(c.note)h+=`<p>${ex(c.note)}</p>`;document.getElementById('ctDisp').innerHTML=h;cb.style.display=''}else cb.style.display='none';
+  const today=new Date();today.setHours(0,0,0,0);
   const list=[...D.sessions].filter(s=>new Date(s.date+'T00:00:00')>=today).sort((a,b)=>a.date.localeCompare(b.date));
-  const out=document.getElementById('sessionsOut');
-  if(!list.length){out.innerHTML='<div class="no-s">📅 Žádné nadcházející tréninky nejsou vypsány.</div>';return;}
-  out.innerHTML=list.map(buildSessionCard).join('');
+  const out=document.getElementById('sesOut');
+  if(!list.length){out.innerHTML='<div class="no-s">📅 Žádné nadcházející tréninky nejsou vypsány.</div>';return}
+  out.innerHTML=list.map(buildSC).join('')
 }
 
-function buildSessionCard(s){
-  const grps=sessionGroups(s.id);
-  const totalConfirmed=D.registrations.filter(r=>r.sessionId===s.id&&r.status==='confirmed').length;
-  const totalMax=grps.reduce((a,g)=>a+g.maxParticipants,0);
-  const free=totalMax-totalConfirmed;
-  const bc=free===0?'b-full':free<3?'b-part':'b-free';
-  const bt=grps.length===0?'Bez skupin':free===0?'Obsazeno':`${free} volných`;
+function buildSC(s){
+  const sl=slots(s);
+  const mx=s.maxPerSlot||1;
+  const totalMax=sl.length*mx;
+  const confirmed=D.registrations.filter(r=>r.sessionId===s.id&&r.status==='confirmed').length;
+  const free=totalMax-confirmed;
+  const bc=free===0?'bfu':free<mx?'bp2':'bf';
+  const bt=free===0?'Obsazeno':`${free} volných`;
 
-  const grpsHtml=grps.length?grps.map(g=>buildGroupCard(g,s)).join(''):`<p style="color:var(--tl);font-size:.85rem;padding:8px 0;font-style:italic">Žádné skupiny pro tento termín.</p>`;
+  const slotsHtml=sl.map(t=>{
+    const conf=slotRegs(s.id,t,'confirmed').sort((a,b)=>a.createdAt-b.createdAt);
+    const waits=slotRegs(s.id,t,'waitlist').sort((a,b)=>a.waitlistPosition-b.waitlistPosition);
+    const isFull=conf.length>=mx;
 
-  return `<div class="sc" id="sc-${s.id}">
-    <div class="sc-hd" onclick="togSC('${s.id}')">
-      <div class="sdi"><span class="dt">${dispDate(s.date)}</span><span class="mt">📍 ${esc(s.location)} &nbsp;·&nbsp; ${grps.length} ${grps.length===1?'skupina':grps.length<5?'skupiny':'skupin'}</span></div>
-      <div class="ss2"><span class="badge ${bc}">${bt}</span><span class="chv">▼</span></div>
-    </div>
-    <div class="sc-bd">${grpsHtml}</div>
-  </div>`;
-}
-
-function buildGroupCard(g,s){
-  const confirmed=groupRegs(g.id,'confirmed').sort((a,b)=>a.createdAt-b.createdAt);
-  const waits=groupRegs(g.id,'waitlist').sort((a,b)=>a.waitlistPosition-b.waitlistPosition);
-  const isFull=confirmed.length>=g.maxParticipants;
-  const end=addM(g.startTime,g.duration);
-  const bc=isFull?'b-full':confirmed.length>0?'b-part':'b-free';
-  const bt=`${confirmed.length}/${g.maxParticipants}`;
-
-  // slots: show filled + empty
-  let partsHtml='<div class="parts-list">';
-  for(let i=0;i<g.maxParticipants;i++){
-    const p=confirmed[i];
-    if(p) partsHtml+=`<div class="part-item"><span class="part-num">${i+1}.</span><span class="part-name">${esc(p.handlerName)}</span><span class="part-dog">/ ${esc(p.dogName)}</span></div>`;
-    else  partsHtml+=`<div class="part-item" style="background:#f8f8f8;border-color:#e8e8e8"><span class="part-num" style="color:#ccc">${i+1}.</span><span class="part-dog">volné místo</span></div>`;
-  }
-  partsHtml+='</div>';
-
-  const actionBtn=isFull
-    ?`<button class="wl-btn2" onclick="openWaitlist('${s.id}','${g.id}')">📋 Čekací listina</button>`
-    :`<button class="signup-btn" onclick="openSignup('${s.id}','${g.id}')">＋ Přihlásit se</button>`;
-
-  let wlHtml='';
-  if(waits.length) wlHtml=`<div class="wl-section"><h5>⏳ Čekací listina (${waits.length})</h5>${waits.map(w=>`<div class="wl-item"><span class="wl-pos">${w.waitlistPosition}.</span>${esc(w.handlerName)} / ${esc(w.dogName)}</div>`).join('')}</div>`;
-
-  return `<div class="gc">
-    <div class="gc-hd">
-      <div><span class="gc-time">⏱ ${g.startTime} – ${end}</span> <span class="gc-meta">${g.duration} min</span></div>
-      <span class="badge ${bc}">${bt} obsazeno</span>
-    </div>
-    <div class="gc-bd">${partsHtml}<div class="gc-actions">${actionBtn}</div>${wlHtml}</div>
-  </div>`;
-}
-
-function togSC(id){ document.getElementById('sc-'+id).classList.toggle('open'); }
-
-// ══════════════════════════════════════════════════
-//  SIGNUP
-// ══════════════════════════════════════════════════
-function openSignup(sessionId,groupId){
-  const s=D.sessions.find(s=>s.id===sessionId), g=D.groups.find(g=>g.id===groupId);
-  SU={sessionId,groupId,admin:false};
-  document.getElementById('mSignupInfo').innerHTML=`📅 ${dispDate(s.date)}<br>⏱ ${g.startTime} – ${addM(g.startTime,g.duration)} (${g.duration} min)<br>📍 ${esc(s.location)}`;
-  document.getElementById('suHandler').value=''; document.getElementById('suDog').value='';
-  openM('mSignup'); setTimeout(()=>document.getElementById('suHandler').focus(),80);
-}
-document.getElementById('suHandler').addEventListener('keydown',e=>{ if(e.key==='Enter')document.getElementById('suDog').focus(); });
-document.getElementById('suDog').addEventListener('keydown',e=>{ if(e.key==='Enter')doSignup(); });
-
-function doSignup(){
-  const handler=document.getElementById('suHandler').value.trim(), dog=document.getElementById('suDog').value.trim();
-  if(!handler||!dog)return toast('Vyplň jméno psovoda i psa.','err');
-  const {sessionId,groupId}=SU;
-  const g=D.groups.find(g=>g.id===groupId);
-  const cnt=groupRegs(groupId,'confirmed').length;
-  if(cnt>=g.maxParticipants){ toast('Skupina je právě plná.','err'); closeM('mSignup'); return; }
-  const reg={id:uid(),sessionId,groupId,handlerName:handler,dogName:dog,status:'confirmed',waitlistPosition:null,createdAt:Date.now()};
-  D.registrations.push(reg); closeM('mSignup'); fsSet('registrations',reg.id,reg); rerender();
-  toast(`✔ Přihlášen: ${handler} / ${dog}`);
-}
-
-// ══════════════════════════════════════════════════
-//  WAITLIST
-// ══════════════════════════════════════════════════
-function openWaitlist(sessionId,groupId){
-  const s=D.sessions.find(s=>s.id===sessionId), g=D.groups.find(g=>g.id===groupId);
-  WL={sessionId,groupId};
-  document.getElementById('mWaitInfo').innerHTML=`📅 ${dispDate(s.date)}<br>⏱ ${g.startTime} – ${addM(g.startTime,g.duration)}<br>📍 ${esc(s.location)}`;
-  document.getElementById('wlHandler').value=''; document.getElementById('wlDog').value='';
-  openM('mWait');
-}
-function doWaitlist(){
-  const handler=document.getElementById('wlHandler').value.trim(), dog=document.getElementById('wlDog').value.trim();
-  if(!handler||!dog)return toast('Vyplň jméno psovoda i psa.','err');
-  const pos=groupRegs(WL.groupId,'waitlist').length+1;
-  const reg={id:uid(),sessionId:WL.sessionId,groupId:WL.groupId,handlerName:handler,dogName:dog,status:'waitlist',waitlistPosition:pos,createdAt:Date.now()};
-  D.registrations.push(reg); closeM('mWait'); fsSet('registrations',reg.id,reg); rerender();
-  toast(`✔ Zapsán/a na čekací listinu (pořadí ${pos}): ${handler} / ${dog}`);
-}
-
-// ══════════════════════════════════════════════════
-//  CANCEL SEARCH
-// ══════════════════════════════════════════════════
-function doSearch(){
-  const q=document.getElementById('csInput').value.trim().toLowerCase(), out=document.getElementById('csResults');
-  if(!q){out.innerHTML='';return;}
-  const found=D.registrations.filter(r=>r.handlerName.toLowerCase().includes(q));
-  if(!found.length){out.innerHTML=`<p style="color:var(--tl);font-size:.85rem;padding:8px 0">Žádná přihláška nenalezena.</p>`;return;}
-  out.innerHTML=found.map(r=>{
-    const s=D.sessions.find(s=>s.id===r.sessionId), g=D.groups.find(g=>g.id===r.groupId);
-    const slot=r.status==='waitlist'?`Čekací listina (${r.waitlistPosition}.)`:(g?`${g.startTime}–${addM(g.startTime,g.duration)}`:'–');
-    return `<div class="cri"><div><strong>${esc(r.handlerName)} / ${esc(r.dogName)}</strong><span>${s?dispDate(s.date):'–'} · ${slot}</span></div><button class="btn br bs" onclick="cancelReg('${r.id}')">✖ Zrušit</button></div>`;
-  }).join('');
-}
-function cancelReg(id){
-  const r=D.registrations.find(r=>r.id===id); if(!r)return;
-  confirm2(`Zrušit přihlášku ${r.handlerName} / ${r.dogName}?`,()=>{
-    const gid=r.groupId;
-    D.registrations=D.registrations.filter(r=>r.id!==id);
-    reorderWL(gid); fsDel('registrations',id); fsReorderWL(gid);
-    doSearch(); rerender(); toast('Přihláška zrušena.');
-  },'Zrušit přihlášku');
-}
-function reorderWL(gid){ D.registrations.filter(r=>r.groupId===gid&&r.status==='waitlist').sort((a,b)=>a.waitlistPosition-b.waitlistPosition).forEach((r,i)=>r.waitlistPosition=i+1); }
-
-// ══════════════════════════════════════════════════
-//  ADMIN – SESSIONS TABLE
-// ══════════════════════════════════════════════════
-function renderSessions(){
-  const sorted=[...D.sessions].sort((a,b)=>a.date.localeCompare(b.date));
-  const tb=document.getElementById('sTbody');
-  if(!sorted.length){tb.innerHTML=`<tr><td colspan="5" style="text-align:center;color:var(--tl);padding:24px">Žádné tréninky.</td></tr>`;return;}
-  tb.innerHTML=sorted.map(s=>{
-    const grps=sessionGroups(s.id);
-    const cnt=D.registrations.filter(r=>r.sessionId===s.id&&r.status==='confirmed').length;
-    const max=grps.reduce((a,g)=>a+g.maxParticipants,0);
-    const bc=max===0?'b-free':cnt>=max?'b-full':cnt>0?'b-part':'b-free';
-    return `<tr>
-      <td>${dispDate(s.date)}</td><td>${esc(s.location)}</td>
-      <td>${grps.length} skupin${grps.length===1?'a':grps.length<5&&grps.length>1?'y':''}</td>
-      <td><span class="badge ${bc}">${cnt}/${max}</span></td>
-      <td><div class="ac">
-        <button class="btn bg bx" onclick="openDetail('${s.id}')">📋 Detail</button>
-        <button class="btn bg bx" onclick="openEditS('${s.id}')">✏ Upravit</button>
-        <button class="btn bg bx" onclick="copyS('${s.id}')">📋 Kopírovat</button>
-        <button class="btn br bx" onclick="deleteS('${s.id}')">🗑</button>
-      </div></td></tr>`;
-  }).join('');
-}
-
-// ── Group rows in session form ──────────────────────
-function addGroupRow(startTime, duration, maxP){
-  const id='gr_'+uid();
-  gRows.push({rid:id, startTime:startTime||'08:00', duration:duration||60, maxParticipants:maxP||3});
-  renderGroupRows();
-}
-function removeGroupRow(rid){ gRows=gRows.filter(r=>r.rid!==rid); renderGroupRows(); }
-function renderGroupRows(){
-  const cont=document.getElementById('gtplList');
-  if(!gRows.length){cont.innerHTML='<p style="color:var(--tl);font-size:.82rem;font-style:italic">Žádné skupiny. Přidej skupinu níže.</p>';return;}
-  cont.innerHTML=gRows.map((r,i)=>`
-    <div class="gtpl-row" id="${r.rid}">
-      <div class="gtpl-field"><label>Začátek</label><input type="time" value="${r.startTime}" onchange="gRows[${i}].startTime=this.value"></div>
-      <div class="gtpl-field"><label>Délka (min)</label><input type="number" value="${r.duration}" min="5" max="480" onchange="gRows[${i}].duration=parseInt(this.value)"></div>
-      <div class="gtpl-field"><label>Max. osob</label><input type="number" value="${r.maxParticipants}" min="1" max="50" onchange="gRows[${i}].maxParticipants=parseInt(this.value)"></div>
-      <button type="button" class="btn br bx" style="align-self:flex-end;margin-bottom:2px" onclick="removeGroupRow('${r.rid}')">✕</button>
-    </div>`).join('');
-}
-
-function openNewS(){
-  editSID=null; editScope='single';
-  document.getElementById('mSTitle').textContent='Nový trénink';
-  document.getElementById('sDate').value='';
-  document.getElementById('sLoc').value='ZKO Rudník';
-  document.getElementById('sLocC').value=''; document.getElementById('sLocW').style.display='none';
-  document.getElementById('sRep').checked=false; document.getElementById('repOpts').classList.remove('show');
-  document.getElementById('seriesW').style.display='none';
-  document.getElementById('groupsSection').style.display='';
-  gRows=[]; addGroupRow();
-  openM('mSession');
-}
-
-function openEditS(id){
-  editSID=id; editScope='single';
-  const s=D.sessions.find(s=>s.id===id);
-  document.getElementById('mSTitle').textContent='Upravit termín';
-  document.getElementById('sDate').value=s.date;
-  if(s.location==='ZKO Rudník'){document.getElementById('sLoc').value='ZKO Rudník';document.getElementById('sLocW').style.display='none';}
-  else{document.getElementById('sLoc').value='custom';document.getElementById('sLocC').value=s.location;document.getElementById('sLocW').style.display='';}
-  document.getElementById('sRep').checked=false; document.getElementById('repOpts').classList.remove('show');
-  document.getElementById('seriesW').style.display=s.repeatGroupId?'':'none';
-  document.getElementById('scopeNote').textContent='';
-  // When editing, hide groups section (manage in detail)
-  document.getElementById('groupsSection').style.display='none';
-  openM('mSession');
-}
-
-function setScope(v){ editScope=v; document.getElementById('scopeNote').textContent=v==='single'?'✔ Upraven bude pouze tento termín.':'✔ Upravena bude celá série termínů.'; }
-function togRep(){ document.getElementById('repOpts').classList.toggle('show',document.getElementById('sRep').checked); }
-function togLoc(){ document.getElementById('sLocW').style.display=document.getElementById('sLoc').value==='custom'?'':'none'; }
-function getLoc(){ const v=document.getElementById('sLoc').value; return v==='custom'?document.getElementById('sLocC').value.trim():v; }
-
-function saveSession(){
-  const date=document.getElementById('sDate').value, location=getLoc();
-  if(!date||!location)return toast('Vyplň datum a místo.','err');
-
-  if(editSID){
-    const s=D.sessions.find(s=>s.id===editSID);
-    const upd={location};
-    if(editScope==='series'&&s.repeatGroupId){
-      D.sessions.filter(s2=>s2.repeatGroupId===s.repeatGroupId).forEach(s2=>{Object.assign(s2,upd);fsSet('sessions',s2.id,s2);});
-      toast('Série termínů upravena.');
-    }else{ Object.assign(s,{date,...upd}); fsSet('sessions',editSID,s); toast('Termín upraven.'); }
-    closeM('mSession'); renderSessions(); return;
-  }
-
-  // New session(s)
-  if(!gRows.length)return toast('Přidej alespoň jednu skupinu.','err');
-
-  const rep=document.getElementById('sRep').checked;
-  const sessionsToCreate=[];
-  if(rep){
-    const every=parseInt(document.getElementById('rEvery').value)||7, count=parseInt(document.getElementById('rCnt').value)||4, gid=uid();
-    for(let i=0;i<count;i++){const d=new Date(date+'T00:00:00');d.setDate(d.getDate()+i*every);sessionsToCreate.push({id:uid(),date:fmt(d),location,repeatGroupId:gid,createdAt:Date.now()});}
-    toast(`Vytvořeno ${count} opakovaných termínů.`);
-  }else{
-    sessionsToCreate.push({id:uid(),date,location,repeatGroupId:null,createdAt:Date.now()});
-    toast('Termín vytvořen.');
-  }
-
-  sessionsToCreate.forEach(s=>{
-    D.sessions.push(s); fsSet('sessions',s.id,s);
-    gRows.forEach((r,i)=>{
-      const g={id:uid(),sessionId:s.id,startTime:r.startTime,duration:r.duration,maxParticipants:r.maxParticipants,order:i,createdAt:Date.now()};
-      D.groups.push(g); fsSet('groups',g.id,g);
-    });
-  });
-
-  closeM('mSession'); renderSessions(); fillRegSel(); rerender();
-}
-
-function deleteS(id){
-  const s=D.sessions.find(s=>s.id===id);
-  confirm2(`Smazat termín ${dispDate(s.date)} včetně skupin a přihlášek?`,()=>{
-    D.sessions=D.sessions.filter(s=>s.id!==id);
-    D.groups=D.groups.filter(g=>g.sessionId!==id);
-    D.registrations=D.registrations.filter(r=>r.sessionId!==id);
-    fsDelSession(id); renderSessions(); fillRegSel(); rerender(); toast('Termín smazán.');
-  },'Smazat termín');
-}
-
-function copyS(id){
-  const s=D.sessions.find(s=>s.id===id), d=new Date(s.date+'T00:00:00');
-  d.setDate(d.getDate()+7);
-  const ns={id:uid(),date:fmt(d),location:s.location,repeatGroupId:null,createdAt:Date.now()};
-  D.sessions.push(ns); fsSet('sessions',ns.id,ns);
-  // Copy groups
-  const grps=sessionGroups(id);
-  grps.forEach(g=>{
-    const ng={...g,id:uid(),sessionId:ns.id,createdAt:Date.now()};
-    D.groups.push(ng); fsSet('groups',ng.id,ng);
-  });
-  renderSessions(); fillRegSel(); rerender();
-  toast(`Termín zkopírován → ${dispDate(fmt(d))} (vč. ${grps.length} skupin)`);
-}
-
-// ══════════════════════════════════════════════════
-//  DETAIL MODAL
-// ══════════════════════════════════════════════════
-function openDetail(id){
-  detailSID=id;
-  const s=D.sessions.find(s=>s.id===id);
-  document.getElementById('mDTitle').textContent=dispDate(s.date);
-  renderDetailBody(id); openM('mDetail');
-}
-
-function renderDetailBody(id){
-  const s=D.sessions.find(s=>s.id===id); if(!s)return;
-  const grps=sessionGroups(id);
-
-  const grpsHtml=grps.map(g=>{
-    const confirmed=groupRegs(g.id,'confirmed').sort((a,b)=>a.createdAt-b.createdAt);
-    const waits=groupRegs(g.id,'waitlist').sort((a,b)=>a.waitlistPosition-b.waitlistPosition);
-    const end=addM(g.startTime,g.duration);
-
-    // Confirmed participants
-    let partsHtml='<div class="adgc-parts">';
-    for(let i=0;i<g.maxParticipants;i++){
-      const p=confirmed[i];
-      if(p) partsHtml+=`<div class="adgc-part">
-        <div class="adgc-part-info"><span class="adgc-part-num">${i+1}.</span><strong>${esc(p.handlerName)}</strong><span style="color:var(--tl);font-size:.8rem">/ ${esc(p.dogName)}</span></div>
-        <div class="ac">
-          <button class="btn bg bx" onclick="openEditReg('${p.id}')">✏</button>
-          <button class="btn ba bx" onclick="openMoveReg('${p.id}')">↔</button>
-          <button class="btn br bx" onclick="adminDelReg('${p.id}')">✖</button>
-        </div></div>`;
-      else partsHtml+=`<div class="adgc-empty-slot"><span style="color:#bbb">${i+1}. volné místo</span><button class="btn bg bx" onclick="adminAddToGroup('${id}','${g.id}')">＋ Přidat</button></div>`;
+    let spotsHtml='';
+    for(let i=0;i<mx;i++){
+      const p=conf[i];
+      spotsHtml+=`<div class="slot-spot">
+        <span class="spot-num">${i+1}.</span>
+        ${p?`<span class="spot-name">${ex(p.handlerName)}</span><span class="spot-dog">/ ${ex(p.dogName)}</span>`:'<span class="spot-empty">volné místo</span>'}
+      </div>`;
     }
-    partsHtml+='</div>';
 
-    // Waitlist
-    let wHtml='';
-    if(waits.length) wHtml=`<div style="margin-top:10px;border-top:1px solid #eee;padding-top:10px"><p style="font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:var(--sw);font-weight:700;margin-bottom:6px">⏳ Čekací listina</p>${waits.map(w=>`<div class="adgc-part"><div class="adgc-part-info"><span class="adgc-part-num" style="color:var(--sw)">${w.waitlistPosition}.</span><strong>${esc(w.handlerName)}</strong><span style="color:var(--tl);font-size:.8rem">/ ${esc(w.dogName)}</span></div><div class="ac"><button class="btn bg bx" onclick="openEditReg('${w.id}')">✏</button><button class="btn ba bx" onclick="promoteWL('${w.id}')">↑</button><button class="btn br bx" onclick="adminDelReg('${w.id}')">✖</button></div></div>`).join('')}</div>`;
+    const btn=isFull
+      ?`<button class="slot-btn slot-btn-wl" onclick="openWL('${s.id}','${t}')">📋 Čekací listina</button>`
+      :`<button class="slot-btn" onclick="openSU('${s.id}','${t}')">＋ Přihlásit se</button>`;
 
-    return `<div class="adgc">
-      <div class="adgc-hd">
-        <div><span class="adgc-title">⏱ ${g.startTime} – ${end}</span> <span class="adgc-meta">${g.duration} min · max ${g.maxParticipants} osob · ${confirmed.length}/${g.maxParticipants} obsazeno</span></div>
-        <div class="ac">
-          <button class="btn bg bx" onclick="openEditGroup('${g.id}')">✏ Skupinu</button>
-          <button class="btn br bx" onclick="deleteGroup('${g.id}')">🗑</button>
-        </div>
-      </div>
-      <div class="adgc-bd">${partsHtml}${wHtml}</div>
+    let wlHtml='';
+    if(waits.length)wlHtml=`<div class="wl-sect"><h5>⏳ Čekací listina</h5>${waits.map(w=>`<div class="wl-item"><span class="wl-pos">${w.waitlistPosition}.</span>${ex(w.handlerName)} / ${ex(w.dogName)}</div>`).join('')}</div>`;
+
+    return`<div class="slot-card">
+      <div class="slot-card-hd"><span class="slot-time">${t}</span><span class="bdg ${isFull?'bfu':conf.length?'bp2':'bf'}">${conf.length}/${mx}</span></div>
+      <div class="slot-card-bd">${spotsHtml}${btn}${wlHtml}</div>
     </div>`;
   }).join('');
 
-  document.getElementById('mDBody').innerHTML=`
-    <div style="display:flex;justify-content:flex-end;margin-bottom:12px">
-      <button class="btn bp bs" onclick="openAddGroup('${id}')">＋ Přidat skupinu</button>
+  return`<div class="sc" id="sc-${s.id}">
+    <div class="sc-hd" onclick="togSC('${s.id}')">
+      <div><div class="sdate">${dd(s.date)}</div><div class="smeta">📍 ${ex(s.location)} · ⏱ ${s.startTime}–${addM(s.startTime,s.slotDuration*s.slotCount)} · ${mx} ${mx===1?'osoba/interval':mx<5?'osoby/interval':'osob/interval'} · ${s.slotDuration} min</div></div>
+      <div style="display:flex;align-items:center;gap:9px"><span class="bdg ${bc}">${bt}</span><span class="chv">▼</span></div>
     </div>
-    <div class="adg">${grpsHtml||'<p style="color:var(--tl);font-style:italic;padding:12px 0">Žádné skupiny. Přidej skupinu tlačítkem výše.</p>'}</div>`;
+    <div class="sc-bd"><div class="slots">${slotsHtml}</div></div>
+  </div>`;
+}
+function togSC(id){document.getElementById('sc-'+id).classList.toggle('op')}
+
+// SIGNUP
+function openSU(sid,t){
+  const s=D.sessions.find(s=>s.id===sid),mx=s.maxPerSlot||1;
+  SU={sid,t,admin:false};
+  document.getElementById('mSUInfo').innerHTML=`📅 ${dd(s.date)}<br>⏱ ${t} – ${addM(t,s.slotDuration)} (${s.slotDuration} min) · max ${mx} osob<br>📍 ${ex(s.location)}`;
+  document.getElementById('suH').value='';document.getElementById('suD').value='';
+  openM('mSU');setTimeout(()=>document.getElementById('suH').focus(),80)
+}
+document.getElementById('suH').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('suD').focus()});
+document.getElementById('suD').addEventListener('keydown',e=>{if(e.key==='Enter')doSignup()});
+function doSignup(){
+  const h=document.getElementById('suH').value.trim(),d=document.getElementById('suD').value.trim();
+  if(!h||!d)return toast('Vyplň jméno psovoda i psa.','err');
+  const s=D.sessions.find(s=>s.id===SU.sid),mx=s.maxPerSlot||1;
+  const cnt=slotRegs(SU.sid,SU.t,'confirmed').length;
+  if(cnt>=mx){toast('Interval je plný.','err');closeM('mSU');return}
+  const reg={id:uid(),sessionId:SU.sid,slotTime:SU.t,handlerName:h,dogName:d,status:'confirmed',waitlistPosition:null,createdAt:Date.now()};
+  D.registrations.push(reg);closeM('mSU');fsS('registrations',reg.id,reg);rr();
+  toast(`✔ Přihlášen: ${h} / ${d} na ${SU.t}`);
+  if(SU.admin){renderDetB(SU.sid);renderSes()}
 }
 
-// ── Group CRUD ──────────────────────────────────────
-function openAddGroup(sessionId){
-  editGID=null;
-  document.getElementById('mGTitle').textContent='Přidat skupinu';
-  document.getElementById('gEditID').value='';
-  document.getElementById('gStart').value='08:00';
-  document.getElementById('gDur').value='60';
-  document.getElementById('gMax').value='3';
-  openM('mGroup');
+// WAITLIST
+function openWL(sid,t){
+  const s=D.sessions.find(s=>s.id===sid);
+  WL={sid,t};
+  document.getElementById('mWLInfo').innerHTML=`📅 ${dd(s.date)}<br>⏱ ${t} – ${addM(t,s.slotDuration)}<br>📍 ${ex(s.location)}`;
+  document.getElementById('wlH').value='';document.getElementById('wlD').value='';
+  openM('mWL')
 }
-function openEditGroup(gid){
-  editGID=gid;
-  const g=D.groups.find(g=>g.id===gid);
-  document.getElementById('mGTitle').textContent='Upravit skupinu';
-  document.getElementById('gEditID').value=gid;
-  document.getElementById('gStart').value=g.startTime;
-  document.getElementById('gDur').value=g.duration;
-  document.getElementById('gMax').value=g.maxParticipants;
-  openM('mGroup');
-}
-function saveGroup(){
-  const startTime=document.getElementById('gStart').value;
-  const duration=parseInt(document.getElementById('gDur').value);
-  const maxParticipants=parseInt(document.getElementById('gMax').value);
-  if(!startTime||!duration||!maxParticipants)return toast('Vyplň všechna pole.','err');
-  if(editGID){
-    const g=D.groups.find(g=>g.id===editGID);
-    Object.assign(g,{startTime,duration,maxParticipants});
-    fsSet('groups',editGID,g);
-    toast('Skupina upravena.');
-  }else{
-    const g={id:uid(),sessionId:detailSID,startTime,duration,maxParticipants,order:D.groups.filter(g=>g.sessionId===detailSID).length,createdAt:Date.now()};
-    D.groups.push(g); fsSet('groups',g.id,g);
-    toast('Skupina přidána.');
-  }
-  closeM('mGroup'); renderDetailBody(detailSID); rerender();
-}
-function deleteGroup(gid){
-  const g=D.groups.find(g=>g.id===gid);
-  const cnt=groupRegs(gid,'confirmed').length;
-  confirm2(`Smazat skupinu ${g.startTime}–${addM(g.startTime,g.duration)} (${cnt} přihlášek)?`,()=>{
-    D.groups=D.groups.filter(g=>g.id!==gid);
-    D.registrations=D.registrations.filter(r=>r.groupId!==gid);
-    fsDelGroup(gid); renderDetailBody(detailSID); rerender(); toast('Skupina smazána.');
-  },'Smazat skupinu');
+function doWL(){
+  const h=document.getElementById('wlH').value.trim(),d=document.getElementById('wlD').value.trim();
+  if(!h||!d)return toast('Vyplň jméno psovoda i psa.','err');
+  const pos=slotRegs(WL.sid,WL.t,'waitlist').length+1;
+  const reg={id:uid(),sessionId:WL.sid,slotTime:WL.t,handlerName:h,dogName:d,status:'waitlist',waitlistPosition:pos,createdAt:Date.now()};
+  D.registrations.push(reg);closeM('mWL');fsS('registrations',reg.id,reg);rr();
+  toast(`✔ Čekací listina (${pos}): ${h} / ${d}`)
 }
 
-// ── Registration CRUD ───────────────────────────────
-function adminDelReg(id){
-  const r=D.registrations.find(r=>r.id===id);
-  confirm2(`Smazat přihlášku ${r.handlerName} / ${r.dogName}?`,()=>{
-    const gid=r.groupId;
+// CANCEL
+function doSearch(){
+  const q=document.getElementById('csIn').value.trim().toLowerCase(),out=document.getElementById('csRes');
+  if(!q){out.innerHTML='';return}
+  const found=D.registrations.filter(r=>r.handlerName.toLowerCase().includes(q));
+  if(!found.length){out.innerHTML=`<p style="color:var(--tl);font-size:.83rem;padding:7px 0">Žádná přihláška nenalezena.</p>`;return}
+  out.innerHTML=found.map(r=>{
+    const s=D.sessions.find(s=>s.id===r.sessionId);
+    const slot=r.status==='waitlist'?`Čekací listina (${r.waitlistPosition}.)`:r.slotTime;
+    return`<div class="cri"><div><strong>${ex(r.handlerName)} / ${ex(r.dogName)}</strong><span>${s?dd(s.date):'–'} · ${slot}</span></div><button class="btn bred bsm" onclick="cancelR('${r.id}')">✖ Zrušit</button></div>`
+  }).join('')
+}
+function cancelR(id){
+  const r=D.registrations.find(r=>r.id===id);if(!r)return;
+  cfm(`Zrušit přihlášku ${r.handlerName} / ${r.dogName}?`,()=>{
+    const sid=r.sessionId,t=r.slotTime;
     D.registrations=D.registrations.filter(r=>r.id!==id);
-    reorderWL(gid); fsDel('registrations',id); fsReorderWL(gid);
-    renderDetailBody(detailSID); renderSessions(); renderRegs(); rerender(); toast('Přihláška smazána.');
-  },'Smazat přihlášku');
+    rwl(sid,t);fsD('registrations',id);fsRWL(sid,t);doSearch();rr();toast('Přihláška zrušena.')
+  },'Zrušit přihlášku')
+}
+function rwl(sid,t){D.registrations.filter(r=>r.sessionId===sid&&r.slotTime===t&&r.status==='waitlist').sort((a,b)=>a.waitlistPosition-b.waitlistPosition).forEach((r,i)=>r.waitlistPosition=i+1)}
+
+// ADMIN SESSIONS
+function renderSes(){
+  const sorted=[...D.sessions].sort((a,b)=>a.date.localeCompare(b.date));
+  const tb=document.getElementById('sTb');
+  if(!sorted.length){tb.innerHTML=`<tr><td colspan="5" style="text-align:center;color:var(--tl);padding:22px">Žádné tréninky.</td></tr>`;return}
+  tb.innerHTML=sorted.map(s=>{
+    const mx=s.maxPerSlot||1,sl=slots(s);
+    const cnt=D.registrations.filter(r=>r.sessionId===s.id&&r.status==='confirmed').length;
+    const max=sl.length*mx;
+    const bc=cnt>=max?'bfu':cnt>0?'bp2':'bf';
+    return`<tr>
+      <td>${dd(s.date)}</td><td>${ex(s.location)}</td>
+      <td>${s.startTime}–${addM(s.startTime,s.slotDuration*s.slotCount)} · ${sl.length}× ${s.slotDuration}min · max ${mx}/interval</td>
+      <td><span class="bdg ${bc}">${cnt}/${max}</span></td>
+      <td><div class="ac">
+        <button class="btn bgho bxs" onclick="openDet('${s.id}')">📋 Detail</button>
+        <button class="btn bgho bxs" onclick="openEditS('${s.id}')">✏</button>
+        <button class="btn bgho bxs" onclick="copyS('${s.id}')">📋</button>
+        <button class="btn bred bxs" onclick="delS('${s.id}')">🗑</button>
+      </div></td></tr>`
+  }).join('')
 }
 
-function adminAddToGroup(sessionId,groupId){
-  const s=D.sessions.find(s=>s.id===sessionId), g=D.groups.find(g=>g.id===groupId);
-  SU={sessionId,groupId,admin:true};
-  document.getElementById('mSignupInfo').innerHTML=`📅 ${dispDate(s.date)}<br>⏱ ${g.startTime} – ${addM(g.startTime,g.duration)} (admin)`;
-  document.getElementById('suHandler').value=''; document.getElementById('suDog').value='';
-  openM('mSignup');
+// session form
+function openNewS(){
+  editSID=null;editScope='single';
+  document.getElementById('mSesT').textContent='Nový trénink';
+  document.getElementById('sD').value='';document.getElementById('sL').value='ZKO Rudník';document.getElementById('sLC').value='';document.getElementById('sLW').style.display='none';
+  document.getElementById('sSt').value='08:00';document.getElementById('sDr').value='60';document.getElementById('sCn').value='3';document.getElementById('sMx').value='3';
+  document.getElementById('sRp').checked=false;document.getElementById('rpOpts').classList.remove('show');document.getElementById('serW').style.display='none';
+  openM('mSes')
+}
+function openEditS(id){
+  editSID=id;editScope='single';
+  const s=D.sessions.find(s=>s.id===id);
+  document.getElementById('mSesT').textContent='Upravit trénink';
+  document.getElementById('sD').value=s.date;
+  if(s.location==='ZKO Rudník'){document.getElementById('sL').value='ZKO Rudník';document.getElementById('sLW').style.display='none'}
+  else{document.getElementById('sL').value='custom';document.getElementById('sLC').value=s.location;document.getElementById('sLW').style.display=''}
+  document.getElementById('sSt').value=s.startTime;document.getElementById('sDr').value=s.slotDuration;document.getElementById('sCn').value=s.slotCount;document.getElementById('sMx').value=s.maxPerSlot||1;
+  document.getElementById('sRp').checked=false;document.getElementById('rpOpts').classList.remove('show');
+  document.getElementById('serW').style.display=s.repeatGroupId?'':'none';document.getElementById('scopeN').textContent='';
+  openM('mSes')
+}
+function setScope(v){editScope=v;document.getElementById('scopeN').textContent=v==='single'?'✔ Jen tento termín.':'✔ Celá série.'}
+function togL(){document.getElementById('sLW').style.display=document.getElementById('sL').value==='custom'?'':'none'}
+function togR(){document.getElementById('rpOpts').classList.toggle('show',document.getElementById('sRp').checked)}
+function getL(){const v=document.getElementById('sL').value;return v==='custom'?document.getElementById('sLC').value.trim():v}
+
+function saveSes(){
+  const date=document.getElementById('sD').value,location=getL(),startTime=document.getElementById('sSt').value;
+  const slotDuration=parseInt(document.getElementById('sDr').value),slotCount=parseInt(document.getElementById('sCn').value),maxPerSlot=parseInt(document.getElementById('sMx').value);
+  if(!date||!location||!startTime||!slotDuration||!slotCount||!maxPerSlot)return toast('Vyplň všechna pole.','err');
+  closeM('mSes');
+  if(editSID){
+    const s=D.sessions.find(s=>s.id===editSID),upd={location,startTime,slotDuration,slotCount,maxPerSlot};
+    if(editScope==='series'&&s.repeatGroupId){D.sessions.filter(s2=>s2.repeatGroupId===s.repeatGroupId).forEach(s2=>{Object.assign(s2,upd);fsS('sessions',s2.id,s2)});toast('Série upravena.')}
+    else{Object.assign(s,{date,...upd});fsS('sessions',editSID,s);toast('Termín upraven.')}
+  }else{
+    const rep=document.getElementById('sRp').checked;
+    if(rep){
+      const ev=parseInt(document.getElementById('rEv').value)||7,cn=parseInt(document.getElementById('rCn').value)||4,gid=uid();
+      for(let i=0;i<cn;i++){const d=new Date(date+'T00:00:00');d.setDate(d.getDate()+i*ev);const ns={id:uid(),date:fmt(d),location,startTime,slotDuration,slotCount,maxPerSlot,repeatGroupId:gid,createdAt:Date.now()};D.sessions.push(ns);fsS('sessions',ns.id,ns)}
+      toast(`Vytvořeno ${cn} termínů.`)
+    }else{
+      const ns={id:uid(),date,location,startTime,slotDuration,slotCount,maxPerSlot,repeatGroupId:null,createdAt:Date.now()};
+      D.sessions.push(ns);fsS('sessions',ns.id,ns);toast('Termín vytvořen.')
+    }
+  }
+  renderSes();fillRS();rr()
 }
 
-function openEditReg(id){
-  const r=D.registrations.find(r=>r.id===id);
-  document.getElementById('erID').value=id;
-  document.getElementById('erHandler').value=r.handlerName;
-  document.getElementById('erDog').value=r.dogName;
-  openM('mEditReg');
-}
-function saveEditReg(){
-  const id=document.getElementById('erID').value, handler=document.getElementById('erHandler').value.trim(), dog=document.getElementById('erDog').value.trim();
-  if(!handler||!dog)return toast('Vyplň všechna pole.','err');
-  const r=D.registrations.find(r=>r.id===id);
-  r.handlerName=handler; r.dogName=dog;
-  closeM('mEditReg'); fsUpd('registrations',id,{handlerName:handler,dogName:dog});
-  renderDetailBody(detailSID); renderRegs(); rerender(); toast('Přihláška upravena.');
-}
+function delS(id){const s=D.sessions.find(s=>s.id===id);cfm(`Smazat termín ${dd(s.date)}?`,()=>{D.sessions=D.sessions.filter(s=>s.id!==id);D.registrations=D.registrations.filter(r=>r.sessionId!==id);fsDSes(id);renderSes();fillRS();rr();toast('Termín smazán.')},'Smazat termín')}
+function copyS(id){const s=D.sessions.find(s=>s.id===id),d=new Date(s.date+'T00:00:00');d.setDate(d.getDate()+7);const ns={...s,id:uid(),date:fmt(d),repeatGroupId:null,createdAt:Date.now()};D.sessions.push(ns);fsS('sessions',ns.id,ns);renderSes();fillRS();rr();toast(`Zkopírováno → ${dd(fmt(d))}`)}
 
-// ── Move to another group ───────────────────────────
-function openMoveReg(id){
-  moveRegID=id;
-  const r=D.registrations.find(r=>r.id===id);
-  const grps=sessionGroups(r.sessionId).filter(g=>g.id!==r.groupId);
-  document.getElementById('mMoveInfo').textContent=`Přesouvám: ${r.handlerName} / ${r.dogName}`;
-  const picker=document.getElementById('movePicker');
-  if(!grps.length){picker.innerHTML=`<p style="color:var(--tl);font-size:.85rem">Žádné jiné skupiny.</p>`;openM('mMove');return;}
-  picker.innerHTML=grps.map(g=>{
-    const cnt=groupRegs(g.id,'confirmed').length, isFull=cnt>=g.maxParticipants;
-    return `<button class="btn ${isFull?'bg':'bp'} bs" style="width:100%;justify-content:space-between" ${isFull?'disabled':''} onclick="doMove('${g.id}')">
-      <span>⏱ ${g.startTime} – ${addM(g.startTime,g.duration)}</span>
-      <span class="badge ${isFull?'b-full':'b-free'}">${cnt}/${g.maxParticipants}</span>
-    </button>`;
+// DETAIL
+function openDet(id){detSID=id;const s=D.sessions.find(s=>s.id===id);document.getElementById('mDetT').textContent=dd(s.date);renderDetB(id);openM('mDet')}
+function renderDetB(id){
+  const s=D.sessions.find(s=>s.id===id);if(!s)return;
+  const sl=slots(s),mx=s.maxPerSlot||1;
+  const html=sl.map(t=>{
+    const conf=slotRegs(id,t,'confirmed').sort((a,b)=>a.createdAt-b.createdAt);
+    const waits=slotRegs(id,t,'waitlist').sort((a,b)=>a.waitlistPosition-b.waitlistPosition);
+    const isFull=conf.length>=mx;
+
+    let spots='';
+    for(let i=0;i<mx;i++){
+      const p=conf[i];
+      spots+=`<div class="asc-spot">`;
+      if(p){
+        spots+=`<div class="asc-info"><strong>${i+1}.</strong><strong>${ex(p.handlerName)}</strong><span style="color:var(--tl);font-size:.78rem">/ ${ex(p.dogName)}</span></div>
+          <div class="ac">
+            <button class="btn bgho bxs" onclick="openER('${p.id}')">✏</button>
+            <button class="btn bamb bxs" onclick="openMv('${p.id}')">↔</button>
+            <button class="btn bred bxs" onclick="admDelR('${p.id}')">✖</button>
+          </div>`;
+      }else{
+        spots+=`<span class="asc-empty" onclick="admAddSlot('${id}','${t}')">${i+1}. + přidat</span>`;
+      }
+      spots+='</div>';
+    }
+
+    let wls='';
+    if(waits.length)wls=`<div style="margin-top:8px;border-top:1px solid #f0ece4;padding-top:8px"><p style="font-size:.7rem;text-transform:uppercase;letter-spacing:1px;color:var(--a);margin-bottom:5px">⏳ Čekací listina</p>${waits.map(w=>`<div class="asc-spot"><div class="asc-info"><strong style="color:var(--a)">${w.waitlistPosition}.</strong><strong>${ex(w.handlerName)}</strong><span style="color:var(--tl);font-size:.78rem">/ ${ex(w.dogName)}</span></div><div class="ac"><button class="btn bgho bxs" onclick="openER('${w.id}')">✏</button><button class="btn bamb bxs" onclick="promWL('${w.id}')">↑</button><button class="btn bred bxs" onclick="admDelR('${w.id}')">✖</button></div></div>`).join('')}</div>`;
+
+    return`<div class="asc">
+      <div class="asc-hd"><span class="asc-time">${t} – ${addM(t,s.slotDuration)}</span><span class="bdg ${isFull?'bfu':conf.length?'bp2':'bf'}">${conf.length}/${mx}</span></div>
+      <div class="asc-bd">${spots}${wls}</div>
+    </div>`;
   }).join('');
-  openM('mMove');
-}
-function doMove(newGid){
-  const r=D.registrations.find(r=>r.id===moveRegID);
-  const oldGid=r.groupId;
-  const g=D.groups.find(g=>g.id===newGid);
-  r.groupId=newGid; r.status='confirmed'; r.waitlistPosition=null;
-  closeM('mMove');
-  fsUpd('registrations',moveRegID,{groupId:newGid,status:'confirmed',waitlistPosition:null});
-  reorderWL(oldGid); fsReorderWL(oldGid);
-  renderDetailBody(detailSID); renderRegs(); rerender();
-  toast(`Přesunuto do skupiny ${g.startTime}`);
+  document.getElementById('mDetB').innerHTML=`<div class="aslots">${html}</div>`;
 }
 
-function promoteWL(id){
-  const r=D.registrations.find(r=>r.id===id);
-  const g=D.groups.find(g=>g.id===r.groupId);
-  const cnt=groupRegs(g.id,'confirmed').length;
-  if(cnt>=g.maxParticipants)return toast('Skupina je plná.','err');
-  r.status='confirmed'; r.waitlistPosition=null;
-  reorderWL(g.id);
-  fsUpd('registrations',id,{status:'confirmed',waitlistPosition:null});
-  fsReorderWL(g.id);
-  renderDetailBody(detailSID); rerender();
-  toast(`${r.handlerName} povýšen/a do skupiny.`);
-}
+function admDelR(id){const r=D.registrations.find(r=>r.id===id);cfm(`Smazat přihlášku ${r.handlerName}?`,()=>{const sid=r.sessionId,t=r.slotTime;D.registrations=D.registrations.filter(r=>r.id!==id);rwl(sid,t);fsD('registrations',id);fsRWL(sid,t);renderDetB(detSID);renderSes();renderRegs();rr();toast('Přihláška smazána.')},'Smazat')}
+function admAddSlot(sid,t){const s=D.sessions.find(s=>s.id===sid);SU={sid,t,admin:true};document.getElementById('mSUInfo').innerHTML=`📅 ${dd(s.date)}<br>⏱ ${t} (admin)`;document.getElementById('suH').value='';document.getElementById('suD').value='';openM('mSU')}
 
-// ══════════════════════════════════════════════════
-//  REGISTRATIONS TAB
-// ══════════════════════════════════════════════════
-function fillRegSel(){
-  const sel=document.getElementById('rSel'), cur=sel.value;
-  sel.innerHTML=`<option value="">-- Vyber termín --</option>`+[...D.sessions].sort((a,b)=>a.date.localeCompare(b.date)).map(s=>`<option value="${s.id}">${dispDate(s.date)} – ${esc(s.location)}</option>`).join('');
-  if(cur)sel.value=cur;
+function openER(id){const r=D.registrations.find(r=>r.id===id);document.getElementById('erID').value=id;document.getElementById('erH').value=r.handlerName;document.getElementById('erDg').value=r.dogName;openM('mER')}
+function saveER(){const id=document.getElementById('erID').value,h=document.getElementById('erH').value.trim(),d=document.getElementById('erDg').value.trim();if(!h||!d)return toast('Vyplň všechna pole.','err');const r=D.registrations.find(r=>r.id===id);r.handlerName=h;r.dogName=d;closeM('mER');fsU('registrations',id,{handlerName:h,dogName:d});renderDetB(detSID);renderRegs();rr();toast('Upraveno.')}
+
+function openMv(id){
+  mvID=id;const r=D.registrations.find(r=>r.id===id),s=D.sessions.find(s=>s.id===r.sessionId),mx=s.maxPerSlot||1;
+  document.getElementById('mMvInfo').textContent=`Přesouvám: ${r.handlerName} / ${r.dogName} (${r.slotTime})`;
+  const other=slots(s).filter(t=>t!==r.slotTime);
+  document.getElementById('mvPick').innerHTML=other.map(t=>{
+    const cnt=slotRegs(s.id,t,'confirmed').length,full=cnt>=mx;
+    return`<button class="btn ${full?'bgho':'bpri'} bsm" style="width:100%;justify-content:space-between" ${full?'disabled':''} onclick="doMv('${t}')"><span>${t} – ${addM(t,s.slotDuration)}</span><span class="bdg ${full?'bfu':'bf'}">${cnt}/${mx}</span></button>`;
+  }).join('');
+  openM('mMv')
 }
+function doMv(t){const r=D.registrations.find(r=>r.id===mvID),old=r.slotTime;r.slotTime=t;r.status='confirmed';r.waitlistPosition=null;closeM('mMv');fsU('registrations',mvID,{slotTime:t,status:'confirmed',waitlistPosition:null});rwl(r.sessionId,old);fsRWL(r.sessionId,old);renderDetB(detSID);renderRegs();rr();toast(`Přesunuto na ${t}`)}
+function promWL(id){const r=D.registrations.find(r=>r.id===id),s=D.sessions.find(s=>s.id===r.sessionId),mx=s.maxPerSlot||1,cnt=slotRegs(s.id,r.slotTime,'confirmed').length;if(cnt>=mx)return toast('Interval je plný.','err');r.status='confirmed';r.waitlistPosition=null;rwl(r.sessionId,r.slotTime);fsU('registrations',id,{status:'confirmed',waitlistPosition:null});fsRWL(r.sessionId,r.slotTime);renderDetB(detSID);rr();toast(`${r.handlerName} povýšen/a.`)}
+
+// REGS TAB
+function fillRS(){const sel=document.getElementById('rSel'),cur=sel.value;sel.innerHTML='<option value="">-- Vyber termín --</option>'+[...D.sessions].sort((a,b)=>a.date.localeCompare(b.date)).map(s=>`<option value="${s.id}">${dd(s.date)} – ${ex(s.location)}</option>`).join('');if(cur)sel.value=cur}
 function renderRegs(){
-  const sid=document.getElementById('rSel').value, out=document.getElementById('regsOut');
-  if(!sid){out.innerHTML=`<div class="al2 ai">Vyber termín pro zobrazení přihlášek.</div>`;return;}
-  const grps=sessionGroups(sid);
-  if(!grps.length){out.innerHTML=`<div class="al2 ai">Žádné skupiny pro tento termín.</div>`;return;}
+  const sid=document.getElementById('rSel').value,out=document.getElementById('regsOut');
+  if(!sid){out.innerHTML='<div class="al2 ainf">Vyber termín.</div>';return}
+  const s=D.sessions.find(s=>s.id===sid),mx=s.maxPerSlot||1;
+  const sl=slots(s);
   let html='';
-  grps.forEach(g=>{
-    const confirmed=groupRegs(g.id,'confirmed').sort((a,b)=>a.createdAt-b.createdAt);
-    const waits=groupRegs(g.id,'waitlist').sort((a,b)=>a.waitlistPosition-b.waitlistPosition);
-    if(!confirmed.length&&!waits.length)return;
-    let rows=confirmed.map((r,i)=>`<tr><td>${i+1}.</td><td>${esc(r.handlerName)}</td><td>${esc(r.dogName)}</td><td><span class="badge b-free">Přihlášen</span></td><td><div class="ac"><button class="btn bg bx" onclick="openEditReg('${r.id}');detailSID='${sid}'">✏</button><button class="btn br bx" onclick="delRegRegs('${r.id}')">✖</button></div></td></tr>`).join('');
-    rows+=waits.map(w=>`<tr><td>čekací ${w.waitlistPosition}.</td><td>${esc(w.handlerName)}</td><td>${esc(w.dogName)}</td><td><span class="badge" style="background:var(--sw);color:#fff">Čeká</span></td><td><div class="ac"><button class="btn bg bx" onclick="openEditReg('${w.id}');detailSID='${sid}'">✏</button><button class="btn br bx" onclick="delRegRegs('${w.id}')">✖</button></div></td></tr>`).join('');
-    if(rows) html+=`<h4 style="font-family:'Bebas Neue',sans-serif;letter-spacing:1px;color:var(--gd);margin:14px 0 6px">⏱ ${g.startTime} – ${addM(g.startTime,g.duration)} &nbsp;(${confirmed.length}/${g.maxParticipants})</h4><div class="tw"><table><thead><tr><th>#</th><th>Psovod</th><th>Pes</th><th>Status</th><th>Akce</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  sl.forEach(t=>{
+    const conf=slotRegs(sid,t,'confirmed').sort((a,b)=>a.createdAt-b.createdAt);
+    const waits=slotRegs(sid,t,'waitlist').sort((a,b)=>a.waitlistPosition-b.waitlistPosition);
+    if(!conf.length&&!waits.length)return;
+    let rows=conf.map((r,i)=>`<tr><td>${i+1}.</td><td>${ex(r.handlerName)}</td><td>${ex(r.dogName)}</td><td><span class="bdg bf" style="font-size:.7rem">✔</span></td><td><div class="ac"><button class="btn bgho bxs" onclick="openER('${r.id}')">✏</button><button class="btn bred bxs" onclick="delReg2('${r.id}')">✖</button></div></td></tr>`).join('');
+    rows+=waits.map(w=>`<tr><td>č.${w.waitlistPosition}</td><td>${ex(w.handlerName)}</td><td>${ex(w.dogName)}</td><td><span class="bdg bp2" style="font-size:.7rem">⏳</span></td><td><div class="ac"><button class="btn bgho bxs" onclick="openER('${w.id}')">✏</button><button class="btn bred bxs" onclick="delReg2('${w.id}')">✖</button></div></td></tr>`).join('');
+    html+=`<h4 style="font-family:'Bebas Neue',sans-serif;letter-spacing:1px;color:var(--g);margin:13px 0 6px">⏱ ${t} – ${addM(t,s.slotDuration)} &nbsp;(${conf.length}/${mx})</h4><div class="tw"><table><thead><tr><th>#</th><th>Psovod</th><th>Pes</th><th>Status</th><th>Akce</th></tr></thead><tbody>${rows}</tbody></table></div>`;
   });
-  out.innerHTML=html||`<div class="al2 ai">Žádné přihlášky pro tento termín.</div>`;
+  out.innerHTML=html||'<div class="al2 ainf">Žádné přihlášky.</div>'
 }
-function delRegRegs(id){
-  const r=D.registrations.find(r=>r.id===id);
-  confirm2(`Smazat přihlášku ${r.handlerName}?`,()=>{
-    const gid=r.groupId; D.registrations=D.registrations.filter(r=>r.id!==id);
-    reorderWL(gid); fsDel('registrations',id); fsReorderWL(gid);
-    renderRegs(); renderSessions(); rerender(); toast('Přihláška smazána.');
-  },'Smazat přihlášku');
-}
+function delReg2(id){const r=D.registrations.find(r=>r.id===id);cfm(`Smazat přihlášku ${r.handlerName}?`,()=>{const sid=r.sessionId,t=r.slotTime;D.registrations=D.registrations.filter(r=>r.id!==id);rwl(sid,t);fsD('registrations',id);fsRWL(sid,t);renderRegs();renderSes();rr();toast('Smazáno.')},'Smazat')}
 
-// ══════════════════════════════════════════════════
-//  TRAINER INFO & CONTACT
-// ══════════════════════════════════════════════════
-function saveTI(){ fsMeta({trainerInfo:document.getElementById('tiInput').value}); toast('Informace trenéra uloženy.'); }
-function clearTI(){ confirm2('Smazat informace trenéra?',()=>{ document.getElementById('tiInput').value=''; fsMeta({trainerInfo:''}); toast('Informace trenéra smazány.'); },'Smazat'); }
-function loadCT(){ const c=D.contact||{}; ['ctName','ctPhone','ctEmail','ctNote'].forEach((id,i)=>document.getElementById(id).value=[c.name,c.phone,c.email,c.note][i]||''); }
-function saveCT(){ fsMeta({contact:{name:document.getElementById('ctName').value.trim(),phone:document.getElementById('ctPhone').value.trim(),email:document.getElementById('ctEmail').value.trim(),note:document.getElementById('ctNote').value.trim()}}); toast('Kontakt uložen.'); }
-function clearCT(){ confirm2('Smazat kontaktní údaje?',()=>{ fsMeta({contact:{name:'',phone:'',email:'',note:''}}); loadCT(); toast('Kontakt smazán.'); },'Smazat'); }
+// INFO & CONTACT
+function saveTI(){fsMeta({trainerInfo:document.getElementById('tiIn').value});toast('Informace uloženy.')}
+function clearTI(){cfm('Smazat informace trenéra?',()=>{document.getElementById('tiIn').value='';fsMeta({trainerInfo:''});toast('Smazáno.')},'Smazat')}
+function loadCT(){const c=D.ct||{};['ctN','ctP','ctE','ctNo'].forEach((id,i)=>document.getElementById(id).value=[c.name,c.phone,c.email,c.note][i]||'')}
+function saveCT(){fsMeta({contact:{name:document.getElementById('ctN').value.trim(),phone:document.getElementById('ctP').value.trim(),email:document.getElementById('ctE').value.trim(),note:document.getElementById('ctNo').value.trim()}});toast('Kontakt uložen.')}
+function clearCT(){cfm('Smazat kontakt?',()=>{fsMeta({contact:{name:'',phone:'',email:'',note:''}});loadCT();toast('Smazáno.')},'Smazat')}
 
-// ══════════════════════════════════════════════════
-//  EXPORT CSV
-// ══════════════════════════════════════════════════
-function exportCSV(){
-  const s=D.sessions.find(s=>s.id===detailSID); if(!s)return;
-  const grps=sessionGroups(detailSID);
+// CSV
+function expCSV(){
+  const s=D.sessions.find(s=>s.id===detSID);if(!s)return;
+  const mx=s.maxPerSlot||1;
   let csv='\uFEFF';
-  csv+=`ZKO Rudník – Přihlášky\nDatum;${dispDate(s.date)}\nMísto;${s.location}\n\n`;
-  grps.forEach(g=>{
-    csv+=`Skupina;${g.startTime}–${addM(g.startTime,g.duration)};${g.duration} min;max ${g.maxParticipants} osob\n`;
-    csv+=`Pořadí;Psovod;Pes;Status\n`;
-    const confirmed=groupRegs(g.id,'confirmed').sort((a,b)=>a.createdAt-b.createdAt);
-    const waits=groupRegs(g.id,'waitlist').sort((a,b)=>a.waitlistPosition-b.waitlistPosition);
-    confirmed.forEach((r,i)=>csv+=`${i+1};${r.handlerName};${r.dogName};Přihlášen\n`);
-    waits.forEach(w=>csv+=`Čekací ${w.waitlistPosition};${w.handlerName};${w.dogName};Čeká\n`);
+  csv+=`ZKO Rudník – Přihlášky\nDatum;${dd(s.date)}\nMísto;${s.location}\nMax. osob/interval;${mx}\n\n`;
+  slots(s).forEach(t=>{
+    const conf=slotRegs(s.id,t,'confirmed').sort((a,b)=>a.createdAt-b.createdAt);
+    const waits=slotRegs(s.id,t,'waitlist').sort((a,b)=>a.waitlistPosition-b.waitlistPosition);
+    if(!conf.length&&!waits.length)return;
+    csv+=`Interval;${t}–${addM(t,s.slotDuration)}\nPořadí;Psovod;Pes\n`;
+    conf.forEach((r,i)=>csv+=`${i+1};${r.handlerName};${r.dogName}\n`);
+    waits.forEach(w=>csv+=`č.${w.waitlistPosition};${w.handlerName};${w.dogName}\n`);
     csv+='\n';
   });
-  const a=Object.assign(document.createElement('a'),{href:URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8;'})),download:`zko-rudnik-${s.date}.csv`});
-  a.click(); URL.revokeObjectURL(a.href); toast('CSV exportováno.');
+  const a=Object.assign(document.createElement('a'),{href:URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8;'})),download:`zko-${s.date}.csv`});
+  a.click();URL.revokeObjectURL(a.href);toast('CSV exportováno.')
 }
 
-// ══════════════════════════════════════════════════
-//  INIT
-// ══════════════════════════════════════════════════
-document.getElementById('csInput').addEventListener('keydown',e=>{ if(e.key==='Enter')doSearch(); });
-bootApp();
+document.getElementById('csIn').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch()});
+boot();
 </script>
 </body>
 </html>
