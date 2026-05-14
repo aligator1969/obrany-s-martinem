@@ -1,1 +1,647 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ZKO Rudník – OBRANY s Martinem</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--G:#1b3a2d;--GM:#2a5940;--A:#d4891a;--AL:#f0a830;--R:#c0392b;--GR:#27ae60;--BG:#f5f0e8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Lato',sans-serif;background:var(--BG);min-height:100vh}
+#OV{position:fixed;inset:0;background:var(--G);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999;gap:14px;text-align:center;padding:20px}
+#OV h1{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:4px;color:var(--AL)}
+#OV p{font-size:.75rem;color:rgba(255,255,255,.5);letter-spacing:2px;text-transform:uppercase}
+.spin{width:32px;height:32px;border:3px solid rgba(255,255,255,.15);border-top-color:var(--AL);border-radius:50%;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+#OV small{color:rgba(255,255,255,.4);font-size:.75rem;line-height:1.6;max-width:300px}
+/* header */
+HDR,header{background:var(--G);color:#fff;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.3)}
+.H{max-width:1100px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.HL{font-family:'Bebas Neue',sans-serif;font-size:1.85rem;letter-spacing:3px;color:var(--AL);line-height:1}
+.HS{font-size:.7rem;color:rgba(255,255,255,.5);letter-spacing:1px;text-transform:uppercase}
+.HB{background:transparent;border:1.5px solid rgba(255,255,255,.3);color:rgba(255,255,255,.75);padding:6px 14px;border-radius:6px;cursor:pointer;font-size:.8rem;font-family:'Lato',sans-serif}
+.HB:hover,.HB.on{background:var(--A);border-color:var(--A);color:#fff}
+/* pages */
+.PG{display:none}.PG.ON{display:block}
+.W{max-width:1000px;margin:0 auto;padding:20px 14px 60px}
+/* cards */
+.BOX{background:#fff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.07);margin-bottom:16px}
+.BOXG{background:linear-gradient(135deg,var(--G),var(--GM));color:#fff;border-radius:8px;padding:17px 21px;margin-bottom:16px}
+.BOXG h3{font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:2px;color:var(--AL);margin-bottom:7px}
+.BOXG p{font-size:.87rem;line-height:1.6;color:rgba(255,255,255,.85);white-space:pre-wrap}
+.BOXC{border-left:4px solid var(--GM);padding:15px 19px}
+.BOXC h3{font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:2px;color:var(--G);margin-bottom:8px}
+.BOXC p{font-size:.87rem;line-height:1.6;color:#444}
+.BOXC a{color:var(--GM);font-weight:700;text-decoration:none}
+.BOXW{border-left:4px solid var(--A);padding:14px 18px}
+.BOXW h3{font-size:.7rem;text-transform:uppercase;letter-spacing:1px;color:#777;margin-bottom:9px}
+.STEPS{display:flex;flex-wrap:wrap;gap:9px}
+.ST{display:flex;align-items:flex-start;gap:7px;flex:1;min-width:140px}
+.ST .N{width:21px;height:21px;background:var(--A);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:900;flex-shrink:0}
+.ST p{font-size:.79rem;color:#444;line-height:1.4;padding-top:1px}
+/* session cards */
+.SEC{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px}
+.SEC h2{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;letter-spacing:2px;color:var(--G)}
+.EMPTY{text-align:center;color:#777;padding:36px;font-size:.88rem}
+/* session card */
+.SC{background:#fff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.07);margin-bottom:13px;overflow:hidden}
+.SC-H{background:var(--G);padding:12px 17px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none}
+.SC-H:hover{background:var(--GM)}
+.SC-DT{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:1px;color:var(--AL)}
+.SC-MT{font-size:.73rem;color:rgba(255,255,255,.6);margin-top:1px}
+.CHV{font-size:.82rem;transition:transform .25s;color:rgba(255,255,255,.55)}
+.SC.OP .CHV{transform:rotate(180deg)}
+.SC-BD{display:none;padding:14px 17px}.SC.OP .SC-BD{display:block}
+/* badge */
+.BDG{padding:3px 10px;border-radius:20px;font-size:.7rem;font-weight:700}
+.BF{background:var(--GR);color:#fff}.BP{background:var(--A);color:#fff}.BU{background:var(--R);color:#fff}
+/* interval grid */
+.IG{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+/* interval card */
+.IC{border:1.5px solid #e0ddd8;border-radius:7px;overflow:hidden}
+.IC-H{background:#f5f2ec;padding:8px 11px;display:flex;align-items:center;justify-content:space-between}
+.IC-T{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;color:var(--G)}
+.IC-B{padding:8px 11px}
+/* spots */
+.SP{display:flex;align-items:center;gap:6px;padding:4px 0;border-bottom:1px solid #f0ece4;font-size:.79rem}
+.SP:last-of-type{border-bottom:none}
+.SPN{font-weight:900;color:var(--A);min-width:17px;font-size:.72rem}
+.SPT{font-weight:700;color:var(--G)}
+.SPD{color:#999;font-size:.72rem}
+.SPE{color:#ccc;font-style:italic;font-size:.74rem}
+/* buttons */
+.BTN{font-family:'Lato',sans-serif;font-size:.82rem;font-weight:700;padding:7px 14px;border:none;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;gap:4px;transition:all .15s}
+.BG{background:var(--G);color:#fff}.BG:hover{background:var(--GM)}
+.BA{background:var(--A);color:#fff}.BA:hover{background:var(--AL)}
+.BR{background:var(--R);color:#fff}.BR:hover{opacity:.85}
+.BGH{background:transparent;color:#555;border:1.5px solid #ccc}.BGH:hover{border-color:var(--GM);color:var(--G)}
+.BS{padding:5px 10px;font-size:.77rem}.BX{padding:3px 7px;font-size:.72rem}
+.SBTN{width:100%;background:var(--GR);color:#fff;border:none;border-radius:5px;padding:7px;cursor:pointer;font-family:'Lato',sans-serif;font-size:.79rem;font-weight:700;margin-top:7px}
+.SBTN:hover{background:#219a52}
+.WBTN{background:var(--A)}.WBTN:hover{background:var(--AL)}
+/* waitlist public */
+.WLS{margin-top:7px;border-top:1px solid #f0ece4;padding-top:7px}
+.WLS h5{font-size:.68rem;text-transform:uppercase;letter-spacing:1px;color:#999;margin-bottom:4px}
+.WLI{font-size:.76rem;color:#555;padding:2px 0}
+/* cancel */
+.CF{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.CF input{flex:1;min-width:170px}
+.CRI{background:#f9f9f9;border:1px solid #e8e8e8;border-radius:6px;padding:9px 12px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+.CRI strong{display:block;font-size:.87rem}.CRI small{color:#999;font-size:.74rem}
+/* forms */
+input,textarea,select{font-family:'Lato',sans-serif;font-size:.87rem;padding:8px 10px;border:1.5px solid #d0ccc4;border-radius:6px;background:#fff;color:#1a1a1a;width:100%;transition:border-color .2s}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--GM)}
+label{display:block;font-size:.73rem;font-weight:700;color:#555;margin-bottom:3px;text-transform:uppercase;letter-spacing:.5px}
+.FG{margin-bottom:11px}.FR{display:flex;gap:8px;flex-wrap:wrap}.FR .FG{flex:1;min-width:90px}
+/* modal */
+.MO{display:none;position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:500;align-items:center;justify-content:center;padding:12px}
+.MO.OP{display:flex}
+.MD{background:#fff;border-radius:10px;box-shadow:0 16px 50px rgba(0,0,0,.28);width:100%;max-width:450px;max-height:90vh;overflow-y:auto;animation:SU .2s ease}
+.MD-L{max-width:720px}
+@keyframes SU{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.MH{background:var(--G);color:#fff;padding:13px 18px;border-radius:10px 10px 0 0;display:flex;align-items:center;justify-content:space-between}
+.MH h2{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:2px;color:var(--AL)}
+.MX{background:none;border:none;color:rgba(255,255,255,.6);font-size:1.2rem;cursor:pointer;line-height:1}
+.MB{padding:18px}.MF{padding:10px 18px;border-top:1px solid #eee;display:flex;gap:7px;justify-content:flex-end;flex-wrap:wrap}
+/* admin */
+.AW{max-width:1100px;margin:0 auto;padding:20px 14px 60px}
+.LB{max-width:330px;margin:50px auto;background:#fff;border-radius:10px;box-shadow:0 4px 18px rgba(0,0,0,.1);overflow:hidden}
+.LH{background:var(--G);padding:20px;text-align:center}
+.LH h2{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:3px;color:var(--AL)}
+.LH p{font-size:.74rem;color:rgba(255,255,255,.5);margin-top:2px}
+.LBD{padding:22px}
+.LE{color:var(--R);font-size:.79rem;margin-top:6px;display:none}
+.AN{display:flex;gap:3px;background:var(--G);border-radius:8px;padding:5px;margin-bottom:18px;flex-wrap:wrap}
+.AN button{flex:1;min-width:75px;background:transparent;border:none;color:rgba(255,255,255,.55);padding:7px 8px;border-radius:4px;cursor:pointer;font-family:'Lato',sans-serif;font-size:.79rem;font-weight:700}
+.AN button:hover{color:#fff;background:rgba(255,255,255,.1)}.AN button.ON{background:var(--A);color:#fff}
+.TC{display:none}.TC.ON{display:block}
+.SECH{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px;flex-wrap:wrap;gap:7px}
+.SECH h2{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;letter-spacing:2px;color:var(--G)}
+.TW{overflow-x:auto;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+table{width:100%;border-collapse:collapse;font-size:.83rem}
+thead th{background:var(--G);color:var(--AL);padding:8px 11px;text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:1px;white-space:nowrap}
+tbody tr:nth-child(even){background:#f8f5f0}tbody tr:hover{background:#f0ece4}
+td{padding:8px 11px;color:#555;border-bottom:1px solid #eee;vertical-align:middle}
+.AC{display:flex;gap:3px;flex-wrap:wrap}
+/* admin detail */
+.ADG{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:8px}
+.ADC{border:1.5px solid #e0ddd8;border-radius:7px;overflow:hidden}
+.ADC-H{background:#f5f2ec;padding:8px 11px;display:flex;align-items:center;justify-content:space-between}
+.ADC-T{font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:1px;color:var(--G)}
+.ADC-B{padding:8px 11px}
+.ADC-SP{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f0ece4;gap:6px;flex-wrap:wrap}
+.ADC-SP:last-child{border-bottom:none}
+.ADC-I{font-size:.79rem;display:flex;align-items:center;gap:5px}
+.ADC-E{color:var(--GR);font-style:italic;font-size:.76rem;cursor:pointer;text-decoration:underline;padding:5px 0}
+.RO{background:#f8f5f0;border-radius:6px;padding:11px;margin-top:5px;display:none}.RO.ON{display:block}
+.AL2{padding:9px 13px;border-radius:6px;font-size:.82rem;margin-bottom:11px}
+.AI{background:#e8f4fd;color:#2471a3;border:1px solid #a9d4f1}
+.AW2{background:#fff4e0;color:#c0780a;border:1px solid #fad7a0}
+.SS3{margin-bottom:13px}.SS3 select{max-width:380px}
+.STC{background:#fff;border-radius:8px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,.07);max-width:390px;margin-bottom:16px}
+#TOAST{position:fixed;bottom:16px;right:16px;background:var(--G);color:#fff;padding:10px 16px;border-radius:7px;font-size:.83rem;z-index:9999;box-shadow:0 3px 12px rgba(0,0,0,.2);transform:translateY(60px);opacity:0;transition:all .25s;max-width:290px}
+#TOAST.ON{transform:translateY(0);opacity:1}#TOAST.E{background:var(--R)}#TOAST.K{background:var(--GR)}
+@media(max-width:540px){.HL{font-size:1.45rem}.H{padding:10px 11px}.AN button{font-size:.73rem;padding:6px 5px}.IG{grid-template-columns:repeat(auto-fill,minmax(145px,1fr))}}
+</style>
+</head>
+<body>
 
+<div id="OV">
+  <h1>ZKO RUDNÍK</h1>
+  <p>OBRANY s Martinem</p>
+  <div class="spin"></div>
+  <small id="OVM">Připojuji se k databázi…</small>
+</div>
+
+<!-- PUBLIC PAGE -->
+<div id="PUB" class="PG ON">
+  <header><div class="H">
+    <div><div class="HL">ZKO RUDNÍK</div><div class="HS">OBRANY s Martinem</div></div>
+    <button class="HB" onclick="gA()">⚙ Administrace</button>
+  </div></header>
+  <div class="W">
+    <div class="BOXG"><h3>📋 INFORMACE TRENÉRA</h3><div id="TID"></div></div>
+    <div id="CTB" class="BOX BOXC" style="display:none"><h3>📞 KONTAKT</h3><div id="CTD"></div></div>
+    <div class="BOX BOXW"><h3>Jak se přihlásit?</h3><div class="STEPS">
+      <div class="ST"><div class="N">1</div><p>Najdi trénink a rozklikni ho.</p></div>
+      <div class="ST"><div class="N">2</div><p>Vyber interval v čase, který ti vyhovuje.</p></div>
+      <div class="ST"><div class="N">3</div><p>Klikni na volné místo a zadej jméno psovoda a psa.</p></div>
+      <div class="ST"><div class="N">4</div><p>Pro zrušení použij sekci níže.</p></div>
+    </div></div>
+    <div class="SEC"><h2>📅 Nadcházející tréninky</h2></div>
+    <div id="SES"></div>
+    <div class="BOX" style="padding:18px;margin-top:10px">
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:2px;color:var(--G);margin-bottom:9px">✖ Zrušení přihlášky</h3>
+      <p style="font-size:.79rem;color:#999;margin-bottom:8px">Zadej své jméno pro nalezení přihlášky.</p>
+      <div class="CF">
+        <input id="CSI" type="text" placeholder="Jméno psovoda…" style="max-width:230px" onkeydown="if(event.key==='Enter')DSR()">
+        <button class="BTN BGH" onclick="DSR()">🔍 Hledat</button>
+      </div>
+      <div id="CSR" style="margin-top:9px"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN PAGE -->
+<div id="ADM" class="PG">
+  <header><div class="H">
+    <div><div class="HL">ZKO RUDNÍK</div><div class="HS">ADMINISTRACE</div></div>
+    <button class="HB on" onclick="gP()">← Zpět na web</button>
+  </div></header>
+  <div class="AW">
+    <div id="LBX" class="LB">
+      <div class="LH"><h2>Administrace</h2><p>ZKO Rudník</p></div>
+      <div class="LBD">
+        <div class="FG"><label>Heslo</label><input type="password" id="PI" placeholder="Zadej heslo…" onkeydown="if(event.key==='Enter')LGI()"></div>
+        <button class="BTN BG" style="width:100%" onclick="LGI()">Přihlásit se</button>
+        <div class="LE" id="LE">Nesprávné heslo.</div>
+      </div>
+    </div>
+    <div id="APN" style="display:none">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:13px">
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:1.45rem;letter-spacing:3px;color:var(--G)">⚙ Administrace</span>
+        <button class="BTN BGH BS" onclick="LGO()">Odhlásit</button>
+      </div>
+      <nav class="AN">
+        <button class="ON" onclick="TB('T1',this)">📅 Tréninky</button>
+        <button onclick="TB('T2',this)">📋 Přihlášky</button>
+        <button onclick="TB('T3',this)">📝 Info</button>
+        <button onclick="TB('T4',this)">📞 Kontakt</button>
+        <button onclick="TB('T5',this)">🔧 Nastavení</button>
+      </nav>
+
+      <div id="T1" class="TC ON">
+        <div class="SECH"><h2>Tréninky</h2><button class="BTN BG" onclick="ONS()">＋ Nový trénink</button></div>
+        <div class="TW"><table>
+          <thead><tr><th>Datum</th><th>Místo</th><th>Čas</th><th>Intervaly</th><th>Obsazeno</th><th>Akce</th></tr></thead>
+          <tbody id="STB"></tbody>
+        </table></div>
+      </div>
+
+      <div id="T2" class="TC">
+        <div class="SECH"><h2>Přihlášky</h2></div>
+        <div class="SS3"><label>Vyber termín</label>
+          <select id="RSL" onchange="RRG()"><option value="">-- Vyber termín --</option></select>
+        </div>
+        <div id="RGO"></div>
+      </div>
+
+      <div id="T3" class="TC">
+        <div class="SECH"><h2>Informace trenéra</h2></div>
+        <div class="STC" style="max-width:600px">
+          <div class="FG"><label>Text na hlavní stránce</label><textarea id="TII" rows="7" placeholder="Pokyny, co vzít s sebou…"></textarea></div>
+          <div style="display:flex;gap:7px">
+            <button class="BTN BG" onclick="STI()">💾 Uložit</button>
+            <button class="BTN BGH" onclick="CTI()">🗑 Smazat</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="T4" class="TC">
+        <div class="SECH"><h2>Kontakt na trenéra</h2></div>
+        <div class="STC" style="max-width:480px">
+          <div class="FG"><label>Jméno</label><input type="text" id="CN" placeholder="Např. Martin Novák"></div>
+          <div class="FR">
+            <div class="FG"><label>Telefon</label><input type="tel" id="CP" placeholder="+420 777 123 456"></div>
+            <div class="FG"><label>E-mail</label><input type="email" id="CE" placeholder="martin@rudnik.cz"></div>
+          </div>
+          <div class="FG"><label>Poznámka</label><textarea id="CO" rows="2" placeholder="Facebook, dostupnost…"></textarea></div>
+          <div style="display:flex;gap:7px">
+            <button class="BTN BG" onclick="SCT()">💾 Uložit</button>
+            <button class="BTN BGH" onclick="CCT()">🗑 Smazat</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="T5" class="TC">
+        <div class="SECH"><h2>Nastavení</h2></div>
+        <div class="STC">
+          <h3 style="font-size:.88rem;margin-bottom:12px;color:var(--G)">Změna hesla</h3>
+          <div class="FG"><label>Aktuální heslo</label><input type="password" id="PC"></div>
+          <div class="FG"><label>Nové heslo</label><input type="password" id="PN"></div>
+          <div class="FG"><label>Nové heslo znovu</label><input type="password" id="PK"></div>
+          <button class="BTN BG" onclick="CPW()">Změnit heslo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODALS -->
+<div class="MO" id="MSU">
+  <div class="MD"><div class="MH"><h2>Přihlášení</h2><button class="MX" onclick="CM('MSU')">✕</button></div>
+  <div class="MB">
+    <p id="MSUI" style="font-size:.81rem;color:#777;margin-bottom:12px;line-height:1.55"></p>
+    <div class="FG"><label>Jméno psovoda</label><input type="text" id="SUH" placeholder="Např. Jan Novák"></div>
+    <div class="FG"><label>Jméno psa</label><input type="text" id="SUD" placeholder="Např. Rex"></div>
+  </div>
+  <div class="MF"><button class="BTN BGH" onclick="CM('MSU')">Zrušit</button><button class="BTN BG" onclick="DSU()">✔ Přihlásit se</button></div>
+  </div>
+</div>
+
+<div class="MO" id="MWL">
+  <div class="MD"><div class="MH"><h2>Čekací listina</h2><button class="MX" onclick="CM('MWL')">✕</button></div>
+  <div class="MB">
+    <div class="AL2 AW2">Všechna místa jsou obsazena. Zapíšeš se na čekací listinu.</div>
+    <p id="MWLI" style="font-size:.81rem;color:#777;margin-bottom:12px;line-height:1.55"></p>
+    <div class="FG"><label>Jméno psovoda</label><input type="text" id="WLH" placeholder="Např. Jan Novák"></div>
+    <div class="FG"><label>Jméno psa</label><input type="text" id="WLD" placeholder="Např. Rex"></div>
+  </div>
+  <div class="MF"><button class="BTN BGH" onclick="CM('MWL')">Zrušit</button><button class="BTN BA" onclick="DWL()">📋 Zapsat na čekací listinu</button></div>
+  </div>
+</div>
+
+<div class="MO" id="MES">
+  <div class="MD"><div class="MH"><h2 id="MEST">Nový trénink</h2><button class="MX" onclick="CM('MES')">✕</button></div>
+  <div class="MB">
+    <div class="FG"><label>Datum</label><input type="date" id="ED"></div>
+    <div class="FG"><label>Místo</label>
+      <select id="EL" onchange="TL()"><option value="ZKO Rudník">ZKO Rudník</option><option value="custom">Jiné…</option></select>
+    </div>
+    <div class="FG" id="ELW" style="display:none"><label>Vlastní místo</label><input type="text" id="ELC" placeholder="Zadej místo…"></div>
+    <div class="FR">
+      <div class="FG"><label>Začátek</label><input type="time" id="EST" value="08:00"></div>
+      <div class="FG"><label>Délka int. (min)</label><input type="number" id="EDR" value="60" min="5" max="480"></div>
+    </div>
+    <div class="FR">
+      <div class="FG"><label>Počet intervalů</label><input type="number" id="ECN" value="3" min="1" max="50"></div>
+      <div class="FG"><label>Max. osob / interval</label><input type="number" id="EMX" value="3" min="1" max="20"></div>
+    </div>
+    <div class="FG">
+      <label style="display:flex;align-items:center;gap:7px;cursor:pointer;text-transform:none;letter-spacing:0;font-weight:400">
+        <input type="checkbox" id="ERP" onchange="TR()" style="width:auto"> Opakovat trénink
+      </label>
+      <div class="RO" id="RPO">
+        <div class="FR">
+          <div class="FG"><label>Každých (dní)</label><input type="number" id="REV" value="7" min="1"></div>
+          <div class="FG"><label>Počet opakování</label><input type="number" id="RCN" value="4" min="2" max="52"></div>
+        </div>
+      </div>
+    </div>
+    <div id="SRW" style="display:none">
+      <div class="AL2 AI"><strong>Termín je součástí série.</strong><br>
+        <div style="display:flex;gap:7px;margin-top:7px">
+          <button class="BTN BGH BS" onclick="SC('single')">Jen tento</button>
+          <button class="BTN BA BS" onclick="SC('series')">Celou sérii</button>
+        </div>
+        <div id="SCN" style="font-size:.74rem;margin-top:5px;color:#777"></div>
+      </div>
+    </div>
+  </div>
+  <div class="MF"><button class="BTN BGH" onclick="CM('MES')">Zrušit</button><button class="BTN BG" onclick="SVS()">💾 Uložit</button></div>
+  </div>
+</div>
+
+<div class="MO" id="MDT">
+  <div class="MD MD-L"><div class="MH"><h2 id="MDTT">Detail termínu</h2><button class="MX" onclick="CM('MDT')">✕</button></div>
+  <div class="MB" id="MDTB"></div>
+  <div class="MF"><button class="BTN BGH" onclick="CM('MDT')">Zavřít</button><button class="BTN BA BS" onclick="EXC()">⬇ Export CSV</button></div>
+  </div>
+</div>
+
+<div class="MO" id="MER">
+  <div class="MD"><div class="MH"><h2>Upravit přihlášku</h2><button class="MX" onclick="CM('MER')">✕</button></div>
+  <div class="MB">
+    <input type="hidden" id="ERID">
+    <div class="FG"><label>Jméno psovoda</label><input type="text" id="ERH"></div>
+    <div class="FG"><label>Jméno psa</label><input type="text" id="ERD"></div>
+  </div>
+  <div class="MF"><button class="BTN BGH" onclick="CM('MER')">Zrušit</button><button class="BTN BG" onclick="SER()">💾 Uložit</button></div>
+  </div>
+</div>
+
+<div class="MO" id="MMV">
+  <div class="MD"><div class="MH"><h2>Přesunout na jiný interval</h2><button class="MX" onclick="CM('MMV')">✕</button></div>
+  <div class="MB">
+    <p id="MMVI" style="font-size:.81rem;color:#777;margin-bottom:9px"></p>
+    <div id="MVP" style="display:flex;flex-direction:column;gap:5px"></div>
+  </div>
+  <div class="MF"><button class="BTN BGH" onclick="CM('MMV')">Zrušit</button></div>
+  </div>
+</div>
+
+<div class="MO" id="MCF">
+  <div class="MD" style="max-width:350px"><div class="MH"><h2 id="MCFT">Potvrdit</h2><button class="MX" onclick="CM('MCF')">✕</button></div>
+  <div class="MB"><p id="MCFM" style="font-size:.88rem;line-height:1.5"></p></div>
+  <div class="MF"><button class="BTN BGH" onclick="CM('MCF')">Zrušit</button><button class="BTN BR" id="MCFO">Potvrdit</button></div>
+  </div>
+</div>
+
+<div id="TOAST"></div>
+
+<script>
+// ── Firebase config ──────────────────────────────
+const FC={apiKey:"AIzaSyCrTSWiZuzpad4AJCT5SyEAjxJOY54xoMM",authDomain:"zko-rudnik-obrany-fc573.firebaseapp.com",projectId:"zko-rudnik-obrany-fc573",storageBucket:"zko-rudnik-obrany-fc573.firebasestorage.app",messagingSenderId:"389782711176",appId:"1:389782711176:web:70ac8856df314eb6a1a83d"};
+
+// ── State ────────────────────────────────────────
+let db=null,LI=false,RDY=false,gS=false,gR=false,gC=false,LTO=null;
+let D={ses:[],reg:[],ti:'',ct:{},pw:'admin123'};
+let dSID=null,mvID=null,suC={},wlC={},eSID=null,eSC='single';
+
+// ── Helpers ──────────────────────────────────────
+const uid=()=>Math.random().toString(36).slice(2)+Date.now().toString(36);
+const fmt=d=>d.toISOString().split('T')[0];
+const aM=(t,m)=>{const[h,i]=t.split(':').map(Number),v=h*60+i+m;return`${String(Math.floor(v/60)).padStart(2,'0')}:${String(v%60).padStart(2,'0')}`};
+const sls=s=>{const a=[];let c=s.startTime;for(let i=0;i<s.slotCount;i++){a.push(c);c=aM(c,s.slotDuration);}return a};
+const dD=ds=>{if(!ds)return'';return new Date(ds+'T00:00:00').toLocaleDateString('cs-CZ',{weekday:'long',day:'numeric',month:'long',year:'numeric'})};
+const ex=s=>String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const sR=(sid,t,st)=>D.reg.filter(r=>r.sessionId===sid&&r.slotTime===t&&(st?r.status===st:true));
+
+// ── Toast ────────────────────────────────────────
+let tT;
+const toast=(m,tp='K')=>{const e=document.getElementById('TOAST');e.textContent=m;e.className='ON '+tp;clearTimeout(tT);tT=setTimeout(()=>e.className='',3200)};
+const OM=id=>document.getElementById(id).classList.add('OP');
+const CM=id=>document.getElementById(id).classList.remove('OP');
+document.querySelectorAll('.MO').forEach(e=>e.addEventListener('click',v=>{if(v.target===e)e.classList.remove('OP')}));
+const CFM=(msg,fn,t)=>{document.getElementById('MCFT').textContent=t||'Potvrdit';document.getElementById('MCFM').textContent=msg;document.getElementById('MCFO').onclick=()=>{CM('MCF');fn()};OM('MCF')};
+
+// ── Firebase writes ──────────────────────────────
+const fw=(p,l)=>p.then(()=>console.log('✔',l)).catch(e=>{console.error('✘',l,e.message);toast('⚠ '+e.message,'E')});
+const fS=(c,id,d)=>fw(db.collection(c).doc(id).set(d),c);
+const fD=(c,id)=>fw(db.collection(c).doc(id).delete(),'del');
+const fU=(c,id,d)=>fw(db.collection(c).doc(id).update(d),'upd');
+const fM=d=>fw(db.collection('meta').doc('cfg').set(d,{merge:true}),'meta');
+const fDS=id=>{const b=db.batch();b.delete(db.collection('sessions').doc(id));D.reg.filter(r=>r.sessionId===id).forEach(r=>b.delete(db.collection('registrations').doc(r.id)));fw(b.commit(),'delS')};
+const fRWL=(sid,t)=>{const w=D.reg.filter(r=>r.sessionId===sid&&r.slotTime===t&&r.status==='waitlist').sort((a,b)=>a.waitlistPosition-b.waitlistPosition);if(!w.length)return;const b=db.batch();w.forEach((r,i)=>b.update(db.collection('registrations').doc(r.id),{waitlistPosition:i+1}));fw(b.commit(),'rwl')};
+
+// ── Boot ─────────────────────────────────────────
+const lS=src=>new Promise((r,j)=>{const s=document.createElement('script');s.src=src;s.onload=r;s.onerror=j;document.head.appendChild(s)});
+async function BOOT(){
+  const C='https://www.gstatic.com/firebasejs/9.23.0/';
+  try{
+    await lS(C+'firebase-app-compat.js');
+    await lS(C+'firebase-firestore-compat.js');
+    if(!firebase.apps.length)firebase.initializeApp(FC);
+    db=firebase.firestore();
+    SL();
+  }catch(e){
+    document.getElementById('OVM').innerHTML='⚠ <strong>Firebase SDK se nenačetlo.</strong><br>Otevři appku přes GitHub Pages odkaz (https://...).<br>Lokální soubory a Claude preview blokují CDN.';
+  }
+}
+function SL(){
+  LTO=setTimeout(()=>{if(!RDY){RDY=true;document.getElementById('OV').style.display='none';toast('Timeout — zkontroluj Firestore Rules','E');RR()}},12000);
+  db.collection('sessions').onSnapshot(s=>{D.ses=s.docs.map(d=>({id:d.id,...d.data()}));gS=true;CR();if(RDY)RR()},()=>{gS=true;CR()});
+  db.collection('registrations').onSnapshot(s=>{D.reg=s.docs.map(d=>({id:d.id,...d.data()}));gR=true;CR();if(RDY)RR()},()=>{gR=true;CR()});
+  db.collection('meta').doc('cfg').onSnapshot(d=>{if(d.exists){const v=d.data();D.ti=v.trainerInfo||'';D.ct=v.contact||{};D.pw=v.adminPassword||'admin123'}gC=true;CR();if(RDY)RR()},()=>{gC=true;CR()});
+}
+function CR(){if(!gS||!gR||!gC||RDY)return;RDY=true;clearTimeout(LTO);document.getElementById('OV').style.display='none';RR()}
+function RR(){RP();if(LI){RS();if(document.getElementById('T2').classList.contains('ON'))RRG();if(dSID)RDB(dSID)}}
+
+// ── Page ─────────────────────────────────────────
+function gA(){document.getElementById('PUB').classList.remove('ON');document.getElementById('ADM').classList.add('ON');if(!LI){document.getElementById('LBX').style.display='';document.getElementById('APN').style.display='none'}else{RS();FRS()}}
+function gP(){document.getElementById('ADM').classList.remove('ON');document.getElementById('PUB').classList.add('ON')}
+
+// ── Auth ─────────────────────────────────────────
+function LGI(){if(document.getElementById('PI').value===D.pw){LI=true;document.getElementById('LBX').style.display='none';document.getElementById('APN').style.display='';document.getElementById('PI').value='';document.getElementById('LE').style.display='none';document.getElementById('TII').value=D.ti||'';LCT();RS();FRS();toast('Přihlášení úspěšné.')}else{document.getElementById('LE').style.display='';toast('Nesprávné heslo.','E')}}
+function LGO(){LI=false;document.getElementById('APN').style.display='none';document.getElementById('LBX').style.display=''}
+function CPW(){const c=document.getElementById('PC').value,n=document.getElementById('PN').value,k=document.getElementById('PK').value;if(c!==D.pw)return toast('Aktuální heslo je nesprávné.','E');if(!n)return toast('Zadej nové heslo.','E');if(n!==k)return toast('Hesla se neshodují.','E');fM({adminPassword:n});['PC','PN','PK'].forEach(i=>document.getElementById(i).value='');toast('Heslo změněno.')}
+function TB(id,btn){document.querySelectorAll('.TC').forEach(t=>t.classList.remove('ON'));document.querySelectorAll('.AN button').forEach(b=>b.classList.remove('ON'));document.getElementById(id).classList.add('ON');btn.classList.add('ON');if(id==='T1')RS();if(id==='T2'){FRS();RRG()}if(id==='T3')document.getElementById('TII').value=D.ti||'';if(id==='T4')LCT()}
+
+// ── Public render ────────────────────────────────
+function RP(){
+  document.getElementById('TID').innerHTML=D.ti?`<p>${ex(D.ti)}</p>`:'<p style="color:rgba(255,255,255,.35);font-style:italic">Žádné informace od trenéra.</p>';
+  const c=D.ct||{},h=c.name||c.phone||c.email||c.note,cb=document.getElementById('CTB');
+  if(h){let s='';if(c.name)s+=`<p><strong>👤 ${ex(c.name)}</strong></p>`;if(c.phone)s+=`<p>📞 <a href="tel:${ex(c.phone)}">${ex(c.phone)}</a></p>`;if(c.email)s+=`<p>✉ <a href="mailto:${ex(c.email)}">${ex(c.email)}</a></p>`;if(c.note)s+=`<p>${ex(c.note)}</p>`;document.getElementById('CTD').innerHTML=s;cb.style.display=''}else cb.style.display='none';
+  const today=new Date();today.setHours(0,0,0,0);
+  const list=[...D.ses].filter(s=>new Date(s.date+'T00:00:00')>=today).sort((a,b)=>a.date.localeCompare(b.date));
+  const out=document.getElementById('SES');
+  if(!list.length){out.innerHTML='<div class="BOX" style="padding:36px;text-align:center;color:#777">📅 Žádné nadcházející tréninky nejsou vypsány.</div>';return}
+  out.innerHTML=list.map(BSC).join('')
+}
+
+function BSC(s){
+  const sl=sls(s),mx=s.maxPerSlot||1;
+  const conf=D.reg.filter(r=>r.sessionId===s.id&&r.status==='confirmed').length;
+  const free=sl.length*mx-conf;
+  const bc=free===0?'BU':free<mx?'BP':'BF';
+  const bt=free===0?'Obsazeno':`${free} volných`;
+
+  const cards=sl.map(t=>{
+    const co=sR(s.id,t,'confirmed').sort((a,b)=>a.createdAt-b.createdAt);
+    const wa=sR(s.id,t,'waitlist').sort((a,b)=>a.waitlistPosition-b.waitlistPosition);
+    const full=co.length>=mx;
+
+    let spots='';
+    for(let i=0;i<mx;i++){
+      const p=co[i];
+      spots+=`<div class="SP"><span class="SPN">${i+1}.</span>${p?`<span class="SPT">${ex(p.handlerName)}</span><span class="SPD">/ ${ex(p.dogName)}</span>`:`<span class="SPE">volné místo</span>`}</div>`;
+    }
+    const btn=full?`<button class="SBTN WBTN" onclick="OWL('${s.id}','${t}')">📋 Čekací listina</button>`:`<button class="SBTN" onclick="OSU('${s.id}','${t}')">＋ Přihlásit se</button>`;
+    const wl=wa.length?`<div class="WLS"><h5>⏳ Čekací listina</h5>${wa.map(w=>`<div class="WLI"><span class="SPN">${w.waitlistPosition}.</span> ${ex(w.handlerName)} / ${ex(w.dogName)}</div>`).join('')}</div>`:'';
+
+    return`<div class="IC">
+      <div class="IC-H"><span class="IC-T">${t}</span><span class="BDG ${full?'BU':co.length?'BP':'BF'}">${co.length}/${mx}</span></div>
+      <div class="IC-B">${spots}${btn}${wl}</div>
+    </div>`;
+  }).join('');
+
+  return`<div class="SC" id="SC${s.id}">
+    <div class="SC-H" onclick="TS('${s.id}')">
+      <div><div class="SC-DT">${dD(s.date)}</div><div class="SC-MT">📍 ${ex(s.location)} · ⏱ ${s.startTime}–${aM(s.startTime,s.slotDuration*s.slotCount)} · ${mx} ${mx===1?'osoba':mx<5?'osoby':'osob'}/interval · ${s.slotDuration} min</div></div>
+      <div style="display:flex;align-items:center;gap:8px"><span class="BDG ${bc}">${bt}</span><span class="CHV">▼</span></div>
+    </div>
+    <div class="SC-BD"><div class="IG">${cards}</div></div>
+  </div>`;
+}
+const TS=id=>document.getElementById('SC'+id).classList.toggle('OP');
+
+// ── Signup ───────────────────────────────────────
+function OSU(sid,t){const s=D.ses.find(s=>s.id===sid),mx=s.maxPerSlot||1;suC={sid,t,adm:false};document.getElementById('MSUI').innerHTML=`📅 ${dD(s.date)}<br>⏱ ${t}–${aM(t,s.slotDuration)} (${s.slotDuration} min) · max ${mx} osob<br>📍 ${ex(s.location)}`;document.getElementById('SUH').value='';document.getElementById('SUD').value='';OM('MSU');setTimeout(()=>document.getElementById('SUH').focus(),80)}
+document.getElementById('SUH').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('SUD').focus()});
+document.getElementById('SUD').addEventListener('keydown',e=>{if(e.key==='Enter')DSU()});
+function DSU(){
+  const h=document.getElementById('SUH').value.trim(),d=document.getElementById('SUD').value.trim();
+  if(!h||!d)return toast('Vyplň jméno psovoda i psa.','E');
+  const s=D.ses.find(s=>s.id===suC.sid),mx=s.maxPerSlot||1;
+  if(sR(suC.sid,suC.t,'confirmed').length>=mx){toast('Interval je plný.','E');CM('MSU');return}
+  const r={id:uid(),sessionId:suC.sid,slotTime:suC.t,handlerName:h,dogName:d,status:'confirmed',waitlistPosition:null,createdAt:Date.now()};
+  D.reg.push(r);CM('MSU');fS('registrations',r.id,r);RR();
+  toast(`✔ Přihlášen: ${h} / ${d} na ${suC.t}`);
+  if(suC.adm){RDB(suC.sid);RS()}
+}
+
+// ── Waitlist ─────────────────────────────────────
+function OWL(sid,t){const s=D.ses.find(s=>s.id===sid);wlC={sid,t};document.getElementById('MWLI').innerHTML=`📅 ${dD(s.date)}<br>⏱ ${t}–${aM(t,s.slotDuration)}<br>📍 ${ex(s.location)}`;document.getElementById('WLH').value='';document.getElementById('WLD').value='';OM('MWL')}
+function DWL(){
+  const h=document.getElementById('WLH').value.trim(),d=document.getElementById('WLD').value.trim();
+  if(!h||!d)return toast('Vyplň jméno psovoda i psa.','E');
+  const pos=sR(wlC.sid,wlC.t,'waitlist').length+1;
+  const r={id:uid(),sessionId:wlC.sid,slotTime:wlC.t,handlerName:h,dogName:d,status:'waitlist',waitlistPosition:pos,createdAt:Date.now()};
+  D.reg.push(r);CM('MWL');fS('registrations',r.id,r);RR();toast(`✔ Čekací listina (${pos}): ${h} / ${d}`)
+}
+
+// ── Cancel ───────────────────────────────────────
+function DSR(){
+  const q=document.getElementById('CSI').value.trim().toLowerCase(),out=document.getElementById('CSR');
+  if(!q){out.innerHTML='';return}
+  const f=D.reg.filter(r=>r.handlerName.toLowerCase().includes(q));
+  if(!f.length){out.innerHTML='<p style="color:#999;font-size:.82rem;padding:6px 0">Žádná přihláška nenalezena.</p>';return}
+  out.innerHTML=f.map(r=>{const s=D.ses.find(s=>s.id===r.sessionId);const sl=r.status==='waitlist'?`Čekací listina (${r.waitlistPosition}.)`:r.slotTime;return`<div class="CRI"><div><strong>${ex(r.handlerName)} / ${ex(r.dogName)}</strong><small>${s?dD(s.date):'–'} · ${sl}</small></div><button class="BTN BR BS" onclick="CRG('${r.id}')">✖ Zrušit</button></div>`}).join('')
+}
+function CRG(id){const r=D.reg.find(r=>r.id===id);if(!r)return;CFM(`Zrušit přihlášku ${r.handlerName} / ${r.dogName}?`,()=>{const sid=r.sessionId,t=r.slotTime;D.reg=D.reg.filter(r=>r.id!==id);RWL(sid,t);fD('registrations',id);fRWL(sid,t);DSR();RR();toast('Přihláška zrušena.')},'Zrušit přihlášku')}
+const RWL=(sid,t)=>D.reg.filter(r=>r.sessionId===sid&&r.slotTime===t&&r.status==='waitlist').sort((a,b)=>a.waitlistPosition-b.waitlistPosition).forEach((r,i)=>r.waitlistPosition=i+1);
+
+// ── Admin sessions ────────────────────────────────
+function RS(){
+  const tb=document.getElementById('STB');
+  const sorted=[...D.ses].sort((a,b)=>a.date.localeCompare(b.date));
+  if(!sorted.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;color:#999;padding:20px">Žádné tréninky.</td></tr>';return}
+  tb.innerHTML=sorted.map(s=>{
+    const mx=s.maxPerSlot||1,sl=sls(s);
+    const c=D.reg.filter(r=>r.sessionId===s.id&&r.status==='confirmed').length;
+    const mx2=sl.length*mx;
+    const bc=c>=mx2?'BU':c>0?'BP':'BF';
+    return`<tr><td>${dD(s.date)}</td><td>${ex(s.location)}</td><td>${s.startTime}–${aM(s.startTime,s.slotDuration*s.slotCount)}</td><td>${sl.length}× ${s.slotDuration}min · max ${mx}/int</td><td><span class="BDG ${bc}">${c}/${mx2}</span></td><td><div class="AC"><button class="BTN BGH BX" onclick="ODT('${s.id}')">📋</button><button class="BTN BGH BX" onclick="OES('${s.id}')">✏</button><button class="BTN BGH BX" onclick="CPS('${s.id}')">📋+</button><button class="BTN BR BX" onclick="DLS('${s.id}')">🗑</button></div></td></tr>`
+  }).join('')
+}
+
+// ── Session form ──────────────────────────────────
+function ONS(){eSID=null;eSC='single';document.getElementById('MEST').textContent='Nový trénink';document.getElementById('ED').value='';document.getElementById('EL').value='ZKO Rudník';document.getElementById('ELC').value='';document.getElementById('ELW').style.display='none';document.getElementById('EST').value='08:00';document.getElementById('EDR').value='60';document.getElementById('ECN').value='3';document.getElementById('EMX').value='3';document.getElementById('ERP').checked=false;document.getElementById('RPO').classList.remove('ON');document.getElementById('SRW').style.display='none';OM('MES')}
+function OES(id){eSID=id;eSC='single';const s=D.ses.find(s=>s.id===id);document.getElementById('MEST').textContent='Upravit trénink';document.getElementById('ED').value=s.date;if(s.location==='ZKO Rudník'){document.getElementById('EL').value='ZKO Rudník';document.getElementById('ELW').style.display='none'}else{document.getElementById('EL').value='custom';document.getElementById('ELC').value=s.location;document.getElementById('ELW').style.display=''}document.getElementById('EST').value=s.startTime;document.getElementById('EDR').value=s.slotDuration;document.getElementById('ECN').value=s.slotCount;document.getElementById('EMX').value=s.maxPerSlot||1;document.getElementById('ERP').checked=false;document.getElementById('RPO').classList.remove('ON');document.getElementById('SRW').style.display=s.repeatGroupId?'':'none';document.getElementById('SCN').textContent='';OM('MES')}
+const SC=v=>{eSC=v;document.getElementById('SCN').textContent=v==='single'?'✔ Jen tento termín.':'✔ Celá série.'};
+const TL=()=>document.getElementById('ELW').style.display=document.getElementById('EL').value==='custom'?'':'none';
+const TR=()=>document.getElementById('RPO').classList.toggle('ON',document.getElementById('ERP').checked);
+const GL=()=>{const v=document.getElementById('EL').value;return v==='custom'?document.getElementById('ELC').value.trim():v};
+
+function SVS(){
+  const date=document.getElementById('ED').value,loc=GL(),st=document.getElementById('EST').value;
+  const dr=parseInt(document.getElementById('EDR').value),cn=parseInt(document.getElementById('ECN').value),mx=parseInt(document.getElementById('EMX').value);
+  if(!date||!loc||!st||!dr||!cn||!mx)return toast('Vyplň všechna pole.','E');
+  CM('MES');
+  if(eSID){
+    const s=D.ses.find(s=>s.id===eSID),u={location:loc,startTime:st,slotDuration:dr,slotCount:cn,maxPerSlot:mx};
+    if(eSC==='series'&&s.repeatGroupId){D.ses.filter(s2=>s2.repeatGroupId===s.repeatGroupId).forEach(s2=>{Object.assign(s2,u);fS('sessions',s2.id,s2)});toast('Série upravena.')}
+    else{Object.assign(s,{date,...u});fS('sessions',eSID,s);toast('Termín upraven.')}
+  }else{
+    const rep=document.getElementById('ERP').checked;
+    if(rep){const ev=parseInt(document.getElementById('REV').value)||7,rc=parseInt(document.getElementById('RCN').value)||4,gid=uid();for(let i=0;i<rc;i++){const d=new Date(date+'T00:00:00');d.setDate(d.getDate()+i*ev);const ns={id:uid(),date:fmt(d),location:loc,startTime:st,slotDuration:dr,slotCount:cn,maxPerSlot:mx,repeatGroupId:gid,createdAt:Date.now()};D.ses.push(ns);fS('sessions',ns.id,ns)}toast(`Vytvořeno ${rc} termínů.`)}
+    else{const ns={id:uid(),date,location:loc,startTime:st,slotDuration:dr,slotCount:cn,maxPerSlot:mx,repeatGroupId:null,createdAt:Date.now()};D.ses.push(ns);fS('sessions',ns.id,ns);toast('Termín vytvořen.')}
+  }
+  RS();FRS();RR()
+}
+
+function DLS(id){const s=D.ses.find(s=>s.id===id);CFM(`Smazat termín ${dD(s.date)}?`,()=>{D.ses=D.ses.filter(s=>s.id!==id);D.reg=D.reg.filter(r=>r.sessionId!==id);fDS(id);RS();FRS();RR();toast('Termín smazán.')},'Smazat termín')}
+function CPS(id){const s=D.ses.find(s=>s.id===id),d=new Date(s.date+'T00:00:00');d.setDate(d.getDate()+7);const ns={...s,id:uid(),date:fmt(d),repeatGroupId:null,createdAt:Date.now()};D.ses.push(ns);fS('sessions',ns.id,ns);RS();FRS();RR();toast(`Zkopírováno → ${dD(fmt(d))}`)}
+
+// ── Detail ────────────────────────────────────────
+function ODT(id){dSID=id;const s=D.ses.find(s=>s.id===id);document.getElementById('MDTT').textContent=dD(s.date);RDB(id);OM('MDT')}
+function RDB(id){
+  const s=D.ses.find(s=>s.id===id);if(!s)return;
+  const mx=s.maxPerSlot||1;
+  const cards=sls(s).map(t=>{
+    const co=sR(id,t,'confirmed').sort((a,b)=>a.createdAt-b.createdAt);
+    const wa=sR(id,t,'waitlist').sort((a,b)=>a.waitlistPosition-b.waitlistPosition);
+    const full=co.length>=mx;
+    let spots='';
+    for(let i=0;i<mx;i++){
+      const p=co[i];
+      spots+=`<div class="ADC-SP">`;
+      if(p)spots+=`<div class="ADC-I"><strong>${i+1}.</strong><strong>${ex(p.handlerName)}</strong><span style="color:#999;font-size:.77rem">/ ${ex(p.dogName)}</span></div><div class="AC"><button class="BTN BGH BX" onclick="OER('${p.id}')">✏</button><button class="BTN BA BX" onclick="OMV('${p.id}')">↔</button><button class="BTN BR BX" onclick="ADR('${p.id}')">✖</button></div>`;
+      else spots+=`<span class="ADC-E" onclick="AAS('${id}','${t}')">${i+1}. + přidat</span>`;
+      spots+='</div>';
+    }
+    const wl=wa.length?`<div style="margin-top:7px;border-top:1px solid #f0ece4;padding-top:7px"><p style="font-size:.68rem;text-transform:uppercase;letter-spacing:1px;color:var(--A);margin-bottom:4px">⏳ Čekací listina</p>${wa.map(w=>`<div class="ADC-SP"><div class="ADC-I"><strong style="color:var(--A)">${w.waitlistPosition}.</strong><strong>${ex(w.handlerName)}</strong><span style="color:#999;font-size:.77rem">/ ${ex(w.dogName)}</span></div><div class="AC"><button class="BTN BGH BX" onclick="OER('${w.id}')">✏</button><button class="BTN BA BX" onclick="PWL('${w.id}')">↑</button><button class="BTN BR BX" onclick="ADR('${w.id}')">✖</button></div></div>`).join('')}</div>`:'';
+    return`<div class="ADC"><div class="ADC-H"><span class="ADC-T">${t}–${aM(t,s.slotDuration)}</span><span class="BDG ${full?'BU':co.length?'BP':'BF'}">${co.length}/${mx}</span></div><div class="ADC-B">${spots}${wl}</div></div>`;
+  }).join('');
+  document.getElementById('MDTB').innerHTML=`<div class="ADG">${cards}</div>`;
+}
+
+function ADR(id){const r=D.reg.find(r=>r.id===id);CFM(`Smazat přihlášku ${r.handlerName}?`,()=>{const sid=r.sessionId,t=r.slotTime;D.reg=D.reg.filter(r=>r.id!==id);RWL(sid,t);fD('registrations',id);fRWL(sid,t);RDB(dSID);RS();RRG();RR();toast('Smazáno.')},'Smazat')}
+function AAS(sid,t){const s=D.ses.find(s=>s.id===sid);suC={sid,t,adm:true};document.getElementById('MSUI').innerHTML=`📅 ${dD(s.date)}<br>⏱ ${t} (admin)`;document.getElementById('SUH').value='';document.getElementById('SUD').value='';OM('MSU')}
+function OER(id){const r=D.reg.find(r=>r.id===id);document.getElementById('ERID').value=id;document.getElementById('ERH').value=r.handlerName;document.getElementById('ERD').value=r.dogName;OM('MER')}
+function SER(){const id=document.getElementById('ERID').value,h=document.getElementById('ERH').value.trim(),d=document.getElementById('ERD').value.trim();if(!h||!d)return toast('Vyplň všechna pole.','E');const r=D.reg.find(r=>r.id===id);r.handlerName=h;r.dogName=d;CM('MER');fU('registrations',id,{handlerName:h,dogName:d});RDB(dSID);RRG();RR();toast('Upraveno.')}
+function OMV(id){mvID=id;const r=D.reg.find(r=>r.id===id),s=D.ses.find(s=>s.id===r.sessionId),mx=s.maxPerSlot||1;document.getElementById('MMVI').textContent=`Přesouvám: ${r.handlerName} / ${r.dogName} (${r.slotTime})`;document.getElementById('MVP').innerHTML=sls(s).filter(t=>t!==r.slotTime).map(t=>{const c=sR(s.id,t,'confirmed').length,f=c>=mx;return`<button class="BTN ${f?'BGH':'BG'} BS" style="width:100%;justify-content:space-between" ${f?'disabled':''} onclick="DMV('${t}')"><span>${t}–${aM(t,s.slotDuration)}</span><span class="BDG ${f?'BU':'BF'}">${c}/${mx}</span></button>`}).join('');OM('MMV')}
+function DMV(t){const r=D.reg.find(r=>r.id===mvID),o=r.slotTime;r.slotTime=t;r.status='confirmed';r.waitlistPosition=null;CM('MMV');fU('registrations',mvID,{slotTime:t,status:'confirmed',waitlistPosition:null});RWL(r.sessionId,o);fRWL(r.sessionId,o);RDB(dSID);RRG();RR();toast(`Přesunuto na ${t}`)}
+function PWL(id){const r=D.reg.find(r=>r.id===id),s=D.ses.find(s=>s.id===r.sessionId),mx=s.maxPerSlot||1;if(sR(s.id,r.slotTime,'confirmed').length>=mx)return toast('Interval je plný.','E');r.status='confirmed';r.waitlistPosition=null;RWL(r.sessionId,r.slotTime);fU('registrations',id,{status:'confirmed',waitlistPosition:null});fRWL(r.sessionId,r.slotTime);RDB(dSID);RR();toast(`${r.handlerName} povýšen/a.`)}
+
+// ── Regs tab ──────────────────────────────────────
+function FRS(){const sel=document.getElementById('RSL'),c=sel.value;sel.innerHTML='<option value="">-- Vyber termín --</option>'+[...D.ses].sort((a,b)=>a.date.localeCompare(b.date)).map(s=>`<option value="${s.id}">${dD(s.date)} – ${ex(s.location)}</option>`).join('');if(c)sel.value=c}
+function RRG(){
+  const sid=document.getElementById('RSL').value,out=document.getElementById('RGO');
+  if(!sid){out.innerHTML='<div class="AL2 AI">Vyber termín.</div>';return}
+  const s=D.ses.find(s=>s.id===sid),mx=s.maxPerSlot||1;
+  let h='';
+  sls(s).forEach(t=>{
+    const co=sR(sid,t,'confirmed').sort((a,b)=>a.createdAt-b.createdAt);
+    const wa=sR(sid,t,'waitlist').sort((a,b)=>a.waitlistPosition-b.waitlistPosition);
+    if(!co.length&&!wa.length)return;
+    let rows=co.map((r,i)=>`<tr><td>${i+1}.</td><td>${ex(r.handlerName)}</td><td>${ex(r.dogName)}</td><td><span class="BDG BF" style="font-size:.69rem">✔</span></td><td><div class="AC"><button class="BTN BGH BX" onclick="OER('${r.id}')">✏</button><button class="BTN BR BX" onclick="DRG('${r.id}')">✖</button></div></td></tr>`).join('');
+    rows+=wa.map(w=>`<tr><td>č.${w.waitlistPosition}</td><td>${ex(w.handlerName)}</td><td>${ex(w.dogName)}</td><td><span class="BDG BP" style="font-size:.69rem">⏳</span></td><td><div class="AC"><button class="BTN BGH BX" onclick="OER('${w.id}')">✏</button><button class="BTN BR BX" onclick="DRG('${w.id}')">✖</button></div></td></tr>`).join('');
+    h+=`<h4 style="font-family:'Bebas Neue',sans-serif;letter-spacing:1px;color:var(--G);margin:12px 0 5px">⏱ ${t}–${aM(t,s.slotDuration)} &nbsp;(${co.length}/${mx})</h4><div class="TW"><table><thead><tr><th>#</th><th>Psovod</th><th>Pes</th><th>Status</th><th>Akce</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  });
+  out.innerHTML=h||'<div class="AL2 AI">Žádné přihlášky.</div>'
+}
+function DRG(id){const r=D.reg.find(r=>r.id===id);CFM(`Smazat ${r.handlerName}?`,()=>{const sid=r.sessionId,t=r.slotTime;D.reg=D.reg.filter(r=>r.id!==id);RWL(sid,t);fD('registrations',id);fRWL(sid,t);RRG();RS();RR();toast('Smazáno.')},'Smazat')}
+
+// ── Info & Contact ────────────────────────────────
+const STI=()=>{fM({trainerInfo:document.getElementById('TII').value});toast('Informace uloženy.')};
+const CTI=()=>CFM('Smazat informace?',()=>{document.getElementById('TII').value='';fM({trainerInfo:''});toast('Smazáno.')},'Smazat');
+function LCT(){const c=D.ct||{};['CN','CP','CE','CO'].forEach((id,i)=>document.getElementById(id).value=[c.name,c.phone,c.email,c.note][i]||'')}
+const SCT=()=>fM({contact:{name:document.getElementById('CN').value.trim(),phone:document.getElementById('CP').value.trim(),email:document.getElementById('CE').value.trim(),note:document.getElementById('CO').value.trim()}})&&toast('Kontakt uložen.');
+function SCT(){fM({contact:{name:document.getElementById('CN').value.trim(),phone:document.getElementById('CP').value.trim(),email:document.getElementById('CE').value.trim(),note:document.getElementById('CO').value.trim()}});toast('Kontakt uložen.')}
+const CCT=()=>CFM('Smazat kontakt?',()=>{fM({contact:{name:'',phone:'',email:'',note:''}});LCT();toast('Smazáno.')},'Smazat');
+
+// ── CSV ───────────────────────────────────────────
+function EXC(){
+  const s=D.ses.find(s=>s.id===dSID);if(!s)return;
+  const mx=s.maxPerSlot||1;
+  let c='\uFEFF';
+  c+=`ZKO Rudník – Přihlášky\nDatum;${dD(s.date)}\nMísto;${s.location}\nMax. osob/interval;${mx}\n\n`;
+  sls(s).forEach(t=>{
+    const co=sR(s.id,t,'confirmed').sort((a,b)=>a.createdAt-b.createdAt);
+    const wa=sR(s.id,t,'waitlist').sort((a,b)=>a.waitlistPosition-b.waitlistPosition);
+    if(!co.length&&!wa.length)return;
+    c+=`Interval;${t}–${aM(t,s.slotDuration)}\nPořadí;Psovod;Pes\n`;
+    co.forEach((r,i)=>c+=`${i+1};${r.handlerName};${r.dogName}\n`);
+    wa.forEach(w=>c+=`č.${w.waitlistPosition};${w.handlerName};${w.dogName}\n`);
+    c+='\n';
+  });
+  const a=Object.assign(document.createElement('a'),{href:URL.createObjectURL(new Blob([c],{type:'text/csv;charset=utf-8;'})),download:`zko-${s.date}.csv`});
+  a.click();URL.revokeObjectURL(a.href);toast('CSV exportováno.')
+}
+
+document.getElementById('CSI').addEventListener('keydown',e=>{if(e.key==='Enter')DSR()});
+BOOT();
+</script>
+</body>
+</html>
